@@ -16,7 +16,8 @@ type ThreatDao interface {
 	// and its generics support only exists in an un-merged (but tested) PR.
 	// To get the working version of mockgen:
 	//  1. clone https://github.com/bradleygore/gomock
-	//  2. in the clone, run `go install ./...`
+	//  2. checkout task_HOSPENG-4373-gomock-generics
+	//  3. run `go install ./...`
 	servicedao.TypedDao[m.Threat]
 }
 
