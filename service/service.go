@@ -9,8 +9,8 @@ import (
 
 	m "github.com/jtyers/tmaas-model"
 	"github.com/jtyers/tmaas-model/validator"
+	servicedao "github.com/jtyers/tmaas-service-dao"
 	"github.com/jtyers/tmaas-service-util/id"
-	"github.com/jtyers/tmaas-service-util/requestor"
 	dao "github.com/jtyers/tmaas-threat-service/dao"
 )
 
@@ -18,6 +18,8 @@ var (
 	ErrTooManyThreats = errors.New("too many threats")
 	ErrNoSuchThreat   = errors.New("no such threat")
 	ErrNoDataToUpdate = errors.New("no data to update")
+
+	ThreatIdPrefix = "th_"
 )
 
 type ThreatService interface {
@@ -39,18 +41,21 @@ type DefaultThreatService struct {
 
 	randomIdProvider id.RandomIdProvider
 	validator        validator.StructValidator
-	requestor        requestor.Requestor
 }
 
-func NewDefaultThreatService(dao dao.ThreatDao, randomIdProvider id.RandomIdProvider, validator validator.StructValidator, requestor requestor.Requestor) *DefaultThreatService {
-	return &DefaultThreatService{dao, randomIdProvider, validator, requestor}
+func NewDefaultThreatService(dao dao.ThreatDao, randomIdProvider id.RandomIdProvider, validator validator.StructValidator) *DefaultThreatService {
+	return &DefaultThreatService{dao, randomIdProvider, validator}
 }
 
 func (g *DefaultThreatService) GetThreat(ctx context.Context, threatId m.ThreatId) (*m.Threat, error) {
 	threat, err := g.dao.Get(ctx, threatId.String())
 
 	if err != nil {
-		return nil, fmt.Errorf("error retrieving threat: %v", err)
+		if err == servicedao.ErrNoSuchDocument {
+			return nil, ErrNoSuchThreat
+		} else {
+			return nil, fmt.Errorf("error retrieving threat: %v", err)
+		}
 	}
 
 	return threat, nil
@@ -69,11 +74,11 @@ func (g *DefaultThreatService) CreateThreat(ctx context.Context, threat m.Threat
 
 	err := g.validator.ValidateForCreate(threat)
 	if err != nil {
-		return nil, fmt.Errorf("threat is not valid: %v", err)
+		return nil, err
 	}
 	err = g.validator.ValidateForUpdate(threat)
 	if err != nil {
-		return nil, fmt.Errorf("threat is not valid: %v", err)
+		return nil, err
 	}
 
 	threat.ThreatId = m.ThreatId("th_" + g.randomIdProvider.GenerateId())
@@ -89,10 +94,13 @@ func (g *DefaultThreatService) CreateThreat(ctx context.Context, threat m.Threat
 func (g *DefaultThreatService) UpdateThreat(ctx context.Context, threatId m.ThreatId, threat m.Threat) error {
 	err := g.validator.ValidateForUpdate(threat)
 	if err != nil {
-		return fmt.Errorf("threat is not valid: %v", err)
+		return err
 	}
 
-	threat.ThreatId = m.ThreatId("th_" + g.randomIdProvider.GenerateId())
+	if threat.ThreatId != threatId {
+		return fmt.Errorf("given threat IDs do not match")
+	}
+
 	queryThreat := m.Threat{ThreatId: threatId}
 
 	_, err = g.dao.UpdateWhereExactSingle(ctx, &queryThreat, &threat)
