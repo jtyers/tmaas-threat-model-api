@@ -7,11 +7,12 @@ package dao
 import (
 	"github.com/google/wire"
 	"github.com/jtyers/tmaas-service-dao/clover"
+	util "github.com/jtyers/tmaas-service-util"
 )
 
 func NewCloverConfiguration() clover.CloverConfiguration {
 	return clover.CloverConfiguration{
-		DatabaseName:   "db",
+		DatabaseName:   util.GetEnvWithDefault("THREAT_DB_PATH", "threat-db"),
 		CollectionName: "threats",
 	}
 }
