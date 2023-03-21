@@ -10,15 +10,18 @@ import (
 	util "github.com/jtyers/tmaas-service-util"
 )
 
-func NewCloverConfiguration() clover.CloverConfiguration {
-	return clover.CloverConfiguration{
-		DatabaseName:   util.GetEnvWithDefault("THREAT_DB_PATH", "threat-db"),
-		CollectionName: "threats",
-	}
+func NewCloverDatabaseConfig() clover.DatabaseConfig {
+	return clover.NewDefaultDatabaseConfig(
+		util.GetEnvWithDefault("THREAT_DB_PATH", "threat-db"),
+	)
 }
 
 var ThreatDaoProviderSet = wire.NewSet(
-	NewCloverConfiguration,
+	NewCloverDatabaseConfig,
+	NewThreatCloverCollectionConfig,
 	clover.DaoProviderSet,
 	NewThreatDao,
 )
+
+//wire.Bind(new(dao.Dao), new(*CloverDao)),
+//NewCloverDao,

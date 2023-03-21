@@ -5,6 +5,7 @@ package dao
 import (
 	m "github.com/jtyers/tmaas-model"
 	servicedao "github.com/jtyers/tmaas-service-dao"
+	"github.com/jtyers/tmaas-service-dao/clover"
 )
 
 // ThreatDao is needed because wire does not directly support
@@ -21,6 +22,6 @@ type ThreatDao interface {
 	servicedao.TypedDao[m.Threat]
 }
 
-func NewThreatDao(dao servicedao.Dao) ThreatDao {
+func NewThreatDao(dao *clover.CloverDao[ThreatCloverCollectionConfig]) ThreatDao {
 	return servicedao.NewDefaultTypedDao[m.Threat](dao)
 }

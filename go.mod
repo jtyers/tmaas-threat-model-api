@@ -6,7 +6,7 @@ require (
 	github.com/golang/mock v1.7.0-rc.1.0.20220812172401-5b455625bd2c
 	github.com/google/wire v0.5.0
 	github.com/jtyers/tmaas-model v0.0.0-20230320103355-0d0168f232b3
-	github.com/jtyers/tmaas-service-dao v0.0.0-20230318211501-b64c32862e53
+	github.com/jtyers/tmaas-service-dao v0.0.0-20230321103055-559043f169ab
 	github.com/jtyers/tmaas-service-util v0.0.0-20230320102918-76e81eaea728
 	github.com/stretchr/testify v1.8.2
 )
