@@ -22,6 +22,10 @@ type ThreatDao interface {
 	servicedao.TypedDao[m.Threat]
 }
 
+func NewThreatCloverDao(db clover.CloverDbWrapper, config ThreatCloverCollectionConfig) *clover.CloverDao[ThreatCloverCollectionConfig] {
+	return clover.NewCloverDao(db, config)
+}
+
 func NewThreatDao(dao *clover.CloverDao[ThreatCloverCollectionConfig]) ThreatDao {
 	return servicedao.NewDefaultTypedDao[m.Threat](dao)
 }

@@ -19,6 +19,8 @@ func NewCloverDatabaseConfig() clover.DatabaseConfig {
 var ThreatDaoProviderSet = wire.NewSet(
 	NewCloverDatabaseConfig,
 	NewThreatCloverCollectionConfig,
+	NewThreatCloverDao,
+
 	clover.DaoProviderSet,
 	NewThreatDao,
 )
