@@ -66,10 +66,10 @@ func (mr *MockThreatModelServiceMockRecorder) GetThreatModel(ctx, id interface{}
 }
 
 // GetThreatModels mocks base method.
-func (m *MockThreatModelService) GetThreatModels(ctx context.Context) ([]*entities.Threat, error) {
+func (m *MockThreatModelService) GetThreatModels(ctx context.Context) ([]*entities.ThreatModel, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetThreatModels", ctx)
-	ret0, _ := ret[0].([]*entities.Threat)
+	ret0, _ := ret[0].([]*entities.ThreatModel)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }

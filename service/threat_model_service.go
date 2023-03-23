@@ -24,7 +24,7 @@ type ThreatModelService interface {
 	GetThreatModel(ctx context.Context, id m.ThreatModelID) (*m.ThreatModel, error)
 
 	// Retrieve all threatModel.
-	GetThreatModels(ctx context.Context) ([]*m.Threat, error)
+	GetThreatModels(ctx context.Context) ([]*m.ThreatModel, error)
 
 	// Creates a threatModel. `threatModel` should not have ID or threatModelID set.
 	CreateThreatModel(ctx context.Context, threatModel m.ThreatModel) (*m.ThreatModel, error)
