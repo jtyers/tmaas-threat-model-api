@@ -19,36 +19,36 @@ var (
 	ErrNoSuchThreat   = errors.New("no such threat")
 	ErrNoDataToUpdate = errors.New("no data to update")
 
-	ThreatIdPrefix = "th_"
+	ThreatIDPrefix = "th_"
 )
 
 type ThreatService interface {
-	// Retrieve a threat by threatId.
-	GetThreat(ctx context.Context, id m.ThreatId) (*m.Threat, error)
+	// Retrieve a threat by threatID.
+	GetThreat(ctx context.Context, id m.ThreatID) (*m.Threat, error)
 
 	// Retrieve all threat.
 	GetThreats(ctx context.Context) ([]*m.Threat, error)
 
-	// Creates a threat. `threat` should not have Id or ThreatId set.
+	// Creates a threat. `threat` should not have ID or ThreatID set.
 	CreateThreat(ctx context.Context, threat m.Threat) (*m.Threat, error)
 
 	// Updates a threat
-	UpdateThreat(ctx context.Context, threatId m.ThreatId, threat m.Threat) error
+	UpdateThreat(ctx context.Context, threatID m.ThreatID, threat m.Threat) error
 }
 
 type DefaultThreatService struct {
 	dao dao.ThreatDao
 
-	randomIdProvider id.RandomIdProvider
+	randomIDProvider id.RandomIDProvider
 	validator        validator.StructValidator
 }
 
-func NewDefaultThreatService(dao dao.ThreatDao, randomIdProvider id.RandomIdProvider, validator validator.StructValidator) *DefaultThreatService {
-	return &DefaultThreatService{dao, randomIdProvider, validator}
+func NewDefaultThreatService(dao dao.ThreatDao, randomIDProvider id.RandomIDProvider, validator validator.StructValidator) *DefaultThreatService {
+	return &DefaultThreatService{dao, randomIDProvider, validator}
 }
 
-func (g *DefaultThreatService) GetThreat(ctx context.Context, threatId m.ThreatId) (*m.Threat, error) {
-	threat, err := g.dao.Get(ctx, threatId.String())
+func (g *DefaultThreatService) GetThreat(ctx context.Context, threatID m.ThreatID) (*m.Threat, error) {
+	threat, err := g.dao.Get(ctx, threatID.String())
 
 	if err != nil {
 		if err == servicedao.ErrNoSuchDocument {
@@ -63,13 +63,13 @@ func (g *DefaultThreatService) GetThreat(ctx context.Context, threatId m.ThreatI
 
 // CreateThreat Creates a new Threat in Firestore.
 //
-// The threat supplied should not have its Id or ThreatId fields set to anything
+// The threat supplied should not have its ID or ThreatID fields set to anything
 // other than "". An error is emitted if this is not the case.
 //
-// The created threat is returned to the caller, with Id and ThreatId set.
+// The created threat is returned to the caller, with ID and ThreatID set.
 func (g *DefaultThreatService) CreateThreat(ctx context.Context, threat m.Threat) (*m.Threat, error) {
-	if threat.ThreatId != "" {
-		return nil, fmt.Errorf("cannot create a threat that already has ThreatId set")
+	if threat.ThreatID != "" {
+		return nil, fmt.Errorf("cannot create a threat that already has ThreatID set")
 	}
 
 	err := g.validator.ValidateForCreate(threat)
@@ -81,7 +81,7 @@ func (g *DefaultThreatService) CreateThreat(ctx context.Context, threat m.Threat
 		return nil, err
 	}
 
-	threat.ThreatId = m.ThreatId("th_" + g.randomIdProvider.GenerateId())
+	threat.ThreatID = m.ThreatID("th_" + g.randomIDProvider.GenerateID())
 
 	result, err := g.dao.Create(ctx, &threat)
 	if err != nil {
@@ -91,17 +91,17 @@ func (g *DefaultThreatService) CreateThreat(ctx context.Context, threat m.Threat
 	return result, nil
 }
 
-func (g *DefaultThreatService) UpdateThreat(ctx context.Context, threatId m.ThreatId, threat m.Threat) error {
+func (g *DefaultThreatService) UpdateThreat(ctx context.Context, threatID m.ThreatID, threat m.Threat) error {
 	err := g.validator.ValidateForUpdate(threat)
 	if err != nil {
 		return err
 	}
 
-	if threat.ThreatId != threatId {
+	if threat.ThreatID != threatID {
 		return fmt.Errorf("given threat IDs do not match")
 	}
 
-	queryThreat := m.Threat{ThreatId: threatId}
+	queryThreat := m.Threat{ThreatID: threatID}
 
 	_, err = g.dao.UpdateWhereExactSingle(ctx, &queryThreat, &threat)
 	if err != nil {

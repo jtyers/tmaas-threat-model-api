@@ -14,8 +14,8 @@ import (
 var ThreatServiceProviderSet = wire.NewSet(
 	dao.ThreatDaoProviderSet,
 
-	id.NewDefaultRandomIdProvider,
-	wire.Bind(new(id.RandomIdProvider), new(*id.DefaultRandomIdProvider)),
+	id.NewDefaultRandomIDProvider,
+	wire.Bind(new(id.RandomIDProvider), new(*id.DefaultRandomIDProvider)),
 
 	validator.StructValidatorProviderSet,
 

@@ -109,33 +109,33 @@ func (mr *MockThreatDaoMockRecorder) GetAll(ctx interface{}) *gomock.Call {
 }
 
 // QueryExact mocks base method.
-func (m *MockThreatDao) QueryExact(ctx context.Context, query *entities.Threat, fields []string) ([]*entities.Threat, error) {
+func (m *MockThreatDao) QueryExact(ctx context.Context, query *entities.Threat) ([]*entities.Threat, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "QueryExact", ctx, query, fields)
+	ret := m.ctrl.Call(m, "QueryExact", ctx, query)
 	ret0, _ := ret[0].([]*entities.Threat)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // QueryExact indicates an expected call of QueryExact.
-func (mr *MockThreatDaoMockRecorder) QueryExact(ctx, query, fields interface{}) *gomock.Call {
+func (mr *MockThreatDaoMockRecorder) QueryExact(ctx, query interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryExact", reflect.TypeOf((*MockThreatDao)(nil).QueryExact), ctx, query, fields)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryExact", reflect.TypeOf((*MockThreatDao)(nil).QueryExact), ctx, query)
 }
 
 // QueryExactSingle mocks base method.
-func (m *MockThreatDao) QueryExactSingle(ctx context.Context, query *entities.Threat, fields []string) (*entities.Threat, error) {
+func (m *MockThreatDao) QueryExactSingle(ctx context.Context, query *entities.Threat) (*entities.Threat, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "QueryExactSingle", ctx, query, fields)
+	ret := m.ctrl.Call(m, "QueryExactSingle", ctx, query)
 	ret0, _ := ret[0].(*entities.Threat)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // QueryExactSingle indicates an expected call of QueryExactSingle.
-func (mr *MockThreatDaoMockRecorder) QueryExactSingle(ctx, query, fields interface{}) *gomock.Call {
+func (mr *MockThreatDaoMockRecorder) QueryExactSingle(ctx, query interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryExactSingle", reflect.TypeOf((*MockThreatDao)(nil).QueryExactSingle), ctx, query, fields)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryExactSingle", reflect.TypeOf((*MockThreatDao)(nil).QueryExactSingle), ctx, query)
 }
 
 // UpdateWhereExact mocks base method.

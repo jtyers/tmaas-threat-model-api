@@ -51,7 +51,7 @@ func (mr *MockThreatServiceMockRecorder) CreateThreat(ctx, threat interface{}) *
 }
 
 // GetThreat mocks base method.
-func (m *MockThreatService) GetThreat(ctx context.Context, id entities.ThreatId) (*entities.Threat, error) {
+func (m *MockThreatService) GetThreat(ctx context.Context, id entities.ThreatID) (*entities.Threat, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetThreat", ctx, id)
 	ret0, _ := ret[0].(*entities.Threat)
@@ -81,15 +81,15 @@ func (mr *MockThreatServiceMockRecorder) GetThreats(ctx interface{}) *gomock.Cal
 }
 
 // UpdateThreat mocks base method.
-func (m *MockThreatService) UpdateThreat(ctx context.Context, threatId entities.ThreatId, threat entities.Threat) error {
+func (m *MockThreatService) UpdateThreat(ctx context.Context, threatID entities.ThreatID, threat entities.Threat) error {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "UpdateThreat", ctx, threatId, threat)
+	ret := m.ctrl.Call(m, "UpdateThreat", ctx, threatID, threat)
 	ret0, _ := ret[0].(error)
 	return ret0
 }
 
 // UpdateThreat indicates an expected call of UpdateThreat.
-func (mr *MockThreatServiceMockRecorder) UpdateThreat(ctx, threatId, threat interface{}) *gomock.Call {
+func (mr *MockThreatServiceMockRecorder) UpdateThreat(ctx, threatID, threat interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateThreat", reflect.TypeOf((*MockThreatService)(nil).UpdateThreat), ctx, threatId, threat)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateThreat", reflect.TypeOf((*MockThreatService)(nil).UpdateThreat), ctx, threatID, threat)
 }

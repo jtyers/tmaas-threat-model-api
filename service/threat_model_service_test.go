@@ -14,35 +14,34 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestGetThreat(t *testing.T) {
-	threat := m.Threat{
-		ThreatID:    m.ThreatID("1234-1234-1234-1234"),
-		Description: "my-first-threat",
+func TestGetThreatModel(t *testing.T) {
+	threatModel := m.ThreatModel{
+		ThreatModelID: m.ThreatModelID("1234-1234-1234-1234"),
 	}
 
 	var tests = []struct {
-		name           string
-		inputThreatID  m.ThreatID
-		daoReturnValue m.Threat
-		daoReturnError error
-		expectedResult *m.Threat
-		expectedError  error
+		name               string
+		inputThreatModelID m.ThreatModelID
+		daoReturnValue     m.ThreatModel
+		daoReturnError     error
+		expectedResult     *m.ThreatModel
+		expectedError      error
 	}{
 		{
-			"should get existing threats",
-			threat.ThreatID,
-			threat,
+			"should get existing threatModels",
+			threatModel.ThreatModelID,
+			threatModel,
 			nil,
-			&threat,
+			&threatModel,
 			nil,
 		},
 		{
-			"should return ErrNoSuchThreat for non-existent threats",
-			threat.ThreatID,
-			threat,
+			"should return ErrNoSuchThreatModel for non-existent threatModels",
+			threatModel.ThreatModelID,
+			threatModel,
 			servicedao.ErrNoSuchDocument,
 			nil,
-			ErrNoSuchThreat,
+			ErrNoSuchThreatModel,
 		},
 	}
 
@@ -52,14 +51,14 @@ func TestGetThreat(t *testing.T) {
 			ctrl := gomock.NewController(t)
 			defer ctrl.Finish()
 
-			mockDao := dao.NewMockThreatDao(ctrl)
+			mockDao := dao.NewMockThreatModelDao(ctrl)
 			ctx := context.Background()
 
-			mockDao.EXPECT().Get(ctx, test.inputThreatID.String()).Return(&test.daoReturnValue, test.daoReturnError)
+			mockDao.EXPECT().Get(ctx, test.inputThreatModelID.String()).Return(&test.daoReturnValue, test.daoReturnError)
 
 			// when
-			service := NewDefaultThreatService(mockDao, nil, nil)
-			g, err := service.GetThreat(ctx, test.inputThreatID)
+			service := NewDefaultThreatModelService(mockDao, nil, nil)
+			g, err := service.GetThreatModel(ctx, test.inputThreatModelID)
 
 			// then
 			require.Equal(t, test.expectedResult, g)
@@ -68,35 +67,33 @@ func TestGetThreat(t *testing.T) {
 	}
 }
 
-func TestUpdateThreat(t *testing.T) {
-	threat := m.Threat{
-		Description: "my-first-threat",
-		InID:        "cm_123456",
-		Stride:      m.StrideSpoofing,
+func TestUpdateThreatModel(t *testing.T) {
+	threatModel := m.ThreatModel{
+		ThreatModelID: m.ThreatModelID("1234-1234-1234-1234"),
 	}
 
 	var tests = []struct {
 		name                      string
-		inputID                   m.ThreatID
-		input                     m.Threat
+		inputID                   m.ThreatModelID
+		input                     m.ThreatModel
 		daoReturnError            error
 		validateUpdateReturnError error
-		expectedResult            *m.Threat
+		expectedResult            *m.ThreatModel
 		expectedError             error
 	}{
 		{
-			"should update threat",
-			threat.ThreatID,
-			threat,
+			"should update threatModel",
+			threatModel.ThreatModelID,
+			threatModel,
 			nil,
 			nil,
-			&threat,
+			&threatModel,
 			nil,
 		},
 		{
 			"should pass through ValidateForUpdate errors with no wrapping or changes",
-			threat.ThreatID,
-			threat,
+			threatModel.ThreatModelID,
+			threatModel,
 			nil,
 			fmt.Errorf("invalid"),
 			nil,
@@ -104,12 +101,12 @@ func TestUpdateThreat(t *testing.T) {
 		},
 		{
 			"should fail if DAO update fails",
-			threat.ThreatID,
-			threat,
+			threatModel.ThreatModelID,
+			threatModel,
 			fmt.Errorf("dao failure"),
 			nil,
 			nil,
-			fmt.Errorf("error updating threat: dao failure"),
+			fmt.Errorf("error updating threatModel: dao failure"),
 		},
 	}
 
@@ -119,7 +116,7 @@ func TestUpdateThreat(t *testing.T) {
 			ctrl := gomock.NewController(t)
 			defer ctrl.Finish()
 
-			mockDao := dao.NewMockThreatDao(ctrl)
+			mockDao := dao.NewMockThreatModelDao(ctrl)
 			ctx := context.Background()
 			mockIDProvider := id.NewMockRandomIDProvider(ctrl)
 
@@ -127,15 +124,15 @@ func TestUpdateThreat(t *testing.T) {
 			mockValidator.EXPECT().ValidateForUpdate(test.input).Return(test.validateUpdateReturnError)
 
 			if test.validateUpdateReturnError == nil {
-				queryThreat := m.Threat{ThreatID: test.inputID}
+				queryThreatModel := m.ThreatModel{ThreatModelID: test.inputID}
 
-				mockDao.EXPECT().UpdateWhereExactSingle(ctx, &queryThreat, &test.input).Return(test.expectedResult, test.daoReturnError)
+				mockDao.EXPECT().UpdateWhereExactSingle(ctx, &queryThreatModel, &test.input).Return(test.expectedResult, test.daoReturnError)
 
 			}
 
 			// when
-			service := NewDefaultThreatService(mockDao, mockIDProvider, mockValidator)
-			err := service.UpdateThreat(ctx, test.inputID, test.input)
+			service := NewDefaultThreatModelService(mockDao, mockIDProvider, mockValidator)
+			err := service.UpdateThreatModel(ctx, test.inputID, test.input)
 
 			// then
 			require.Equal(t, test.expectedError, err)
@@ -143,34 +140,30 @@ func TestUpdateThreat(t *testing.T) {
 	}
 }
 
-func TestCreateThreat(t *testing.T) {
-	threat := m.Threat{
-		Description: "my-first-threat",
-		InID:        "cm_123456",
-		Stride:      m.StrideSpoofing,
-	}
+func TestCreateThreatModel(t *testing.T) {
+	threatModel := m.ThreatModel{}
 
 	var tests = []struct {
 		name                      string
-		input                     m.Threat
+		input                     m.ThreatModel
 		daoReturnError            error
 		validateCreateReturnError error
 		validateUpdateReturnError error
-		expectedResult            *m.Threat
+		expectedResult            *m.ThreatModel
 		expectedError             error
 	}{
 		{
-			"should create threat",
-			threat,
+			"should create threatModel",
+			threatModel,
 			nil,
 			nil,
 			nil,
-			&threat,
+			&threatModel,
 			nil,
 		},
 		{
 			"should pass through ValidateCreate errors with no wrapping or changes",
-			threat,
+			threatModel,
 			nil,
 			fmt.Errorf("invalid"),
 			nil,
@@ -179,7 +172,7 @@ func TestCreateThreat(t *testing.T) {
 		},
 		{
 			"should pass through ValidateForUpdate errors with no wrapping or changes",
-			threat,
+			threatModel,
 			nil,
 			nil,
 			fmt.Errorf("invalid"),
@@ -188,12 +181,12 @@ func TestCreateThreat(t *testing.T) {
 		},
 		{
 			"should fail if DAO create fails",
-			threat,
+			threatModel,
 			fmt.Errorf("dao failure"),
 			nil,
 			nil,
 			nil,
-			fmt.Errorf("error creating threat: dao failure"),
+			fmt.Errorf("error creating threatModel: dao failure"),
 		},
 	}
 
@@ -203,7 +196,7 @@ func TestCreateThreat(t *testing.T) {
 			ctrl := gomock.NewController(t)
 			defer ctrl.Finish()
 
-			mockDao := dao.NewMockThreatDao(ctrl)
+			mockDao := dao.NewMockThreatModelDao(ctrl)
 			ctx := context.Background()
 			mockIDProvider := id.NewMockRandomIDProvider(ctrl)
 
@@ -219,7 +212,7 @@ func TestCreateThreat(t *testing.T) {
 
 					// NOTE: this is not a pointer, so a copy of the original struct
 					expectedInputForCreate := test.input
-					expectedInputForCreate.ThreatID = m.ThreatID(ThreatIDPrefix + newID)
+					expectedInputForCreate.ThreatModelID = m.ThreatModelID(ThreatModelIDPrefix + newID)
 
 					mockDao.EXPECT().Create(ctx, &expectedInputForCreate).Return(test.expectedResult, test.daoReturnError)
 
@@ -227,8 +220,8 @@ func TestCreateThreat(t *testing.T) {
 			}
 
 			// when
-			service := NewDefaultThreatService(mockDao, mockIDProvider, mockValidator)
-			g, err := service.CreateThreat(ctx, test.input)
+			service := NewDefaultThreatModelService(mockDao, mockIDProvider, mockValidator)
+			g, err := service.CreateThreatModel(ctx, test.input)
 
 			// then
 			require.Equal(t, test.expectedResult, g)
@@ -237,42 +230,39 @@ func TestCreateThreat(t *testing.T) {
 	}
 }
 
-func TestGetThreats(t *testing.T) {
-	threats := []*m.Threat{
+func TestGetThreatModels(t *testing.T) {
+	threatModels := []*m.ThreatModel{
 		{
-			ThreatID:    m.ThreatID("1234-1234-1234-1234"),
-			Description: "my-first-threat",
+			ThreatModelID: m.ThreatModelID("1234-1234-1234-1234"),
 		},
 		{
-			ThreatID:    m.ThreatID("2345-2345-2345-3245"),
-			Description: "my-second-threat",
+			ThreatModelID: m.ThreatModelID("2345-2345-2345-3245"),
 		},
 		{
-			ThreatID:    m.ThreatID("3456-3456-3456-3456"),
-			Description: "my-third-threat",
+			ThreatModelID: m.ThreatModelID("3456-3456-3456-3456"),
 		},
 	}
 
 	var tests = []struct {
 		name           string
-		daoReturnValue []*m.Threat
+		daoReturnValue []*m.ThreatModel
 		daoReturnError error
-		expectedResult []*m.Threat
+		expectedResult []*m.ThreatModel
 		expectedError  error
 	}{
 		{
-			"should get existing threats",
-			threats,
+			"should get existing threatModels",
+			threatModels,
 			nil,
-			threats,
+			threatModels,
 			nil,
 		},
 		{
 			"should pass through DAO errors",
-			threats,
+			threatModels,
 			fmt.Errorf("foo bar"),
 			nil,
-			fmt.Errorf("error retrieving threats: foo bar"),
+			fmt.Errorf("error retrieving threatModels: foo bar"),
 		},
 	}
 
@@ -282,14 +272,14 @@ func TestGetThreats(t *testing.T) {
 			ctrl := gomock.NewController(t)
 			defer ctrl.Finish()
 
-			mockDao := dao.NewMockThreatDao(ctrl)
+			mockDao := dao.NewMockThreatModelDao(ctrl)
 			ctx := context.Background()
 
 			mockDao.EXPECT().GetAll(ctx).Return(test.daoReturnValue, test.daoReturnError)
 
 			// when
-			service := NewDefaultThreatService(mockDao, nil, nil)
-			g, err := service.GetThreats(ctx)
+			service := NewDefaultThreatModelService(mockDao, nil, nil)
+			g, err := service.GetThreatModels(ctx)
 
 			// then
 			require.Equal(t, test.expectedResult, g)
