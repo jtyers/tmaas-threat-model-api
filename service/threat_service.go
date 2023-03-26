@@ -18,8 +18,6 @@ var (
 	ErrTooManyThreats = errors.New("too many threats")
 	ErrNoSuchThreat   = errors.New("no such threat")
 	ErrNoDataToUpdate = errors.New("no data to update")
-
-	ThreatIDPrefix = "th_"
 )
 
 type ThreatService interface {
@@ -81,7 +79,7 @@ func (g *DefaultThreatService) CreateThreat(ctx context.Context, threat m.Threat
 		return nil, err
 	}
 
-	threat.ThreatID = m.ThreatID("th_" + g.randomIDProvider.GenerateID())
+	threat.ThreatID = m.ThreatID(ThreatIDPrefix + g.randomIDProvider.GenerateID())
 
 	result, err := g.dao.Create(ctx, &threat)
 	if err != nil {

@@ -16,7 +16,6 @@ import (
 
 var (
 	ErrNoSuchThreatModel = errors.New("no such threat model")
-	ThreatModelIDPrefix  = "th_"
 )
 
 type ThreatModelService interface {
@@ -78,7 +77,7 @@ func (g *DefaultThreatModelService) CreateThreatModel(ctx context.Context, threa
 		return nil, err
 	}
 
-	threatModel.ThreatModelID = m.ThreatModelID("th_" + g.randomIDProvider.GenerateID())
+	threatModel.ThreatModelID = m.ThreatModelID(ThreatModelIDPrefix + g.randomIDProvider.GenerateID())
 
 	result, err := g.dao.Create(ctx, &threatModel)
 	if err != nil {
