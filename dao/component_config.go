@@ -10,6 +10,6 @@ type ComponentCloverCollectionConfig struct {
 
 func NewComponentCloverCollectionConfig() ComponentCloverCollectionConfig {
 	return ComponentCloverCollectionConfig{
-		clover.NewDefaultCollectionConfig("threats"),
+		clover.NewDefaultCollectionConfig("components"),
 	}
 }
