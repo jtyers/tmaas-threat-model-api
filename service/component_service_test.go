@@ -253,6 +253,7 @@ func TestGetComponents(t *testing.T) {
 
 	var tests = []struct {
 		name           string
+		dfdID          m.DataFlowDiagramID
 		daoReturnValue []*m.Component
 		daoReturnError error
 		expectedResult []*m.Component
@@ -260,6 +261,7 @@ func TestGetComponents(t *testing.T) {
 	}{
 		{
 			"should get existing components",
+			m.DataFlowDiagramID("dfd_1"),
 			components,
 			nil,
 			components,
@@ -267,6 +269,7 @@ func TestGetComponents(t *testing.T) {
 		},
 		{
 			"should pass through DAO errors",
+			m.DataFlowDiagramID("dfd_1"),
 			components,
 			fmt.Errorf("foo bar"),
 			nil,
@@ -283,11 +286,12 @@ func TestGetComponents(t *testing.T) {
 			mockDao := dao.NewMockComponentDao(ctrl)
 			ctx := context.Background()
 
-			mockDao.EXPECT().GetAll(ctx).Return(test.daoReturnValue, test.daoReturnError)
+			queryComponent := &m.Component{DataFlowDiagramID: test.dfdID}
+			mockDao.EXPECT().QueryExact(ctx, queryComponent).Return(test.daoReturnValue, test.daoReturnError)
 
 			// when
 			service := NewDefaultComponentService(mockDao, nil, nil)
-			g, err := service.GetComponents(ctx)
+			g, err := service.GetComponents(ctx, test.dfdID)
 
 			// then
 			require.Equal(t, test.expectedResult, g)

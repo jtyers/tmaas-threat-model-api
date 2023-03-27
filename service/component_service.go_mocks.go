@@ -66,18 +66,18 @@ func (mr *MockComponentServiceMockRecorder) GetComponent(ctx, id interface{}) *g
 }
 
 // GetComponents mocks base method.
-func (m *MockComponentService) GetComponents(ctx context.Context) ([]*entities.Component, error) {
+func (m *MockComponentService) GetComponents(ctx context.Context, id entities.DataFlowDiagramID) ([]*entities.Component, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetComponents", ctx)
+	ret := m.ctrl.Call(m, "GetComponents", ctx, id)
 	ret0, _ := ret[0].([]*entities.Component)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // GetComponents indicates an expected call of GetComponents.
-func (mr *MockComponentServiceMockRecorder) GetComponents(ctx interface{}) *gomock.Call {
+func (mr *MockComponentServiceMockRecorder) GetComponents(ctx, id interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetComponents", reflect.TypeOf((*MockComponentService)(nil).GetComponents), ctx)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetComponents", reflect.TypeOf((*MockComponentService)(nil).GetComponents), ctx, id)
 }
 
 // UpdateComponent mocks base method.

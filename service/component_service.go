@@ -23,8 +23,8 @@ type ComponentService interface {
 	// Retrieve a component by componentID.
 	GetComponent(ctx context.Context, id m.ComponentID) (*m.Component, error)
 
-	// Retrieve all component.
-	GetComponents(ctx context.Context) ([]*m.Component, error)
+	// Retrieve all component for a given DFD.
+	GetComponents(ctx context.Context, id m.DataFlowDiagramID) ([]*m.Component, error)
 
 	// Creates a component. `component` should not have ID or ComponentID set.
 	CreateComponent(ctx context.Context, component m.Component) (*m.Component, error)
@@ -108,8 +108,9 @@ func (g *DefaultComponentService) UpdateComponent(ctx context.Context, component
 	return nil
 }
 
-func (g *DefaultComponentService) GetComponents(ctx context.Context) ([]*m.Component, error) {
-	components, err := g.dao.GetAll(ctx)
+func (g *DefaultComponentService) GetComponents(ctx context.Context, id m.DataFlowDiagramID) ([]*m.Component, error) {
+	queryComponent := &m.Component{DataFlowDiagramID: id}
+	components, err := g.dao.QueryExact(ctx, queryComponent)
 
 	if err != nil {
 		return nil, fmt.Errorf("error retrieving components: %v", err)
