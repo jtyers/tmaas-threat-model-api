@@ -11,7 +11,7 @@ import (
 	"github.com/jtyers/tmaas-threat-service/dao"
 )
 
-var serviceDepsProviderSet = wire.NewSet(
+var ServiceDepsProviderSet = wire.NewSet(
 	id.NewDefaultRandomIDProvider,
 	wire.Bind(new(id.RandomIDProvider), new(*id.DefaultRandomIDProvider)),
 
@@ -19,16 +19,12 @@ var serviceDepsProviderSet = wire.NewSet(
 )
 
 var ThreatServiceProviderSet = wire.NewSet(
-	serviceDepsProviderSet,
-
 	dao.ThreatDaoProviderSet,
 	wire.Bind(new(ThreatService), new(*DefaultThreatService)),
 	NewDefaultThreatService,
 )
 
 var ThreatModelServiceProviderSet = wire.NewSet(
-	serviceDepsProviderSet,
-
 	dao.ThreatModelDaoProviderSet,
 	wire.Bind(new(ThreatModelService), new(*DefaultThreatModelService)),
 	NewDefaultThreatModelService,
