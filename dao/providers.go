@@ -25,5 +25,14 @@ var ThreatDaoProviderSet = wire.NewSet(
 	NewThreatDao,
 )
 
+var ThreatModelDaoProviderSet = wire.NewSet(
+	NewCloverDatabaseConfig,
+	NewThreatModelCloverCollectionConfig,
+	NewThreatModelCloverDao,
+
+	clover.DaoProviderSet,
+	NewThreatModelDao,
+)
+
 //wire.Bind(new(dao.Dao), new(*CloverDao)),
 //NewCloverDao,
