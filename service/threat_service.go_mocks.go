@@ -50,6 +50,20 @@ func (mr *MockThreatServiceMockRecorder) CreateThreat(ctx, threat interface{}) *
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateThreat", reflect.TypeOf((*MockThreatService)(nil).CreateThreat), ctx, threat)
 }
 
+// DeleteThreat mocks base method.
+func (m *MockThreatService) DeleteThreat(ctx context.Context, threatID entities.ThreatID) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeleteThreat", ctx, threatID)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// DeleteThreat indicates an expected call of DeleteThreat.
+func (mr *MockThreatServiceMockRecorder) DeleteThreat(ctx, threatID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteThreat", reflect.TypeOf((*MockThreatService)(nil).DeleteThreat), ctx, threatID)
+}
+
 // GetThreat mocks base method.
 func (m *MockThreatService) GetThreat(ctx context.Context, id entities.ThreatID) (*entities.Threat, error) {
 	m.ctrl.T.Helper()
