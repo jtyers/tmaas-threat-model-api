@@ -8,4 +8,5 @@ var (
 	ThreatIDPrefix          = "th_"
 	DataFlowDiagramIDPrefix = "dfd_"
 	ComponentIDPrefix       = "cm_"
+	ControlIDPrefix         = "cn_"
 )

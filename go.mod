@@ -5,7 +5,7 @@ go 1.20
 require (
 	github.com/golang/mock v1.7.0-rc.1.0.20220812172401-5b455625bd2c
 	github.com/google/wire v0.5.0
-	github.com/jtyers/tmaas-model v0.0.0-20230326221527-75215c1f68b7
+	github.com/jtyers/tmaas-model v0.0.0-20230405132450-55675aea1252
 	github.com/jtyers/tmaas-service-dao v0.0.0-20230323095444-857a50b9335f
 	github.com/jtyers/tmaas-service-util v0.0.0-20230323095543-af29d2528eff
 	github.com/stretchr/testify v1.8.2
