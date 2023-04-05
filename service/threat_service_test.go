@@ -143,6 +143,56 @@ func TestUpdateThreat(t *testing.T) {
 	}
 }
 
+func TestDeleteThreat(t *testing.T) {
+	threat := m.Threat{
+		Description: "my-first-threat",
+		InID:        "cm_123456",
+		Stride:      m.StrideSpoofing,
+	}
+
+	var tests = []struct {
+		name           string
+		inputID        m.ThreatID
+		daoReturnError error
+		expectedError  error
+	}{
+		{
+			"should delete threat",
+			threat.ThreatID,
+			nil,
+			nil,
+		},
+		{
+			"should fail if DAO delete fails",
+			threat.ThreatID,
+			fmt.Errorf("dao failure"),
+			fmt.Errorf("error deleting threat: dao failure"),
+		},
+	}
+
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			// given
+			ctrl := gomock.NewController(t)
+			defer ctrl.Finish()
+
+			mockDao := dao.NewMockThreatDao(ctrl)
+			ctx := context.Background()
+
+			queryThreat := m.Threat{ThreatID: test.inputID}
+
+			mockDao.EXPECT().DeleteWhere(ctx, &queryThreat).Return(test.daoReturnError)
+
+			// when
+			service := NewDefaultThreatService(mockDao, nil, nil)
+			err := service.DeleteThreat(ctx, test.inputID)
+
+			// then
+			require.Equal(t, test.expectedError, err)
+		})
+	}
+}
+
 func TestCreateThreat(t *testing.T) {
 	threat := m.Threat{
 		Description: "my-first-threat",

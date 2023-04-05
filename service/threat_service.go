@@ -32,6 +32,9 @@ type ThreatService interface {
 
 	// Updates a threat
 	UpdateThreat(ctx context.Context, threatID m.ThreatID, threat m.Threat) error
+
+	// Deletes a threat.
+	DeleteThreat(ctx context.Context, threatID m.ThreatID) error
 }
 
 type DefaultThreatService struct {
@@ -40,6 +43,8 @@ type DefaultThreatService struct {
 	randomIDProvider id.RandomIDProvider
 	validator        validator.StructValidator
 }
+
+var _ ThreatService = (*DefaultThreatService)(nil)
 
 func NewDefaultThreatService(dao dao.ThreatDao, randomIDProvider id.RandomIDProvider, validator validator.StructValidator) *DefaultThreatService {
 	return &DefaultThreatService{dao, randomIDProvider, validator}
@@ -117,4 +122,14 @@ func (g *DefaultThreatService) GetThreats(ctx context.Context) ([]*m.Threat, err
 	}
 
 	return threats, nil
+}
+
+func (g *DefaultThreatService) DeleteThreat(ctx context.Context, threatID m.ThreatID) error {
+	queryThreat := m.Threat{ThreatID: threatID}
+	err := g.dao.DeleteWhere(ctx, &queryThreat)
+	if err != nil {
+		return fmt.Errorf("error deleting threat: %v", err)
+	}
+
+	return nil
 }
