@@ -9,7 +9,7 @@ import (
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"
-	entities "github.com/jtyers/tmaas-model"
+	model "github.com/jtyers/tmaas-model"
 )
 
 // MockInherentRiskService is a mock of InherentRiskService interface.
@@ -36,10 +36,10 @@ func (m *MockInherentRiskService) EXPECT() *MockInherentRiskServiceMockRecorder 
 }
 
 // CreateInherentRisk mocks base method.
-func (m *MockInherentRiskService) CreateInherentRisk(ctx context.Context, inherentRisk entities.InherentRisk) (*entities.InherentRisk, error) {
+func (m *MockInherentRiskService) CreateInherentRisk(ctx context.Context, inherentRisk model.InherentRisk) (*model.InherentRisk, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CreateInherentRisk", ctx, inherentRisk)
-	ret0, _ := ret[0].(*entities.InherentRisk)
+	ret0, _ := ret[0].(*model.InherentRisk)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -51,10 +51,10 @@ func (mr *MockInherentRiskServiceMockRecorder) CreateInherentRisk(ctx, inherentR
 }
 
 // GetInherentRisk mocks base method.
-func (m *MockInherentRiskService) GetInherentRisk(ctx context.Context, id entities.InherentRiskID) (*entities.InherentRisk, error) {
+func (m *MockInherentRiskService) GetInherentRisk(ctx context.Context, id model.InherentRiskID) (*model.InherentRisk, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetInherentRisk", ctx, id)
-	ret0, _ := ret[0].(*entities.InherentRisk)
+	ret0, _ := ret[0].(*model.InherentRisk)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -66,10 +66,10 @@ func (mr *MockInherentRiskServiceMockRecorder) GetInherentRisk(ctx, id interface
 }
 
 // GetInherentRisks mocks base method.
-func (m *MockInherentRiskService) GetInherentRisks(ctx context.Context) ([]*entities.InherentRisk, error) {
+func (m *MockInherentRiskService) GetInherentRisks(ctx context.Context) ([]*model.InherentRisk, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetInherentRisks", ctx)
-	ret0, _ := ret[0].([]*entities.InherentRisk)
+	ret0, _ := ret[0].([]*model.InherentRisk)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -81,7 +81,7 @@ func (mr *MockInherentRiskServiceMockRecorder) GetInherentRisks(ctx interface{})
 }
 
 // UpdateInherentRisk mocks base method.
-func (m *MockInherentRiskService) UpdateInherentRisk(ctx context.Context, inherentRiskID entities.InherentRiskID, inherentRisk entities.InherentRisk) error {
+func (m *MockInherentRiskService) UpdateInherentRisk(ctx context.Context, inherentRiskID model.InherentRiskID, inherentRisk model.InherentRisk) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "UpdateInherentRisk", ctx, inherentRiskID, inherentRisk)
 	ret0, _ := ret[0].(error)

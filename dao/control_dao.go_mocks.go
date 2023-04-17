@@ -9,7 +9,7 @@ import (
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"
-	entities "github.com/jtyers/tmaas-model"
+	model "github.com/jtyers/tmaas-model"
 )
 
 // MockControlDao is a mock of ControlDao interface.
@@ -36,10 +36,10 @@ func (m *MockControlDao) EXPECT() *MockControlDaoMockRecorder {
 }
 
 // Create mocks base method.
-func (m *MockControlDao) Create(ctx context.Context, data *entities.Control) (*entities.Control, error) {
+func (m *MockControlDao) Create(ctx context.Context, data *model.Control) (*model.Control, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Create", ctx, data)
-	ret0, _ := ret[0].(*entities.Control)
+	ret0, _ := ret[0].(*model.Control)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -65,7 +65,7 @@ func (mr *MockControlDaoMockRecorder) Delete(ctx, id interface{}) *gomock.Call {
 }
 
 // DeleteWhere mocks base method.
-func (m *MockControlDao) DeleteWhere(ctx context.Context, query *entities.Control) error {
+func (m *MockControlDao) DeleteWhere(ctx context.Context, query *model.Control) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "DeleteWhere", ctx, query)
 	ret0, _ := ret[0].(error)
@@ -79,10 +79,10 @@ func (mr *MockControlDaoMockRecorder) DeleteWhere(ctx, query interface{}) *gomoc
 }
 
 // Get mocks base method.
-func (m *MockControlDao) Get(ctx context.Context, id string) (*entities.Control, error) {
+func (m *MockControlDao) Get(ctx context.Context, id string) (*model.Control, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Get", ctx, id)
-	ret0, _ := ret[0].(*entities.Control)
+	ret0, _ := ret[0].(*model.Control)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -94,10 +94,10 @@ func (mr *MockControlDaoMockRecorder) Get(ctx, id interface{}) *gomock.Call {
 }
 
 // GetAll mocks base method.
-func (m *MockControlDao) GetAll(ctx context.Context) ([]*entities.Control, error) {
+func (m *MockControlDao) GetAll(ctx context.Context) ([]*model.Control, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetAll", ctx)
-	ret0, _ := ret[0].([]*entities.Control)
+	ret0, _ := ret[0].([]*model.Control)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -109,10 +109,10 @@ func (mr *MockControlDaoMockRecorder) GetAll(ctx interface{}) *gomock.Call {
 }
 
 // QueryExact mocks base method.
-func (m *MockControlDao) QueryExact(ctx context.Context, query *entities.Control) ([]*entities.Control, error) {
+func (m *MockControlDao) QueryExact(ctx context.Context, query *model.Control) ([]*model.Control, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "QueryExact", ctx, query)
-	ret0, _ := ret[0].([]*entities.Control)
+	ret0, _ := ret[0].([]*model.Control)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -124,10 +124,10 @@ func (mr *MockControlDaoMockRecorder) QueryExact(ctx, query interface{}) *gomock
 }
 
 // QueryExactSingle mocks base method.
-func (m *MockControlDao) QueryExactSingle(ctx context.Context, query *entities.Control) (*entities.Control, error) {
+func (m *MockControlDao) QueryExactSingle(ctx context.Context, query *model.Control) (*model.Control, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "QueryExactSingle", ctx, query)
-	ret0, _ := ret[0].(*entities.Control)
+	ret0, _ := ret[0].(*model.Control)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -139,10 +139,10 @@ func (mr *MockControlDaoMockRecorder) QueryExactSingle(ctx, query interface{}) *
 }
 
 // UpdateWhereExact mocks base method.
-func (m *MockControlDao) UpdateWhereExact(ctx context.Context, queryExact, data *entities.Control) ([]*entities.Control, error) {
+func (m *MockControlDao) UpdateWhereExact(ctx context.Context, queryExact, data *model.Control) ([]*model.Control, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "UpdateWhereExact", ctx, queryExact, data)
-	ret0, _ := ret[0].([]*entities.Control)
+	ret0, _ := ret[0].([]*model.Control)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -154,10 +154,10 @@ func (mr *MockControlDaoMockRecorder) UpdateWhereExact(ctx, queryExact, data int
 }
 
 // UpdateWhereExactSingle mocks base method.
-func (m *MockControlDao) UpdateWhereExactSingle(ctx context.Context, queryExact, data *entities.Control) (*entities.Control, error) {
+func (m *MockControlDao) UpdateWhereExactSingle(ctx context.Context, queryExact, data *model.Control) (*model.Control, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "UpdateWhereExactSingle", ctx, queryExact, data)
-	ret0, _ := ret[0].(*entities.Control)
+	ret0, _ := ret[0].(*model.Control)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }

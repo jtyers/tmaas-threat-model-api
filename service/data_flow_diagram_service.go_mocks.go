@@ -9,7 +9,7 @@ import (
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"
-	entities "github.com/jtyers/tmaas-model"
+	model "github.com/jtyers/tmaas-model"
 )
 
 // MockDataFlowDiagramService is a mock of DataFlowDiagramService interface.
@@ -36,10 +36,10 @@ func (m *MockDataFlowDiagramService) EXPECT() *MockDataFlowDiagramServiceMockRec
 }
 
 // CreateDataFlowDiagram mocks base method.
-func (m *MockDataFlowDiagramService) CreateDataFlowDiagram(ctx context.Context, dataFlowDiagram entities.DataFlowDiagram) (*entities.DataFlowDiagram, error) {
+func (m *MockDataFlowDiagramService) CreateDataFlowDiagram(ctx context.Context, dataFlowDiagram model.DataFlowDiagram) (*model.DataFlowDiagram, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CreateDataFlowDiagram", ctx, dataFlowDiagram)
-	ret0, _ := ret[0].(*entities.DataFlowDiagram)
+	ret0, _ := ret[0].(*model.DataFlowDiagram)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -51,10 +51,10 @@ func (mr *MockDataFlowDiagramServiceMockRecorder) CreateDataFlowDiagram(ctx, dat
 }
 
 // GetDataFlowDiagram mocks base method.
-func (m *MockDataFlowDiagramService) GetDataFlowDiagram(ctx context.Context, id entities.DataFlowDiagramID) (*entities.DataFlowDiagram, error) {
+func (m *MockDataFlowDiagramService) GetDataFlowDiagram(ctx context.Context, id model.DataFlowDiagramID) (*model.DataFlowDiagram, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetDataFlowDiagram", ctx, id)
-	ret0, _ := ret[0].(*entities.DataFlowDiagram)
+	ret0, _ := ret[0].(*model.DataFlowDiagram)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -66,10 +66,10 @@ func (mr *MockDataFlowDiagramServiceMockRecorder) GetDataFlowDiagram(ctx, id int
 }
 
 // GetDataFlowDiagrams mocks base method.
-func (m *MockDataFlowDiagramService) GetDataFlowDiagrams(ctx context.Context) ([]*entities.DataFlowDiagram, error) {
+func (m *MockDataFlowDiagramService) GetDataFlowDiagrams(ctx context.Context) ([]*model.DataFlowDiagram, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetDataFlowDiagrams", ctx)
-	ret0, _ := ret[0].([]*entities.DataFlowDiagram)
+	ret0, _ := ret[0].([]*model.DataFlowDiagram)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -81,7 +81,7 @@ func (mr *MockDataFlowDiagramServiceMockRecorder) GetDataFlowDiagrams(ctx interf
 }
 
 // UpdateDataFlowDiagram mocks base method.
-func (m *MockDataFlowDiagramService) UpdateDataFlowDiagram(ctx context.Context, dataFlowDiagramID entities.DataFlowDiagramID, dataFlowDiagram entities.DataFlowDiagram) error {
+func (m *MockDataFlowDiagramService) UpdateDataFlowDiagram(ctx context.Context, dataFlowDiagramID model.DataFlowDiagramID, dataFlowDiagram model.DataFlowDiagram) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "UpdateDataFlowDiagram", ctx, dataFlowDiagramID, dataFlowDiagram)
 	ret0, _ := ret[0].(error)

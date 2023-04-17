@@ -9,7 +9,7 @@ import (
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"
-	entities "github.com/jtyers/tmaas-model"
+	model "github.com/jtyers/tmaas-model"
 )
 
 // MockInherentRiskDao is a mock of InherentRiskDao interface.
@@ -36,10 +36,10 @@ func (m *MockInherentRiskDao) EXPECT() *MockInherentRiskDaoMockRecorder {
 }
 
 // Create mocks base method.
-func (m *MockInherentRiskDao) Create(ctx context.Context, data *entities.InherentRisk) (*entities.InherentRisk, error) {
+func (m *MockInherentRiskDao) Create(ctx context.Context, data *model.InherentRisk) (*model.InherentRisk, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Create", ctx, data)
-	ret0, _ := ret[0].(*entities.InherentRisk)
+	ret0, _ := ret[0].(*model.InherentRisk)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -65,7 +65,7 @@ func (mr *MockInherentRiskDaoMockRecorder) Delete(ctx, id interface{}) *gomock.C
 }
 
 // DeleteWhere mocks base method.
-func (m *MockInherentRiskDao) DeleteWhere(ctx context.Context, query *entities.InherentRisk) error {
+func (m *MockInherentRiskDao) DeleteWhere(ctx context.Context, query *model.InherentRisk) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "DeleteWhere", ctx, query)
 	ret0, _ := ret[0].(error)
@@ -79,10 +79,10 @@ func (mr *MockInherentRiskDaoMockRecorder) DeleteWhere(ctx, query interface{}) *
 }
 
 // Get mocks base method.
-func (m *MockInherentRiskDao) Get(ctx context.Context, id string) (*entities.InherentRisk, error) {
+func (m *MockInherentRiskDao) Get(ctx context.Context, id string) (*model.InherentRisk, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Get", ctx, id)
-	ret0, _ := ret[0].(*entities.InherentRisk)
+	ret0, _ := ret[0].(*model.InherentRisk)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -94,10 +94,10 @@ func (mr *MockInherentRiskDaoMockRecorder) Get(ctx, id interface{}) *gomock.Call
 }
 
 // GetAll mocks base method.
-func (m *MockInherentRiskDao) GetAll(ctx context.Context) ([]*entities.InherentRisk, error) {
+func (m *MockInherentRiskDao) GetAll(ctx context.Context) ([]*model.InherentRisk, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetAll", ctx)
-	ret0, _ := ret[0].([]*entities.InherentRisk)
+	ret0, _ := ret[0].([]*model.InherentRisk)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -109,10 +109,10 @@ func (mr *MockInherentRiskDaoMockRecorder) GetAll(ctx interface{}) *gomock.Call 
 }
 
 // QueryExact mocks base method.
-func (m *MockInherentRiskDao) QueryExact(ctx context.Context, query *entities.InherentRisk) ([]*entities.InherentRisk, error) {
+func (m *MockInherentRiskDao) QueryExact(ctx context.Context, query *model.InherentRisk) ([]*model.InherentRisk, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "QueryExact", ctx, query)
-	ret0, _ := ret[0].([]*entities.InherentRisk)
+	ret0, _ := ret[0].([]*model.InherentRisk)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -124,10 +124,10 @@ func (mr *MockInherentRiskDaoMockRecorder) QueryExact(ctx, query interface{}) *g
 }
 
 // QueryExactSingle mocks base method.
-func (m *MockInherentRiskDao) QueryExactSingle(ctx context.Context, query *entities.InherentRisk) (*entities.InherentRisk, error) {
+func (m *MockInherentRiskDao) QueryExactSingle(ctx context.Context, query *model.InherentRisk) (*model.InherentRisk, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "QueryExactSingle", ctx, query)
-	ret0, _ := ret[0].(*entities.InherentRisk)
+	ret0, _ := ret[0].(*model.InherentRisk)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -139,10 +139,10 @@ func (mr *MockInherentRiskDaoMockRecorder) QueryExactSingle(ctx, query interface
 }
 
 // UpdateWhereExact mocks base method.
-func (m *MockInherentRiskDao) UpdateWhereExact(ctx context.Context, queryExact, data *entities.InherentRisk) ([]*entities.InherentRisk, error) {
+func (m *MockInherentRiskDao) UpdateWhereExact(ctx context.Context, queryExact, data *model.InherentRisk) ([]*model.InherentRisk, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "UpdateWhereExact", ctx, queryExact, data)
-	ret0, _ := ret[0].([]*entities.InherentRisk)
+	ret0, _ := ret[0].([]*model.InherentRisk)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -154,10 +154,10 @@ func (mr *MockInherentRiskDaoMockRecorder) UpdateWhereExact(ctx, queryExact, dat
 }
 
 // UpdateWhereExactSingle mocks base method.
-func (m *MockInherentRiskDao) UpdateWhereExactSingle(ctx context.Context, queryExact, data *entities.InherentRisk) (*entities.InherentRisk, error) {
+func (m *MockInherentRiskDao) UpdateWhereExactSingle(ctx context.Context, queryExact, data *model.InherentRisk) (*model.InherentRisk, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "UpdateWhereExactSingle", ctx, queryExact, data)
-	ret0, _ := ret[0].(*entities.InherentRisk)
+	ret0, _ := ret[0].(*model.InherentRisk)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }

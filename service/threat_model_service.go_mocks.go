@@ -9,7 +9,7 @@ import (
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"
-	entities "github.com/jtyers/tmaas-model"
+	model "github.com/jtyers/tmaas-model"
 )
 
 // MockThreatModelService is a mock of ThreatModelService interface.
@@ -36,10 +36,10 @@ func (m *MockThreatModelService) EXPECT() *MockThreatModelServiceMockRecorder {
 }
 
 // CreateThreatModel mocks base method.
-func (m *MockThreatModelService) CreateThreatModel(ctx context.Context, threatModel entities.ThreatModel) (*entities.ThreatModel, error) {
+func (m *MockThreatModelService) CreateThreatModel(ctx context.Context, threatModel model.ThreatModel) (*model.ThreatModel, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CreateThreatModel", ctx, threatModel)
-	ret0, _ := ret[0].(*entities.ThreatModel)
+	ret0, _ := ret[0].(*model.ThreatModel)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -51,10 +51,10 @@ func (mr *MockThreatModelServiceMockRecorder) CreateThreatModel(ctx, threatModel
 }
 
 // GetThreatModel mocks base method.
-func (m *MockThreatModelService) GetThreatModel(ctx context.Context, id entities.ThreatModelID) (*entities.ThreatModel, error) {
+func (m *MockThreatModelService) GetThreatModel(ctx context.Context, id model.ThreatModelID) (*model.ThreatModel, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetThreatModel", ctx, id)
-	ret0, _ := ret[0].(*entities.ThreatModel)
+	ret0, _ := ret[0].(*model.ThreatModel)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -66,10 +66,10 @@ func (mr *MockThreatModelServiceMockRecorder) GetThreatModel(ctx, id interface{}
 }
 
 // GetThreatModels mocks base method.
-func (m *MockThreatModelService) GetThreatModels(ctx context.Context) ([]*entities.ThreatModel, error) {
+func (m *MockThreatModelService) GetThreatModels(ctx context.Context) ([]*model.ThreatModel, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetThreatModels", ctx)
-	ret0, _ := ret[0].([]*entities.ThreatModel)
+	ret0, _ := ret[0].([]*model.ThreatModel)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -81,7 +81,7 @@ func (mr *MockThreatModelServiceMockRecorder) GetThreatModels(ctx interface{}) *
 }
 
 // UpdateThreatModel mocks base method.
-func (m *MockThreatModelService) UpdateThreatModel(ctx context.Context, threatModelID entities.ThreatModelID, threatModel entities.ThreatModel) error {
+func (m *MockThreatModelService) UpdateThreatModel(ctx context.Context, threatModelID model.ThreatModelID, threatModel model.ThreatModel) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "UpdateThreatModel", ctx, threatModelID, threatModel)
 	ret0, _ := ret[0].(error)

@@ -9,7 +9,7 @@ import (
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"
-	entities "github.com/jtyers/tmaas-model"
+	model "github.com/jtyers/tmaas-model"
 )
 
 // MockDataFlowDiagramDao is a mock of DataFlowDiagramDao interface.
@@ -36,10 +36,10 @@ func (m *MockDataFlowDiagramDao) EXPECT() *MockDataFlowDiagramDaoMockRecorder {
 }
 
 // Create mocks base method.
-func (m *MockDataFlowDiagramDao) Create(ctx context.Context, data *entities.DataFlowDiagram) (*entities.DataFlowDiagram, error) {
+func (m *MockDataFlowDiagramDao) Create(ctx context.Context, data *model.DataFlowDiagram) (*model.DataFlowDiagram, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Create", ctx, data)
-	ret0, _ := ret[0].(*entities.DataFlowDiagram)
+	ret0, _ := ret[0].(*model.DataFlowDiagram)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -65,7 +65,7 @@ func (mr *MockDataFlowDiagramDaoMockRecorder) Delete(ctx, id interface{}) *gomoc
 }
 
 // DeleteWhere mocks base method.
-func (m *MockDataFlowDiagramDao) DeleteWhere(ctx context.Context, query *entities.DataFlowDiagram) error {
+func (m *MockDataFlowDiagramDao) DeleteWhere(ctx context.Context, query *model.DataFlowDiagram) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "DeleteWhere", ctx, query)
 	ret0, _ := ret[0].(error)
@@ -79,10 +79,10 @@ func (mr *MockDataFlowDiagramDaoMockRecorder) DeleteWhere(ctx, query interface{}
 }
 
 // Get mocks base method.
-func (m *MockDataFlowDiagramDao) Get(ctx context.Context, id string) (*entities.DataFlowDiagram, error) {
+func (m *MockDataFlowDiagramDao) Get(ctx context.Context, id string) (*model.DataFlowDiagram, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Get", ctx, id)
-	ret0, _ := ret[0].(*entities.DataFlowDiagram)
+	ret0, _ := ret[0].(*model.DataFlowDiagram)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -94,10 +94,10 @@ func (mr *MockDataFlowDiagramDaoMockRecorder) Get(ctx, id interface{}) *gomock.C
 }
 
 // GetAll mocks base method.
-func (m *MockDataFlowDiagramDao) GetAll(ctx context.Context) ([]*entities.DataFlowDiagram, error) {
+func (m *MockDataFlowDiagramDao) GetAll(ctx context.Context) ([]*model.DataFlowDiagram, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetAll", ctx)
-	ret0, _ := ret[0].([]*entities.DataFlowDiagram)
+	ret0, _ := ret[0].([]*model.DataFlowDiagram)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -109,10 +109,10 @@ func (mr *MockDataFlowDiagramDaoMockRecorder) GetAll(ctx interface{}) *gomock.Ca
 }
 
 // QueryExact mocks base method.
-func (m *MockDataFlowDiagramDao) QueryExact(ctx context.Context, query *entities.DataFlowDiagram) ([]*entities.DataFlowDiagram, error) {
+func (m *MockDataFlowDiagramDao) QueryExact(ctx context.Context, query *model.DataFlowDiagram) ([]*model.DataFlowDiagram, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "QueryExact", ctx, query)
-	ret0, _ := ret[0].([]*entities.DataFlowDiagram)
+	ret0, _ := ret[0].([]*model.DataFlowDiagram)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -124,10 +124,10 @@ func (mr *MockDataFlowDiagramDaoMockRecorder) QueryExact(ctx, query interface{})
 }
 
 // QueryExactSingle mocks base method.
-func (m *MockDataFlowDiagramDao) QueryExactSingle(ctx context.Context, query *entities.DataFlowDiagram) (*entities.DataFlowDiagram, error) {
+func (m *MockDataFlowDiagramDao) QueryExactSingle(ctx context.Context, query *model.DataFlowDiagram) (*model.DataFlowDiagram, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "QueryExactSingle", ctx, query)
-	ret0, _ := ret[0].(*entities.DataFlowDiagram)
+	ret0, _ := ret[0].(*model.DataFlowDiagram)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -139,10 +139,10 @@ func (mr *MockDataFlowDiagramDaoMockRecorder) QueryExactSingle(ctx, query interf
 }
 
 // UpdateWhereExact mocks base method.
-func (m *MockDataFlowDiagramDao) UpdateWhereExact(ctx context.Context, queryExact, data *entities.DataFlowDiagram) ([]*entities.DataFlowDiagram, error) {
+func (m *MockDataFlowDiagramDao) UpdateWhereExact(ctx context.Context, queryExact, data *model.DataFlowDiagram) ([]*model.DataFlowDiagram, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "UpdateWhereExact", ctx, queryExact, data)
-	ret0, _ := ret[0].([]*entities.DataFlowDiagram)
+	ret0, _ := ret[0].([]*model.DataFlowDiagram)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -154,10 +154,10 @@ func (mr *MockDataFlowDiagramDaoMockRecorder) UpdateWhereExact(ctx, queryExact, 
 }
 
 // UpdateWhereExactSingle mocks base method.
-func (m *MockDataFlowDiagramDao) UpdateWhereExactSingle(ctx context.Context, queryExact, data *entities.DataFlowDiagram) (*entities.DataFlowDiagram, error) {
+func (m *MockDataFlowDiagramDao) UpdateWhereExactSingle(ctx context.Context, queryExact, data *model.DataFlowDiagram) (*model.DataFlowDiagram, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "UpdateWhereExactSingle", ctx, queryExact, data)
-	ret0, _ := ret[0].(*entities.DataFlowDiagram)
+	ret0, _ := ret[0].(*model.DataFlowDiagram)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }

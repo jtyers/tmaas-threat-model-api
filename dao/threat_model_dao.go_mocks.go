@@ -9,7 +9,7 @@ import (
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"
-	entities "github.com/jtyers/tmaas-model"
+	model "github.com/jtyers/tmaas-model"
 )
 
 // MockThreatModelDao is a mock of ThreatModelDao interface.
@@ -36,10 +36,10 @@ func (m *MockThreatModelDao) EXPECT() *MockThreatModelDaoMockRecorder {
 }
 
 // Create mocks base method.
-func (m *MockThreatModelDao) Create(ctx context.Context, data *entities.ThreatModel) (*entities.ThreatModel, error) {
+func (m *MockThreatModelDao) Create(ctx context.Context, data *model.ThreatModel) (*model.ThreatModel, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Create", ctx, data)
-	ret0, _ := ret[0].(*entities.ThreatModel)
+	ret0, _ := ret[0].(*model.ThreatModel)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -65,7 +65,7 @@ func (mr *MockThreatModelDaoMockRecorder) Delete(ctx, id interface{}) *gomock.Ca
 }
 
 // DeleteWhere mocks base method.
-func (m *MockThreatModelDao) DeleteWhere(ctx context.Context, query *entities.ThreatModel) error {
+func (m *MockThreatModelDao) DeleteWhere(ctx context.Context, query *model.ThreatModel) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "DeleteWhere", ctx, query)
 	ret0, _ := ret[0].(error)
@@ -79,10 +79,10 @@ func (mr *MockThreatModelDaoMockRecorder) DeleteWhere(ctx, query interface{}) *g
 }
 
 // Get mocks base method.
-func (m *MockThreatModelDao) Get(ctx context.Context, id string) (*entities.ThreatModel, error) {
+func (m *MockThreatModelDao) Get(ctx context.Context, id string) (*model.ThreatModel, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Get", ctx, id)
-	ret0, _ := ret[0].(*entities.ThreatModel)
+	ret0, _ := ret[0].(*model.ThreatModel)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -94,10 +94,10 @@ func (mr *MockThreatModelDaoMockRecorder) Get(ctx, id interface{}) *gomock.Call 
 }
 
 // GetAll mocks base method.
-func (m *MockThreatModelDao) GetAll(ctx context.Context) ([]*entities.ThreatModel, error) {
+func (m *MockThreatModelDao) GetAll(ctx context.Context) ([]*model.ThreatModel, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetAll", ctx)
-	ret0, _ := ret[0].([]*entities.ThreatModel)
+	ret0, _ := ret[0].([]*model.ThreatModel)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -109,10 +109,10 @@ func (mr *MockThreatModelDaoMockRecorder) GetAll(ctx interface{}) *gomock.Call {
 }
 
 // QueryExact mocks base method.
-func (m *MockThreatModelDao) QueryExact(ctx context.Context, query *entities.ThreatModel) ([]*entities.ThreatModel, error) {
+func (m *MockThreatModelDao) QueryExact(ctx context.Context, query *model.ThreatModel) ([]*model.ThreatModel, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "QueryExact", ctx, query)
-	ret0, _ := ret[0].([]*entities.ThreatModel)
+	ret0, _ := ret[0].([]*model.ThreatModel)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -124,10 +124,10 @@ func (mr *MockThreatModelDaoMockRecorder) QueryExact(ctx, query interface{}) *go
 }
 
 // QueryExactSingle mocks base method.
-func (m *MockThreatModelDao) QueryExactSingle(ctx context.Context, query *entities.ThreatModel) (*entities.ThreatModel, error) {
+func (m *MockThreatModelDao) QueryExactSingle(ctx context.Context, query *model.ThreatModel) (*model.ThreatModel, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "QueryExactSingle", ctx, query)
-	ret0, _ := ret[0].(*entities.ThreatModel)
+	ret0, _ := ret[0].(*model.ThreatModel)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -139,10 +139,10 @@ func (mr *MockThreatModelDaoMockRecorder) QueryExactSingle(ctx, query interface{
 }
 
 // UpdateWhereExact mocks base method.
-func (m *MockThreatModelDao) UpdateWhereExact(ctx context.Context, queryExact, data *entities.ThreatModel) ([]*entities.ThreatModel, error) {
+func (m *MockThreatModelDao) UpdateWhereExact(ctx context.Context, queryExact, data *model.ThreatModel) ([]*model.ThreatModel, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "UpdateWhereExact", ctx, queryExact, data)
-	ret0, _ := ret[0].([]*entities.ThreatModel)
+	ret0, _ := ret[0].([]*model.ThreatModel)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -154,10 +154,10 @@ func (mr *MockThreatModelDaoMockRecorder) UpdateWhereExact(ctx, queryExact, data
 }
 
 // UpdateWhereExactSingle mocks base method.
-func (m *MockThreatModelDao) UpdateWhereExactSingle(ctx context.Context, queryExact, data *entities.ThreatModel) (*entities.ThreatModel, error) {
+func (m *MockThreatModelDao) UpdateWhereExactSingle(ctx context.Context, queryExact, data *model.ThreatModel) (*model.ThreatModel, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "UpdateWhereExactSingle", ctx, queryExact, data)
-	ret0, _ := ret[0].(*entities.ThreatModel)
+	ret0, _ := ret[0].(*model.ThreatModel)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }

@@ -9,7 +9,7 @@ import (
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"
-	entities "github.com/jtyers/tmaas-model"
+	model "github.com/jtyers/tmaas-model"
 )
 
 // MockControlService is a mock of ControlService interface.
@@ -36,10 +36,10 @@ func (m *MockControlService) EXPECT() *MockControlServiceMockRecorder {
 }
 
 // CreateControl mocks base method.
-func (m *MockControlService) CreateControl(ctx context.Context, control entities.Control) (*entities.Control, error) {
+func (m *MockControlService) CreateControl(ctx context.Context, control model.Control) (*model.Control, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CreateControl", ctx, control)
-	ret0, _ := ret[0].(*entities.Control)
+	ret0, _ := ret[0].(*model.Control)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -51,7 +51,7 @@ func (mr *MockControlServiceMockRecorder) CreateControl(ctx, control interface{}
 }
 
 // DeleteControl mocks base method.
-func (m *MockControlService) DeleteControl(ctx context.Context, controlID entities.ControlID) error {
+func (m *MockControlService) DeleteControl(ctx context.Context, controlID model.ControlID) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "DeleteControl", ctx, controlID)
 	ret0, _ := ret[0].(error)
@@ -65,10 +65,10 @@ func (mr *MockControlServiceMockRecorder) DeleteControl(ctx, controlID interface
 }
 
 // GetControl mocks base method.
-func (m *MockControlService) GetControl(ctx context.Context, id entities.ControlID) (*entities.Control, error) {
+func (m *MockControlService) GetControl(ctx context.Context, id model.ControlID) (*model.Control, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetControl", ctx, id)
-	ret0, _ := ret[0].(*entities.Control)
+	ret0, _ := ret[0].(*model.Control)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -80,10 +80,10 @@ func (mr *MockControlServiceMockRecorder) GetControl(ctx, id interface{}) *gomoc
 }
 
 // GetControls mocks base method.
-func (m *MockControlService) GetControls(ctx context.Context) ([]*entities.Control, error) {
+func (m *MockControlService) GetControls(ctx context.Context) ([]*model.Control, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetControls", ctx)
-	ret0, _ := ret[0].([]*entities.Control)
+	ret0, _ := ret[0].([]*model.Control)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -95,7 +95,7 @@ func (mr *MockControlServiceMockRecorder) GetControls(ctx interface{}) *gomock.C
 }
 
 // UpdateControl mocks base method.
-func (m *MockControlService) UpdateControl(ctx context.Context, controlID entities.ControlID, control entities.Control) error {
+func (m *MockControlService) UpdateControl(ctx context.Context, controlID model.ControlID, control model.Control) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "UpdateControl", ctx, controlID, control)
 	ret0, _ := ret[0].(error)

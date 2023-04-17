@@ -18,6 +18,7 @@ var (
 	ErrNoSuchThreatModel = errors.New("no such threat model")
 )
 
+// ThreatModelService provides the interface to manage threat models.
 type ThreatModelService interface {
 	// Retrieve a threatModel by threatModelID.
 	GetThreatModel(ctx context.Context, id m.ThreatModelID) (*m.ThreatModel, error)
@@ -49,9 +50,8 @@ func (g *DefaultThreatModelService) GetThreatModel(ctx context.Context, threatMo
 	if err != nil {
 		if err == servicedao.ErrNoSuchDocument {
 			return nil, ErrNoSuchThreatModel
-		} else {
-			return nil, fmt.Errorf("error retrieving threatModel: %v", err)
 		}
+		return nil, fmt.Errorf("error retrieving threatModel: %v", err)
 	}
 
 	return threatModel, nil

@@ -9,7 +9,7 @@ import (
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"
-	entities "github.com/jtyers/tmaas-model"
+	model "github.com/jtyers/tmaas-model"
 )
 
 // MockComponentDao is a mock of ComponentDao interface.
@@ -36,10 +36,10 @@ func (m *MockComponentDao) EXPECT() *MockComponentDaoMockRecorder {
 }
 
 // Create mocks base method.
-func (m *MockComponentDao) Create(ctx context.Context, data *entities.Component) (*entities.Component, error) {
+func (m *MockComponentDao) Create(ctx context.Context, data *model.Component) (*model.Component, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Create", ctx, data)
-	ret0, _ := ret[0].(*entities.Component)
+	ret0, _ := ret[0].(*model.Component)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -65,7 +65,7 @@ func (mr *MockComponentDaoMockRecorder) Delete(ctx, id interface{}) *gomock.Call
 }
 
 // DeleteWhere mocks base method.
-func (m *MockComponentDao) DeleteWhere(ctx context.Context, query *entities.Component) error {
+func (m *MockComponentDao) DeleteWhere(ctx context.Context, query *model.Component) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "DeleteWhere", ctx, query)
 	ret0, _ := ret[0].(error)
@@ -79,10 +79,10 @@ func (mr *MockComponentDaoMockRecorder) DeleteWhere(ctx, query interface{}) *gom
 }
 
 // Get mocks base method.
-func (m *MockComponentDao) Get(ctx context.Context, id string) (*entities.Component, error) {
+func (m *MockComponentDao) Get(ctx context.Context, id string) (*model.Component, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Get", ctx, id)
-	ret0, _ := ret[0].(*entities.Component)
+	ret0, _ := ret[0].(*model.Component)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -94,10 +94,10 @@ func (mr *MockComponentDaoMockRecorder) Get(ctx, id interface{}) *gomock.Call {
 }
 
 // GetAll mocks base method.
-func (m *MockComponentDao) GetAll(ctx context.Context) ([]*entities.Component, error) {
+func (m *MockComponentDao) GetAll(ctx context.Context) ([]*model.Component, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetAll", ctx)
-	ret0, _ := ret[0].([]*entities.Component)
+	ret0, _ := ret[0].([]*model.Component)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -109,10 +109,10 @@ func (mr *MockComponentDaoMockRecorder) GetAll(ctx interface{}) *gomock.Call {
 }
 
 // QueryExact mocks base method.
-func (m *MockComponentDao) QueryExact(ctx context.Context, query *entities.Component) ([]*entities.Component, error) {
+func (m *MockComponentDao) QueryExact(ctx context.Context, query *model.Component) ([]*model.Component, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "QueryExact", ctx, query)
-	ret0, _ := ret[0].([]*entities.Component)
+	ret0, _ := ret[0].([]*model.Component)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -124,10 +124,10 @@ func (mr *MockComponentDaoMockRecorder) QueryExact(ctx, query interface{}) *gomo
 }
 
 // QueryExactSingle mocks base method.
-func (m *MockComponentDao) QueryExactSingle(ctx context.Context, query *entities.Component) (*entities.Component, error) {
+func (m *MockComponentDao) QueryExactSingle(ctx context.Context, query *model.Component) (*model.Component, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "QueryExactSingle", ctx, query)
-	ret0, _ := ret[0].(*entities.Component)
+	ret0, _ := ret[0].(*model.Component)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -139,10 +139,10 @@ func (mr *MockComponentDaoMockRecorder) QueryExactSingle(ctx, query interface{})
 }
 
 // UpdateWhereExact mocks base method.
-func (m *MockComponentDao) UpdateWhereExact(ctx context.Context, queryExact, data *entities.Component) ([]*entities.Component, error) {
+func (m *MockComponentDao) UpdateWhereExact(ctx context.Context, queryExact, data *model.Component) ([]*model.Component, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "UpdateWhereExact", ctx, queryExact, data)
-	ret0, _ := ret[0].([]*entities.Component)
+	ret0, _ := ret[0].([]*model.Component)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -154,10 +154,10 @@ func (mr *MockComponentDaoMockRecorder) UpdateWhereExact(ctx, queryExact, data i
 }
 
 // UpdateWhereExactSingle mocks base method.
-func (m *MockComponentDao) UpdateWhereExactSingle(ctx context.Context, queryExact, data *entities.Component) (*entities.Component, error) {
+func (m *MockComponentDao) UpdateWhereExactSingle(ctx context.Context, queryExact, data *model.Component) (*model.Component, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "UpdateWhereExactSingle", ctx, queryExact, data)
-	ret0, _ := ret[0].(*entities.Component)
+	ret0, _ := ret[0].(*model.Component)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }

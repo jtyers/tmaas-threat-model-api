@@ -9,7 +9,7 @@ import (
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"
-	entities "github.com/jtyers/tmaas-model"
+	model "github.com/jtyers/tmaas-model"
 )
 
 // MockComponentService is a mock of ComponentService interface.
@@ -36,10 +36,10 @@ func (m *MockComponentService) EXPECT() *MockComponentServiceMockRecorder {
 }
 
 // CreateComponent mocks base method.
-func (m *MockComponentService) CreateComponent(ctx context.Context, component entities.Component) (*entities.Component, error) {
+func (m *MockComponentService) CreateComponent(ctx context.Context, component model.Component) (*model.Component, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CreateComponent", ctx, component)
-	ret0, _ := ret[0].(*entities.Component)
+	ret0, _ := ret[0].(*model.Component)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -51,10 +51,10 @@ func (mr *MockComponentServiceMockRecorder) CreateComponent(ctx, component inter
 }
 
 // GetComponent mocks base method.
-func (m *MockComponentService) GetComponent(ctx context.Context, id entities.ComponentID) (*entities.Component, error) {
+func (m *MockComponentService) GetComponent(ctx context.Context, id model.ComponentID) (*model.Component, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetComponent", ctx, id)
-	ret0, _ := ret[0].(*entities.Component)
+	ret0, _ := ret[0].(*model.Component)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -66,10 +66,10 @@ func (mr *MockComponentServiceMockRecorder) GetComponent(ctx, id interface{}) *g
 }
 
 // GetComponents mocks base method.
-func (m *MockComponentService) GetComponents(ctx context.Context, id entities.DataFlowDiagramID) ([]*entities.Component, error) {
+func (m *MockComponentService) GetComponents(ctx context.Context, id model.DataFlowDiagramID) ([]*model.Component, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetComponents", ctx, id)
-	ret0, _ := ret[0].([]*entities.Component)
+	ret0, _ := ret[0].([]*model.Component)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -81,7 +81,7 @@ func (mr *MockComponentServiceMockRecorder) GetComponents(ctx, id interface{}) *
 }
 
 // UpdateComponent mocks base method.
-func (m *MockComponentService) UpdateComponent(ctx context.Context, componentID entities.ComponentID, component entities.Component) error {
+func (m *MockComponentService) UpdateComponent(ctx context.Context, componentID model.ComponentID, component model.Component) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "UpdateComponent", ctx, componentID, component)
 	ret0, _ := ret[0].(error)
