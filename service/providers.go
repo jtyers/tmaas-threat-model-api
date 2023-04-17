@@ -8,7 +8,7 @@ import (
 	"github.com/google/wire"
 	"github.com/jtyers/tmaas-model/validator"
 	"github.com/jtyers/tmaas-service-util/id"
-	"github.com/jtyers/tmaas-threat-service/dao"
+	"github.com/jtyers/tmaas-api/dao"
 )
 
 var ServiceDepsProviderSet = wire.NewSet(

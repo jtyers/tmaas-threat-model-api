@@ -10,7 +10,7 @@ import (
 	"github.com/jtyers/tmaas-model/validator"
 	servicedao "github.com/jtyers/tmaas-service-dao"
 	"github.com/jtyers/tmaas-service-util/id"
-	"github.com/jtyers/tmaas-threat-service/dao"
+	"github.com/jtyers/tmaas-api/dao"
 	"github.com/stretchr/testify/require"
 )
 

@@ -11,7 +11,7 @@ import (
 	"github.com/jtyers/tmaas-model/validator"
 	servicedao "github.com/jtyers/tmaas-service-dao"
 	"github.com/jtyers/tmaas-service-util/id"
-	dao "github.com/jtyers/tmaas-threat-service/dao"
+	dao "github.com/jtyers/tmaas-api/dao"
 )
 
 var (

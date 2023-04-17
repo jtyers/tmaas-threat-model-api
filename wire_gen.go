@@ -18,7 +18,7 @@ import (
 	"github.com/jtyers/tmaas-model/validator"
 	"github.com/jtyers/tmaas-service-dao/clover"
 	"github.com/jtyers/tmaas-service-util/id"
-	dao2 "github.com/jtyers/tmaas-threat-service/dao"
+	dao2 "github.com/jtyers/tmaas-api/dao"
 	"net/http"
 )
 
