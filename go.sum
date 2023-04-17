@@ -809,7 +809,7 @@ github.com/json-iterator/go v1.1.12 h1:PV8peI4a0ysnczrg+LtxykD8LfKY9ML6u2jnxaEnr
 github.com/json-iterator/go v1.1.12/go.mod h1:e30LSqwooZae/UwlEbR2852Gd8hjQvJoHmT4TnhNGBo=
 github.com/jstemmer/go-junit-report v0.0.0-20190106144839-af01ea7f8024/go.mod h1:6v2b51hI/fHJwM22ozAgKL4VKDeJcHhJFhtBdhmNjmU=
 github.com/jstemmer/go-junit-report v0.9.1/go.mod h1:Brl9GWCQeLvo8nXZwPNNblvFj/XSXhF0NWZEnDohbsk=
-github.com/jtyers/gin-jwt/v2 v2.6.5 h1:K5IzKEHSWNNyO2kw+ZJRVaOJHcGsG7vfUrZvxX7GMPI=
+github.com/jtyers/gin-jwt/v2 v2.6.5 h1:hG2FVOkObEnMICILbz3LAxKJo4LI4hQRTzZNdUhoZ4Q=
 github.com/jtyers/gin-jwt/v2 v2.6.5/go.mod h1:4VU+vZlAzoaAVr55Xyp4qBDoaYve7wRLG9Mm+nL+6JU=
 github.com/jtyers/tmaas-api-util v0.0.0-20230417192940-8d4b79734847 h1:9bFvIhf33U/VryecQ9zh0BPhpq7PU220sNcCaOT+a0A=
 github.com/jtyers/tmaas-api-util v0.0.0-20230417192940-8d4b79734847/go.mod h1:Syg5uybyO4PNfi3MakR6vWyqj1IS+bX4r4xrQx7e0vw=
@@ -822,8 +822,6 @@ github.com/jtyers/tmaas-service-dao v0.0.0-20230323095444-857a50b9335f h1:dhzWoa
 github.com/jtyers/tmaas-service-dao v0.0.0-20230323095444-857a50b9335f/go.mod h1:ejo38xvlP1GgFukw06GOs/9shl6q/ROTWgkuvcmUaRc=
 github.com/jtyers/tmaas-service-util v0.0.0-20230323095543-af29d2528eff h1:z3IVTqrMVI7QUIQFTPpxvvVTdd5M9NJPt0MOV4dd808=
 github.com/jtyers/tmaas-service-util v0.0.0-20230323095543-af29d2528eff/go.mod h1:OE1wTRdeP6u+K0+lHmQVLhB0Jqv78ygNA6WzOPjt/6o=
-github.com/jtyers/tmaas-threat-service v0.0.0-20230405132612-6c7ab37c37b1 h1:ECDsP6a/u9ISNFERvh3knSi+3FVSJCgG8sXDuAdyrNg=
-github.com/jtyers/tmaas-threat-service v0.0.0-20230405132612-6c7ab37c37b1/go.mod h1:lz4Q87MzNJxlDXkxzOwUWUzLNoOnz2i7vu+nBnNVDag=
 github.com/jung-kurt/gofpdf v1.0.0/go.mod h1:7Id9E/uU8ce6rXgefFLlgrJj/GYY22cpxn+r32jIOes=
 github.com/jung-kurt/gofpdf v1.0.3-0.20190309125859-24315acbbda5/go.mod h1:7Id9E/uU8ce6rXgefFLlgrJj/GYY22cpxn+r32jIOes=
 github.com/kballard/go-shellquote v0.0.0-20180428030007-95032a82bc51/go.mod h1:CzGEWj7cYgsdH8dAjBGEr58BoE7ScuLd+fwFZ44+/x8=

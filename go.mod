@@ -12,7 +12,6 @@ require (
 	github.com/jtyers/tmaas-model v0.0.0-20230417182555-3d9a138fe706
 	github.com/jtyers/tmaas-service-dao v0.0.0-20230323095444-857a50b9335f
 	github.com/jtyers/tmaas-service-util v0.0.0-20230323095543-af29d2528eff
-	github.com/jtyers/tmaas-threat-service v0.0.0-20230405132612-6c7ab37c37b1
 	github.com/stretchr/testify v1.8.2
 )
 
