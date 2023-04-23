@@ -8,7 +8,6 @@ import (
 	"github.com/google/wire"
 	"github.com/jtyers/tmaas-model/validator"
 	"github.com/jtyers/tmaas-service-util/id"
-	"github.com/jtyers/tmaas-api/dao"
 )
 
 var ServiceDepsProviderSet = wire.NewSet(
@@ -18,14 +17,9 @@ var ServiceDepsProviderSet = wire.NewSet(
 	validator.StructValidatorProviderSet,
 )
 
-var ThreatServiceProviderSet = wire.NewSet(
-	dao.ThreatDaoProviderSet,
-	wire.Bind(new(ThreatService), new(*DefaultThreatService)),
-	NewDefaultThreatService,
-)
-
 var ThreatModelServiceProviderSet = wire.NewSet(
-	dao.ThreatModelDaoProviderSet,
+	ServiceDepsProviderSet,
+
 	wire.Bind(new(ThreatModelService), new(*DefaultThreatModelService)),
 	NewDefaultThreatModelService,
 )

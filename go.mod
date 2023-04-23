@@ -10,7 +10,7 @@ require (
 	github.com/jtyers/tmaas-api-util v0.0.0-20230423123805-d45c06d478ac
 	github.com/jtyers/tmaas-cors-config v0.0.0-20230417194512-a9d24d2b927f
 	github.com/jtyers/tmaas-model v0.0.0-20230422214841-1c5b766f1792
-	github.com/jtyers/tmaas-service-dao v0.0.0-20230323095444-857a50b9335f
+	github.com/jtyers/tmaas-service-dao v0.0.0-20230423135029-918c0ede5d2f
 	github.com/jtyers/tmaas-service-util v0.0.0-20230323095543-af29d2528eff
 	github.com/stretchr/testify v1.8.2
 )
@@ -70,6 +70,7 @@ require (
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/satori/go.uuid v1.2.0 // indirect
+	github.com/stretchr/objx v0.5.0 // indirect
 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
 	github.com/ugorji/go/codec v1.2.9 // indirect
 	github.com/vmihailenco/msgpack/v5 v5.3.5 // indirect

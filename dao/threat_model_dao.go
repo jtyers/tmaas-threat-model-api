@@ -5,7 +5,7 @@ package dao
 import (
 	m "github.com/jtyers/tmaas-model"
 	servicedao "github.com/jtyers/tmaas-service-dao"
-	"github.com/jtyers/tmaas-service-dao/clover"
+	"github.com/jtyers/tmaas-service-dao/firestore"
 )
 
 // ThreatModelDao is needed because wire does not directly support
@@ -22,10 +22,6 @@ type ThreatModelDao interface {
 	servicedao.TypedDao[m.ThreatModel]
 }
 
-func NewThreatModelCloverDao(db clover.CloverDbWrapper, config ThreatModelCloverCollectionConfig) *clover.CloverDao[ThreatModelCloverCollectionConfig] {
-	return clover.NewCloverDao(db, config)
-}
-
-func NewThreatModelDao(dao *clover.CloverDao[ThreatModelCloverCollectionConfig]) ThreatModelDao {
+func NewThreatModelDao(dao *firestore.FirestoreDao) ThreatModelDao {
 	return servicedao.NewDefaultTypedDao[m.ThreatModel](dao)
 }

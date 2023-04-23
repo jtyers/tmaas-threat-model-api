@@ -818,8 +818,8 @@ github.com/jtyers/tmaas-cors-config v0.0.0-20230417194512-a9d24d2b927f/go.mod h1
 github.com/jtyers/tmaas-model v0.0.0-20230316213236-58ab80852bd7/go.mod h1:+wFTCkzjQCnR+y8QqkKGE6aXKGQ9rH5+h/hdEhBBNt8=
 github.com/jtyers/tmaas-model v0.0.0-20230422214841-1c5b766f1792 h1:uMosvu9wCXSXBPsX3LkcvJZm+ghqqTKjFMf1fl3yHLI=
 github.com/jtyers/tmaas-model v0.0.0-20230422214841-1c5b766f1792/go.mod h1:+wFTCkzjQCnR+y8QqkKGE6aXKGQ9rH5+h/hdEhBBNt8=
-github.com/jtyers/tmaas-service-dao v0.0.0-20230323095444-857a50b9335f h1:dhzWoaJxxZas+TAUWvpYK6tUKQYDvPwt+A97b2ZKL8A=
-github.com/jtyers/tmaas-service-dao v0.0.0-20230323095444-857a50b9335f/go.mod h1:ejo38xvlP1GgFukw06GOs/9shl6q/ROTWgkuvcmUaRc=
+github.com/jtyers/tmaas-service-dao v0.0.0-20230423135029-918c0ede5d2f h1:S/2syTCbuyYUJUt0naWoQuTevhEv2Z/ZzEfvi9VQsbc=
+github.com/jtyers/tmaas-service-dao v0.0.0-20230423135029-918c0ede5d2f/go.mod h1:ejo38xvlP1GgFukw06GOs/9shl6q/ROTWgkuvcmUaRc=
 github.com/jtyers/tmaas-service-util v0.0.0-20230323095543-af29d2528eff h1:z3IVTqrMVI7QUIQFTPpxvvVTdd5M9NJPt0MOV4dd808=
 github.com/jtyers/tmaas-service-util v0.0.0-20230323095543-af29d2528eff/go.mod h1:OE1wTRdeP6u+K0+lHmQVLhB0Jqv78ygNA6WzOPjt/6o=
 github.com/jung-kurt/gofpdf v1.0.0/go.mod h1:7Id9E/uU8ce6rXgefFLlgrJj/GYY22cpxn+r32jIOes=
@@ -929,6 +929,7 @@ github.com/spf13/pflag v1.0.3/go.mod h1:DYY7MBk1bdzusC3SYhjObp+wFpr4gzcvqqNjLnIn
 github.com/spf13/viper v1.3.2/go.mod h1:ZiWeW+zYFKm7srdB9IoDzzZXaJaI5eL9QjNiN/DMA2s=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
 github.com/stretchr/objx v0.4.0/go.mod h1:YvHI0jy2hoMjB+UWwv71VJQ9isScKT/TqJzVSSt89Yw=
+github.com/stretchr/objx v0.5.0 h1:1zr/of2m5FGMsad5YfcqgdqdWrIhu+EBEJRhR1U7z/c=
 github.com/stretchr/objx v0.5.0/go.mod h1:Yh+to48EsGEfYuaHDzXPcE3xhTkx73EhmCGUpEOglKo=
 github.com/stretchr/testify v1.2.2/go.mod h1:a8OnRcib4nhh0OaRAV+Yts87kKdq0PP7pXfy6kDkUVs=
 github.com/stretchr/testify v1.3.0/go.mod h1:M5WIy9Dh21IEIfnGCwXGc5bZfKNJtfHm1UVUgZn+9EI=
