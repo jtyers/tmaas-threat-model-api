@@ -21,15 +21,11 @@ var ThreatModelDaoProviderSet = wire.NewSet(
 type Configuration struct {
 	// Google Project ID, required by many Google Cloud APIs
 	ProjectID string
-
-	// Name of topic to publish User Changes to
-	UserChangesTopicName string
 }
 
 func NewConfiguration() Configuration {
 	return Configuration{
-		ProjectID:            serviceutil.GetEnv("PROJECT_ID"),
-		UserChangesTopicName: serviceutil.GetEnv("PUBSUB_USER_CHANGES_TOPIC"),
+		ProjectID: serviceutil.GetEnv("PROJECT_ID"),
 	}
 }
 
