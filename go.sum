@@ -811,13 +811,13 @@ github.com/jstemmer/go-junit-report v0.0.0-20190106144839-af01ea7f8024/go.mod h1
 github.com/jstemmer/go-junit-report v0.9.1/go.mod h1:Brl9GWCQeLvo8nXZwPNNblvFj/XSXhF0NWZEnDohbsk=
 github.com/jtyers/gin-jwt/v2 v2.6.5 h1:hG2FVOkObEnMICILbz3LAxKJo4LI4hQRTzZNdUhoZ4Q=
 github.com/jtyers/gin-jwt/v2 v2.6.5/go.mod h1:4VU+vZlAzoaAVr55Xyp4qBDoaYve7wRLG9Mm+nL+6JU=
-github.com/jtyers/tmaas-api-util v0.0.0-20230417192940-8d4b79734847 h1:9bFvIhf33U/VryecQ9zh0BPhpq7PU220sNcCaOT+a0A=
-github.com/jtyers/tmaas-api-util v0.0.0-20230417192940-8d4b79734847/go.mod h1:Syg5uybyO4PNfi3MakR6vWyqj1IS+bX4r4xrQx7e0vw=
+github.com/jtyers/tmaas-api-util v0.0.0-20230423123805-d45c06d478ac h1:HKe41ZneItDSic5snAHJrdo5nk04qjNfTSU7QSrHpkM=
+github.com/jtyers/tmaas-api-util v0.0.0-20230423123805-d45c06d478ac/go.mod h1:Syg5uybyO4PNfi3MakR6vWyqj1IS+bX4r4xrQx7e0vw=
 github.com/jtyers/tmaas-cors-config v0.0.0-20230417194512-a9d24d2b927f h1:pIwUbhxMLo3ZaSQwcvI2aw7c8Jqgsyn83FlnT6PfGng=
 github.com/jtyers/tmaas-cors-config v0.0.0-20230417194512-a9d24d2b927f/go.mod h1:fRxlwnHxht02/tuUMrCVEmKJcKXSDEMsYvsZB4Eura0=
 github.com/jtyers/tmaas-model v0.0.0-20230316213236-58ab80852bd7/go.mod h1:+wFTCkzjQCnR+y8QqkKGE6aXKGQ9rH5+h/hdEhBBNt8=
-github.com/jtyers/tmaas-model v0.0.0-20230417182555-3d9a138fe706 h1:xKW5TeuoRlqVjo8g3jOMJPvyad4lXjnz476Hi7/t8bg=
-github.com/jtyers/tmaas-model v0.0.0-20230417182555-3d9a138fe706/go.mod h1:+wFTCkzjQCnR+y8QqkKGE6aXKGQ9rH5+h/hdEhBBNt8=
+github.com/jtyers/tmaas-model v0.0.0-20230422214841-1c5b766f1792 h1:uMosvu9wCXSXBPsX3LkcvJZm+ghqqTKjFMf1fl3yHLI=
+github.com/jtyers/tmaas-model v0.0.0-20230422214841-1c5b766f1792/go.mod h1:+wFTCkzjQCnR+y8QqkKGE6aXKGQ9rH5+h/hdEhBBNt8=
 github.com/jtyers/tmaas-service-dao v0.0.0-20230323095444-857a50b9335f h1:dhzWoaJxxZas+TAUWvpYK6tUKQYDvPwt+A97b2ZKL8A=
 github.com/jtyers/tmaas-service-dao v0.0.0-20230323095444-857a50b9335f/go.mod h1:ejo38xvlP1GgFukw06GOs/9shl6q/ROTWgkuvcmUaRc=
 github.com/jtyers/tmaas-service-util v0.0.0-20230323095543-af29d2528eff h1:z3IVTqrMVI7QUIQFTPpxvvVTdd5M9NJPt0MOV4dd808=

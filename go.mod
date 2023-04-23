@@ -7,9 +7,9 @@ require (
 	github.com/golang/mock v1.7.0-rc.1.0.20220812172401-5b455625bd2c
 	github.com/google/wire v0.5.0
 	github.com/jtyers/gin-jwt/v2 v2.6.5
-	github.com/jtyers/tmaas-api-util v0.0.0-20230417192940-8d4b79734847
+	github.com/jtyers/tmaas-api-util v0.0.0-20230423123805-d45c06d478ac
 	github.com/jtyers/tmaas-cors-config v0.0.0-20230417194512-a9d24d2b927f
-	github.com/jtyers/tmaas-model v0.0.0-20230417182555-3d9a138fe706
+	github.com/jtyers/tmaas-model v0.0.0-20230422214841-1c5b766f1792
 	github.com/jtyers/tmaas-service-dao v0.0.0-20230323095444-857a50b9335f
 	github.com/jtyers/tmaas-service-util v0.0.0-20230323095543-af29d2528eff
 	github.com/stretchr/testify v1.8.2
