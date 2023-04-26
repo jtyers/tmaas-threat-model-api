@@ -16,7 +16,7 @@ import (
 	"github.com/jtyers/tmaas-api/web"
 	"github.com/jtyers/tmaas-cors-config"
 	"github.com/jtyers/tmaas-model/validator"
-	"github.com/jtyers/tmaas-service-dao/firestore"
+	"github.com/jtyers/tmaas-service-dao/datastore"
 	"github.com/jtyers/tmaas-service-util/id"
 	"net/http"
 )
@@ -24,22 +24,17 @@ import (
 // Injectors from wire.go:
 
 func InitialiseRouter() (http.Handler, error) {
-	configuration := dao.NewConfiguration()
-	firestoreConfiguration := dao.NewFirestoreConfiguration(configuration)
-	context := firestore.NewContext()
-	client, err := firestore.NewFirestoreClient(context, firestoreConfiguration)
+	context := datastore.NewContext()
+	datastoreConfiguration := dao.NewDatastoreConfig()
+	client, err := datastore.NewDatastoreClient(context, datastoreConfiguration)
 	if err != nil {
 		return nil, err
 	}
-<<<<<<< HEAD
-	threatModelCloverCollectionConfig := dao.NewThreatModelCloverCollectionConfig()
-	cloverDao := dao.NewThreatModelCloverDao(db, threatModelCloverCollectionConfig)
-	threatModelDao := dao.NewThreatModelDao(cloverDao)
-=======
-	collectionRef := firestore.NewFirestoreCollection(firestoreConfiguration, client)
-	firestoreDao := firestore.NewFirestoreDao(collectionRef, client)
-	threatModelDao := dao.NewThreatModelDao(firestoreDao)
->>>>>>> 97775591bb8c4e15c8beb586a8ebe9752be47237
+	threatModelIDCreator := dao.NewThreatModelIDCreator()
+	threatModelDao, err := dao.NewThreatModelDao(client, datastoreConfiguration, threatModelIDCreator)
+	if err != nil {
+		return nil, err
+	}
 	defaultRandomIDProvider := id.NewDefaultRandomIDProvider()
 	defaultStructValidator, err := validator.NewDefaultStructValidator()
 	if err != nil {

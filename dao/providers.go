@@ -21,5 +21,6 @@ var ThreatModelDaoProviderSet = wire.NewSet(
 	datastore.DaoProviderSet,
 
 	NewThreatModelDao,
+	NewThreatModelIDCreator,
 	NewDatastoreConfig,
 )

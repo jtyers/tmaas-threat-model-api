@@ -6,11 +6,11 @@ import (
 	"testing"
 
 	"github.com/golang/mock/gomock"
+	"github.com/jtyers/tmaas-api/dao"
 	m "github.com/jtyers/tmaas-model"
 	"github.com/jtyers/tmaas-model/validator"
 	servicedao "github.com/jtyers/tmaas-service-dao"
 	"github.com/jtyers/tmaas-service-util/id"
-	"github.com/jtyers/tmaas-api/dao"
 	"github.com/stretchr/testify/require"
 )
 
@@ -54,7 +54,7 @@ func TestGetThreatModel(t *testing.T) {
 			mockDao := dao.NewMockThreatModelDao(ctrl)
 			ctx := context.Background()
 
-			mockDao.EXPECT().Get(ctx, test.inputThreatModelID.String()).Return(&test.daoReturnValue, test.daoReturnError)
+			mockDao.EXPECT().Get(ctx, test.inputThreatModelID).Return(&test.daoReturnValue, test.daoReturnError)
 
 			// when
 			service := NewDefaultThreatModelService(mockDao, nil, nil)
@@ -124,9 +124,7 @@ func TestUpdateThreatModel(t *testing.T) {
 			mockValidator.EXPECT().ValidateForUpdate(test.input).Return(test.validateUpdateReturnError)
 
 			if test.validateUpdateReturnError == nil {
-				queryThreatModel := m.ThreatModel{ThreatModelID: test.inputID}
-
-				mockDao.EXPECT().UpdateWhereExactSingle(ctx, &queryThreatModel, &test.input).Return(test.expectedResult, test.daoReturnError)
+				mockDao.EXPECT().Update(ctx, test.inputID, &test.input).Return(test.expectedResult, test.daoReturnError)
 
 			}
 

@@ -7,11 +7,11 @@ import (
 	"errors"
 	"fmt"
 
+	dao "github.com/jtyers/tmaas-api/dao"
 	m "github.com/jtyers/tmaas-model"
 	"github.com/jtyers/tmaas-model/validator"
 	servicedao "github.com/jtyers/tmaas-service-dao"
 	"github.com/jtyers/tmaas-service-util/id"
-	dao "github.com/jtyers/tmaas-api/dao"
 )
 
 var (
@@ -34,8 +34,7 @@ type ThreatModelService interface {
 }
 
 type DefaultThreatModelService struct {
-	dao dao.ThreatModelDao
-
+	dao              dao.ThreatModelDao
 	randomIDProvider id.RandomIDProvider
 	validator        validator.StructValidator
 }
@@ -45,7 +44,7 @@ func NewDefaultThreatModelService(dao dao.ThreatModelDao, randomIDProvider id.Ra
 }
 
 func (g *DefaultThreatModelService) GetThreatModel(ctx context.Context, threatModelID m.ThreatModelID) (*m.ThreatModel, error) {
-	threatModel, err := g.dao.Get(ctx, threatModelID.String())
+	threatModel, err := g.dao.Get(ctx, threatModelID)
 
 	if err != nil {
 		if err == servicedao.ErrNoSuchDocument {
@@ -97,9 +96,7 @@ func (g *DefaultThreatModelService) UpdateThreatModel(ctx context.Context, threa
 		return fmt.Errorf("given threatModel IDs do not match")
 	}
 
-	queryThreatModel := m.ThreatModel{ThreatModelID: threatModelID}
-
-	_, err = g.dao.UpdateWhereExactSingle(ctx, &queryThreatModel, &threatModel)
+	_, err = g.dao.Update(ctx, threatModelID, &threatModel)
 	if err != nil {
 		return fmt.Errorf("error updating threatModel: %v", err)
 	}
