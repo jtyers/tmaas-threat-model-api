@@ -5,7 +5,7 @@ package dao
 import (
 	m "github.com/jtyers/tmaas-model"
 	servicedao "github.com/jtyers/tmaas-service-dao"
-	"github.com/jtyers/tmaas-service-dao/clover"
+	"github.com/jtyers/tmaas-service-dao/firestore"
 )
 
 // ThreatModelDao is needed because wire does not directly support
