@@ -15,7 +15,6 @@ import (
 	"github.com/stretchr/testify/require"
 
 	"github.com/jtyers/tmaas-api-util/combo"
-	"github.com/jtyers/tmaas-api-util/combo/mocks"
 	"github.com/jtyers/tmaas-api-util/errors"
 	"github.com/jtyers/tmaas-api/service"
 	cmocks "github.com/jtyers/tmaas-cors-config/mocks"
@@ -140,7 +139,7 @@ func TestGetThreatModelHandler(t *testing.T) {
 					test.dsReturnValue, test.dsReturnError)
 			}
 
-			comboFactory := mocks.NewMockComboMiddlewareFactoryWithTokensAndPermissions(ctrl, test.token, serviceAccountPermissionsJson)
+			comboFactory := combo.NewMockComboMiddlewareFactoryWithTokensAndPermissions(ctrl, test.token, serviceAccountPermissionsJson)
 			server, closeServer := createServer(comboFactory, svc)
 			defer closeServer()
 
@@ -237,7 +236,7 @@ func TestGetThreatModelsHandler(t *testing.T) {
 				mockThreatModelService.EXPECT().GetThreatModels(gomock.AssignableToTypeOf(&gin.Context{})).Return(test.dsReturnValue, test.dsReturnError)
 			}
 
-			comboFactory := mocks.NewMockComboMiddlewareFactoryWithTokensAndPermissions(ctrl, test.ai,
+			comboFactory := combo.NewMockComboMiddlewareFactoryWithTokensAndPermissions(ctrl, test.ai,
 				serviceAccountPermissionsJson)
 			server, closeServer := createServer(comboFactory, mockThreatModelService)
 			defer closeServer()
@@ -323,7 +322,7 @@ func TestCreateThreatModelHandler(t *testing.T) {
 					test.threatModelToReturnFromService, test.errorToReturnFromService)
 			}
 
-			comboFactory := mocks.NewMockComboMiddlewareFactoryWithTokensAndPermissions(ctrl, test.ai,
+			comboFactory := combo.NewMockComboMiddlewareFactoryWithTokensAndPermissions(ctrl, test.ai,
 				serviceAccountPermissionsJson)
 			server, closeServer := createServer(comboFactory, mockThreatModelService)
 			defer closeServer()
@@ -385,7 +384,7 @@ func TestPatchThreatModelHandler(t *testing.T) {
 			// given
 			mockThreatModelService := service.NewMockThreatModelService(ctrl)
 
-			comboFactory := mocks.NewMockComboMiddlewareFactoryWithTokensAndPermissions(ctrl, test.ai,
+			comboFactory := combo.NewMockComboMiddlewareFactoryWithTokensAndPermissions(ctrl, test.ai,
 				serviceAccountPermissionsJson)
 			server, closeServer := createServer(comboFactory, mockThreatModelService)
 			defer closeServer()
@@ -446,7 +445,7 @@ func TestPatchThreatModelHandler(t *testing.T) {
 // 			// given
 // 			mockThreatModelService := service.NewMockThreatModelService(ctrl)
 //
-// 			comboFactory := mocks.NewMockComboMiddlewareFactoryWithTokensAndPermissions(ctrl, test.ai,
+// 			comboFactory := combo.NewMockComboMiddlewareFactoryWithTokensAndPermissions(ctrl, test.ai,
 // 				serviceAccountPermissionsJson)
 // 			server, closeServer := createServer(comboFactory, mockThreatModelService)
 // 			defer closeServer()

@@ -27,5 +27,5 @@ func NewDataFlowDiagramCloverDao(db clover.CloverDbWrapper, config DataFlowDiagr
 }
 
 func NewDataFlowDiagramDao(dao *clover.CloverDao[DataFlowDiagramCloverCollectionConfig]) DataFlowDiagramDao {
-	return servicedao.NewDefaultTypedDao[m.DataFlowDiagram](dao)
+	return servicedao.NewDefaultTypedDao[m.DataFlowDiagram](dao, nil)
 }

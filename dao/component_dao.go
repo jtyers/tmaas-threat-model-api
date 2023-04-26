@@ -27,5 +27,5 @@ func NewComponentCloverDao(db clover.CloverDbWrapper, config ComponentCloverColl
 }
 
 func NewComponentDao(dao *clover.CloverDao[ComponentCloverCollectionConfig]) ComponentDao {
-	return servicedao.NewDefaultTypedDao[m.Component](dao)
+	return servicedao.NewDefaultTypedDao[m.Component](dao, nil)
 }

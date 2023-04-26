@@ -18,7 +18,6 @@ import (
 	"github.com/jtyers/tmaas-model/validator"
 	"github.com/jtyers/tmaas-service-dao/clover"
 	"github.com/jtyers/tmaas-service-util/id"
-	dao2 "github.com/jtyers/tmaas-api/dao"
 	"net/http"
 )
 
@@ -30,9 +29,9 @@ func InitialiseRouter() (http.Handler, error) {
 	if err != nil {
 		return nil, err
 	}
-	threatModelCloverCollectionConfig := dao2.NewThreatModelCloverCollectionConfig()
-	cloverDao := dao2.NewThreatModelCloverDao(db, threatModelCloverCollectionConfig)
-	threatModelDao := dao2.NewThreatModelDao(cloverDao)
+	threatModelCloverCollectionConfig := dao.NewThreatModelCloverCollectionConfig()
+	cloverDao := dao.NewThreatModelCloverDao(db, threatModelCloverCollectionConfig)
+	threatModelDao := dao.NewThreatModelDao(cloverDao)
 	defaultRandomIDProvider := id.NewDefaultRandomIDProvider()
 	defaultStructValidator, err := validator.NewDefaultStructValidator()
 	if err != nil {

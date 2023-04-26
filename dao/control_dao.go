@@ -27,5 +27,5 @@ func NewControlCloverDao(db clover.CloverDbWrapper, config ControlCloverCollecti
 }
 
 func NewControlDao(dao *clover.CloverDao[ControlCloverCollectionConfig]) ControlDao {
-	return servicedao.NewDefaultTypedDao[m.Control](dao)
+	return servicedao.NewDefaultTypedDao[m.Control](dao, nil)
 }

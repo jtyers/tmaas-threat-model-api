@@ -27,5 +27,5 @@ func NewThreatControlCloverDao(db clover.CloverDbWrapper, config ThreatControlCl
 }
 
 func NewThreatControlDao(dao *clover.CloverDao[ThreatControlCloverCollectionConfig]) ThreatControlDao {
-	return servicedao.NewDefaultTypedDao[m.ThreatControl](dao)
+	return servicedao.NewDefaultTypedDao[m.ThreatControl](dao, nil)
 }

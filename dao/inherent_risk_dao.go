@@ -27,5 +27,5 @@ func NewInherentRiskCloverDao(db clover.CloverDbWrapper, config InherentRiskClov
 }
 
 func NewInherentRiskDao(dao *clover.CloverDao[InherentRiskCloverCollectionConfig]) InherentRiskDao {
-	return servicedao.NewDefaultTypedDao[m.InherentRisk](dao)
+	return servicedao.NewDefaultTypedDao[m.InherentRisk](dao, nil)
 }
