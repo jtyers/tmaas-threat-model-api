@@ -9,8 +9,8 @@ require (
 	github.com/jtyers/gin-jwt/v2 v2.6.5
 	github.com/jtyers/tmaas-api-util v0.0.0-20230423152119-e2a34a751f63
 	github.com/jtyers/tmaas-cors-config v0.0.0-20230417194512-a9d24d2b927f
-	github.com/jtyers/tmaas-model v0.0.0-20230423144153-1300d0f00d56
-	github.com/jtyers/tmaas-service-dao v0.0.0-20230425181910-9dc8858f165e
+	github.com/jtyers/tmaas-model v0.0.0-20230426192611-d6f95f29e113
+	github.com/jtyers/tmaas-service-dao v0.0.0-20230426193224-777851eb2315
 	github.com/jtyers/tmaas-service-util v0.0.0-20230423152226-c446309204bd
 	github.com/stretchr/testify v1.8.2
 )
@@ -19,6 +19,7 @@ require (
 	cloud.google.com/go v0.110.0 // indirect
 	cloud.google.com/go/compute v1.18.0 // indirect
 	cloud.google.com/go/compute/metadata v0.2.3 // indirect
+	cloud.google.com/go/datastore v1.10.0 // indirect
 	cloud.google.com/go/firestore v1.9.0 // indirect
 	cloud.google.com/go/iam v0.12.0 // indirect
 	cloud.google.com/go/longrunning v0.4.1 // indirect

@@ -51,7 +51,7 @@ func (mr *MockThreatModelDaoMockRecorder) Create(ctx, data interface{}) *gomock.
 }
 
 // Delete mocks base method.
-func (m *MockThreatModelDao) Delete(ctx context.Context, id string) error {
+func (m *MockThreatModelDao) Delete(ctx context.Context, id model.ThreatModelID) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Delete", ctx, id)
 	ret0, _ := ret[0].(error)
@@ -79,7 +79,7 @@ func (mr *MockThreatModelDaoMockRecorder) DeleteWhere(ctx, query interface{}) *g
 }
 
 // Get mocks base method.
-func (m *MockThreatModelDao) Get(ctx context.Context, id string) (*model.ThreatModel, error) {
+func (m *MockThreatModelDao) Get(ctx context.Context, id model.ThreatModelID) (*model.ThreatModel, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Get", ctx, id)
 	ret0, _ := ret[0].(*model.ThreatModel)
@@ -136,6 +136,21 @@ func (m *MockThreatModelDao) QueryExactSingle(ctx context.Context, query *model.
 func (mr *MockThreatModelDaoMockRecorder) QueryExactSingle(ctx, query interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QueryExactSingle", reflect.TypeOf((*MockThreatModelDao)(nil).QueryExactSingle), ctx, query)
+}
+
+// Update mocks base method.
+func (m *MockThreatModelDao) Update(ctx context.Context, id model.ThreatModelID, data *model.ThreatModel) (*model.ThreatModel, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Update", ctx, id, data)
+	ret0, _ := ret[0].(*model.ThreatModel)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Update indicates an expected call of Update.
+func (mr *MockThreatModelDaoMockRecorder) Update(ctx, id, data interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Update", reflect.TypeOf((*MockThreatModelDao)(nil).Update), ctx, id, data)
 }
 
 // UpdateWhereExact mocks base method.

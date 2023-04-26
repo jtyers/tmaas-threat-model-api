@@ -6,32 +6,20 @@ package dao
 
 import (
 	"github.com/google/wire"
-	"github.com/jtyers/tmaas-service-dao/firestore"
-	serviceutil "github.com/jtyers/tmaas-service-util"
+	"github.com/jtyers/tmaas-service-dao/datastore"
+	util "github.com/jtyers/tmaas-service-util"
 )
+
+func NewDatastoreConfig() datastore.DatastoreConfiguration {
+	return datastore.DatastoreConfiguration{
+		ProjectID:        util.GetEnv("PROJECT_ID"),
+		DatastoreKeyKind: "threat-model",
+	}
+}
 
 var ThreatModelDaoProviderSet = wire.NewSet(
-	firestore.DaoProviderSet,
+	datastore.DaoProviderSet,
 
-	NewConfiguration,
-	NewFirestoreConfiguration,
 	NewThreatModelDao,
+	NewDatastoreConfig,
 )
-
-type Configuration struct {
-	// Google Project ID, required by many Google Cloud APIs
-	ProjectID string
-}
-
-func NewConfiguration() Configuration {
-	return Configuration{
-		ProjectID: serviceutil.GetEnv("PROJECT_ID"),
-	}
-}
-
-func NewFirestoreConfiguration(c Configuration) firestore.FirestoreConfiguration {
-	return firestore.FirestoreConfiguration{
-		ProjectID:      c.ProjectID,
-		CollectionName: "threat-models", // hard-coded :-)
-	}
-}

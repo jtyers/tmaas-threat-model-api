@@ -3,9 +3,10 @@ package dao
 //go:generate mockgen -source=$GOFILE -destination=${GOFILE}_mocks.go -package $GOPACKAGE
 
 import (
+	gdatastore "cloud.google.com/go/datastore"
 	m "github.com/jtyers/tmaas-model"
 	servicedao "github.com/jtyers/tmaas-service-dao"
-	"github.com/jtyers/tmaas-service-dao/firestore"
+	"github.com/jtyers/tmaas-service-dao/datastore"
 )
 
 // ThreatModelDao is needed because wire does not directly support
@@ -19,13 +20,20 @@ type ThreatModelDao interface {
 	//  1. clone https://github.com/bradleygore/gomock
 	//  2. checkout task_HOSPENG-4373-gomock-generics
 	//  3. run `go install ./...`
-	servicedao.TypedDao[m.ThreatModel]
+	servicedao.IDTypedDao[m.ThreatModelID, m.ThreatModel]
 }
 
-func NewThreatModelCloverDao(db clover.CloverDbWrapper, config ThreatModelCloverCollectionConfig) *clover.CloverDao[ThreatModelCloverCollectionConfig] {
-	return clover.NewCloverDao(db, config)
+type ThreatModelIDCreator struct{}
+
+func NewThreatModelIDCreator() ThreatModelIDCreator {
+	return ThreatModelIDCreator{}
+}
+func (ThreatModelIDCreator) Create(id string) m.ThreatModelID {
+	return m.ThreatModelID(id)
 }
 
-func NewThreatModelDao(dao *clover.CloverDao[ThreatModelCloverCollectionConfig]) ThreatModelDao {
-	return servicedao.NewDefaultTypedDao[m.ThreatModel](dao, nil)
+func NewThreatModelDao(client *gdatastore.Client, config datastore.DatastoreConfiguration, idCreator ThreatModelIDCreator) (ThreatModelDao, error) {
+	var errorMappings map[error]error
+
+	return datastore.NewDatastoreDao[m.ThreatModelID, m.ThreatModel, *m.ThreatModel](client, config, idCreator, errorMappings)
 }
