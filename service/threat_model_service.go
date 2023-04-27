@@ -11,7 +11,6 @@ import (
 	m "github.com/jtyers/tmaas-model"
 	"github.com/jtyers/tmaas-model/validator"
 	servicedao "github.com/jtyers/tmaas-service-dao"
-	"github.com/jtyers/tmaas-service-util/id"
 )
 
 var (
@@ -34,13 +33,12 @@ type ThreatModelService interface {
 }
 
 type DefaultThreatModelService struct {
-	dao              dao.ThreatModelDao
-	randomIDProvider id.RandomIDProvider
-	validator        validator.StructValidator
+	dao       dao.ThreatModelDao
+	validator validator.StructValidator
 }
 
-func NewDefaultThreatModelService(dao dao.ThreatModelDao, randomIDProvider id.RandomIDProvider, validator validator.StructValidator) *DefaultThreatModelService {
-	return &DefaultThreatModelService{dao, randomIDProvider, validator}
+func NewDefaultThreatModelService(dao dao.ThreatModelDao, validator validator.StructValidator) *DefaultThreatModelService {
+	return &DefaultThreatModelService{dao, validator}
 }
 
 func (g *DefaultThreatModelService) GetThreatModel(ctx context.Context, threatModelID m.ThreatModelID) (*m.ThreatModel, error) {
@@ -76,8 +74,7 @@ func (g *DefaultThreatModelService) CreateThreatModel(ctx context.Context, threa
 		return nil, err
 	}
 
-	threatModel.ThreatModelID = m.ThreatModelID(ThreatModelIDPrefix + g.randomIDProvider.GenerateID())
-
+	// leave ID blank - the DAO will generate one for us
 	result, err := g.dao.Create(ctx, &threatModel)
 	if err != nil {
 		return nil, fmt.Errorf("error creating threatModel: %v", err)

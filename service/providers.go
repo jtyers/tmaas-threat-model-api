@@ -7,13 +7,9 @@ package service
 import (
 	"github.com/google/wire"
 	"github.com/jtyers/tmaas-model/validator"
-	"github.com/jtyers/tmaas-service-util/id"
 )
 
 var ServiceDepsProviderSet = wire.NewSet(
-	id.NewDefaultRandomIDProvider,
-	wire.Bind(new(id.RandomIDProvider), new(*id.DefaultRandomIDProvider)),
-
 	validator.StructValidatorProviderSet,
 )
 

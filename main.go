@@ -1,3 +1,18 @@
+// @title ThreatPlane Threat Model API
+// @version 1.0
+// @description The API used to interact with Threat Models
+
+// @contact.name ThreatPlane
+// @contact.url http://www.threatplane.io
+// @contact.email support@threatplane.io
+
+// @license.name Commercial licence
+// @license.url https://threatplane.io/terms
+
+// @host localhost:8080
+// @BasePath /
+// @query.collection.format multi
+
 package main
 
 import (

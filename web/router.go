@@ -6,9 +6,12 @@ import (
 	"github.com/gin-gonic/gin"
 	jwt "github.com/jtyers/gin-jwt/v2"
 	"github.com/jtyers/tmaas-api-util/errors"
+	_ "github.com/jtyers/tmaas-api/docs"
 	"github.com/jtyers/tmaas-api/service"
 	corsconfig "github.com/jtyers/tmaas-cors-config"
 	m "github.com/jtyers/tmaas-model"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 
 	"github.com/jtyers/tmaas-api-util/combo"
 	"github.com/jtyers/tmaas-service-util/log"
@@ -54,6 +57,12 @@ func NewRouter(handlers *ThreatModelHandlers, comboFactory combo.ComboMiddleware
 	r.PATCH("/api/v1/threatModel/by-id/:threatModelID",
 		comboFactory.StrictPermission(m.PermissionReadOwnThreatModels),
 		handlers.PatchThreatModelHandler,
+	)
+
+	// docs route - we ensure users are authenticated somehow before emitting docs
+	r.GET("/docs/*any",
+		//comboFactory.StrictUserPermission(m.PermissionReadOwnUser),
+		ginSwagger.WrapHandler(swaggerFiles.Handler),
 	)
 
 	return r

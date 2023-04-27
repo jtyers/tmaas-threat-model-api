@@ -30,17 +30,18 @@ func InitialiseRouter() (http.Handler, error) {
 	if err != nil {
 		return nil, err
 	}
+	randomIDProviderPrefix := dao.NewThreatModelRandomIDProviderPrefix()
+	defaultRandomIDProvider := id.NewDefaultRandomIDProvider(randomIDProviderPrefix)
 	threatModelIDCreator := dao.NewThreatModelIDCreator()
-	threatModelDao, err := dao.NewThreatModelDao(client, datastoreConfiguration, threatModelIDCreator)
+	threatModelDao, err := dao.NewThreatModelDao(client, defaultRandomIDProvider, datastoreConfiguration, threatModelIDCreator)
 	if err != nil {
 		return nil, err
 	}
-	defaultRandomIDProvider := id.NewDefaultRandomIDProvider()
 	defaultStructValidator, err := validator.NewDefaultStructValidator()
 	if err != nil {
 		return nil, err
 	}
-	defaultThreatModelService := service.NewDefaultThreatModelService(threatModelDao, defaultRandomIDProvider, defaultStructValidator)
+	defaultThreatModelService := service.NewDefaultThreatModelService(threatModelDao, defaultStructValidator)
 	threatModelHandlers := web.NewThreatModelHandlers(defaultThreatModelService)
 	iamClient, err := extractor.NewIamClient(context)
 	if err != nil {

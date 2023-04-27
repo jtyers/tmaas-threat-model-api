@@ -7,6 +7,7 @@ import (
 	m "github.com/jtyers/tmaas-model"
 	servicedao "github.com/jtyers/tmaas-service-dao"
 	"github.com/jtyers/tmaas-service-dao/datastore"
+	"github.com/jtyers/tmaas-service-util/id"
 )
 
 // ThreatModelDao is needed because wire does not directly support
@@ -23,17 +24,12 @@ type ThreatModelDao interface {
 	servicedao.IDTypedDao[m.ThreatModelID, m.ThreatModel]
 }
 
-type ThreatModelIDCreator struct{}
-
-func NewThreatModelIDCreator() ThreatModelIDCreator {
-	return ThreatModelIDCreator{}
-}
-func (ThreatModelIDCreator) Create(id string) m.ThreatModelID {
-	return m.ThreatModelID(id)
+func (ThreatModelIDCreator) Zero() m.ThreatModelID {
+	return m.ThreatModelID("")
 }
 
-func NewThreatModelDao(client *gdatastore.Client, config datastore.DatastoreConfiguration, idCreator ThreatModelIDCreator) (ThreatModelDao, error) {
+func NewThreatModelDao(client *gdatastore.Client, randomIDProvider id.RandomIDProvider, config datastore.DatastoreConfiguration, idCreator ThreatModelIDCreator) (ThreatModelDao, error) {
 	var errorMappings map[error]error
 
-	return datastore.NewDatastoreDao[m.ThreatModelID, m.ThreatModel, *m.ThreatModel](client, config, idCreator, errorMappings)
+	return datastore.NewDatastoreDao[m.ThreatModelID, m.ThreatModel, *m.ThreatModel](client, randomIDProvider, config, idCreator, errorMappings)
 }

@@ -17,7 +17,13 @@ func NewThreatModelHandlers(ts service.ThreatModelService) *ThreatModelHandlers 
 	return &ThreatModelHandlers{threatModelService: ts}
 }
 
-// Retrieves a threatModel by ID.
+// @Summary Retrieves a threatModel by ID.
+// @ID get-threat-model-by-id
+// @Produce json
+// @Param threatModelID path string true "threat model ID"
+// @Success 200 {object} m.ThreatModel
+// @Failure 404 {string} string "Not Found"
+// @Router /api/v1/{threatModelID} [get]
 func (th *ThreatModelHandlers) GetThreatModelHandler(c *gin.Context) {
 	threatModelIDStr := c.Param("threatModelID")
 	threatModelID := m.ThreatModelID(threatModelIDStr)
@@ -30,6 +36,11 @@ func (th *ThreatModelHandlers) GetThreatModelHandler(c *gin.Context) {
 	}
 }
 
+// @Summary Get all Threat Models
+// @ID get-all-threat-models
+// @Produce json
+// @Success 200 {object} []m.ThreatModel
+// @Router /api/v1/threatModel [get]
 func (th *ThreatModelHandlers) GetThreatModelsHandler(c *gin.Context) {
 	result, err := th.threatModelService.GetThreatModels(c)
 	if err != nil {
@@ -39,6 +50,13 @@ func (th *ThreatModelHandlers) GetThreatModelsHandler(c *gin.Context) {
 	}
 }
 
+// @Summary Create a new Threat Model
+// @ID create-threat-model
+// @Produce json
+// @Param data body m.ThreatModel true "todo data"
+// @Success 200 {object} m.ThreatModel
+// @Failure 400 {string} string "Nope"
+// @Router /api/v1/threatModel [put]
 func (th *ThreatModelHandlers) PutThreatModelHandler(c *gin.Context) {
 	var t m.ThreatModel
 
@@ -57,6 +75,13 @@ func (th *ThreatModelHandlers) PutThreatModelHandler(c *gin.Context) {
 	c.PureJSON(http.StatusOK, structs.StructToMap(result))
 }
 
+// @Summary Update a new Threat Model
+// @ID update-threat-model
+// @Produce json
+// @Param data body m.ThreatModel true "todo data"
+// @Success 200 {object} m.ThreatModel
+// @Failure 400 {string} string "Nope"
+// @Router /api/v1/threatModel [patch]
 func (th *ThreatModelHandlers) PatchThreatModelHandler(c *gin.Context) {
 	threatModelIDStr := c.Param("threatModelID")
 	threatModelID := m.ThreatModelID(threatModelIDStr)
@@ -78,6 +103,13 @@ func (th *ThreatModelHandlers) PatchThreatModelHandler(c *gin.Context) {
 	c.PureJSON(http.StatusOK, structs.StructToMap(t))
 }
 
+// @Summary delete a todo item by ID
+// @ID delete-todo-by-id
+// @Produce json
+// @Param id path string true "todo ID"
+// @Success 200 {object} m.ThreatModel
+// @Failure 404 {string} string "Not Found"
+// @Router /api/v1/threatModel/{id} [delete]
 // func (th *ThreatModelHandlers) DeleteThreatModelHandler(c *gin.Context) {
 // 	threatModelIDStr := c.Param("threatModelID")
 // 	threatModelID := m.ThreatModelID(threatModelIDStr)
