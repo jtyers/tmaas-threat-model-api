@@ -110,13 +110,13 @@ func (th *ThreatModelHandlers) PatchThreatModelHandler(c *gin.Context) {
 // @Success 200 {object} m.ThreatModel
 // @Failure 404 {string} string "Not Found"
 // @Router /api/v1/threatModel/{id} [delete]
-// func (th *ThreatModelHandlers) DeleteThreatModelHandler(c *gin.Context) {
-// 	threatModelIDStr := c.Param("threatModelID")
-// 	threatModelID := m.ThreatModelID(threatModelIDStr)
-//
-// 	err := th.threatModelService.DeleteThreatModel(c, threatModelID)
-// 	if err != nil {
-// 		c.Error(err)
-// 		return
-// 	}
-// }
+func (th *ThreatModelHandlers) DeleteThreatModelHandler(c *gin.Context) {
+	threatModelIDStr := c.Param("threatModelID")
+	threatModelID := m.ThreatModelID(threatModelIDStr)
+	//
+	err := th.threatModelService.DeleteThreatModel(c, threatModelID)
+	if err != nil {
+		c.Error(err)
+		return
+	}
+}

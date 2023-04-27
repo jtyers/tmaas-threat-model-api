@@ -30,6 +30,9 @@ type ThreatModelService interface {
 
 	// Updates a threatModel
 	UpdateThreatModel(ctx context.Context, threatModelID m.ThreatModelID, threatModel m.ThreatModel) error
+
+	// Delete a threatModel by threatModelID.
+	DeleteThreatModel(ctx context.Context, id m.ThreatModelID) error
 }
 
 type DefaultThreatModelService struct {
@@ -109,4 +112,13 @@ func (g *DefaultThreatModelService) GetThreatModels(ctx context.Context) ([]*m.T
 	}
 
 	return threatModels, nil
+}
+
+func (g *DefaultThreatModelService) DeleteThreatModel(ctx context.Context, id m.ThreatModelID) error {
+	err := g.dao.Delete(ctx, id)
+	if err != nil {
+		return fmt.Errorf("error deleting threatModel %s: %v", id, err)
+	}
+
+	return nil
 }

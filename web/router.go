@@ -50,10 +50,10 @@ func NewRouter(handlers *ThreatModelHandlers, comboFactory combo.ComboMiddleware
 		handlers.GetThreatModelHandler,
 	)
 
-	//r.DELETE("/api/v1/threatModel/by-id/:threatModelID",
-	//	comboFactory.StrictUserPermission(e.PermissionWriteOwnThreatModel),
-	//	handlers.DeleteThreatModelHandler,
-	//)
+	r.DELETE("/api/v1/threatModel/:threatModelID",
+		comboFactory.StrictUserPermission(m.PermissionEditOwnThreatModels),
+		handlers.DeleteThreatModelHandler,
+	)
 	r.PATCH("/api/v1/threatModel/by-id/:threatModelID",
 		comboFactory.StrictPermission(m.PermissionReadOwnThreatModels),
 		handlers.PatchThreatModelHandler,

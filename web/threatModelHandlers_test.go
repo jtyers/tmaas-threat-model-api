@@ -411,57 +411,57 @@ func TestPatchThreatModelHandler(t *testing.T) {
 	}
 }
 
-// func TestDeleteThreatModelHandler(t *testing.T) {
-// 	serviceAccountPermissionsJson := combo.ServiceAccountPermissionsJson(`{}`)
-//
-// 	ctrl := gomock.NewController(t)
-// 	defer ctrl.Finish()
-//
-// 	var tests = []struct {
-// 		name             string
-// 		ai               *e.AuthenticationInfo
-// 		inputThreatModelID    m.ThreatModelID
-// 		dsReturnError    error
-// 		expectedResponse int
-// 	}{
-// 		{
-// 			"should delete threatModel",
-// 			&m.AuthenticationInfo{UserID: m.UserID("u-1"), Roles: []m.Role{m.RoleUser}},
-// 			m.ThreatModelID("d-12345678"),
-// 			nil,
-// 			http.StatusOK,
-// 		},
-// 		{
-// 			"should return 401 when no token passed",
-// 			nil,
-// 			m.ThreatModelID("d-12345678"),
-// 			nil,
-// 			http.StatusUnauthorized,
-// 		},
-// 	}
-//
-// 	for _, test := range tests {
-// 		t.Run(test.name, func(t *testing.T) {
-// 			// given
-// 			mockThreatModelService := service.NewMockThreatModelService(ctrl)
-//
-// 			comboFactory := combo.NewMockComboMiddlewareFactoryWithTokensAndPermissions(ctrl, test.ai,
-// 				serviceAccountPermissionsJson)
-// 			server, closeServer := createServer(comboFactory, mockThreatModelService)
-// 			defer closeServer()
-//
-// 			if test.ai != nil {
-// 				mockThreatModelService.EXPECT().DeleteThreatModel(gomock.AssignableToTypeOf(&gin.Context{}), test.inputThreatModelID).Return(test.dsReturnError)
-// 			}
-//
-// 			// when
-// 			request, _ := http.NewRequest(http.MethodDelete,
-// 				server.URL+"/api/v1/threatModel/by-id/"+string(test.inputThreatModelID), nil)
-// 			response, err := http.DefaultClient.Do(request)
-//
-// 			// then
-// 			require.Nil(t, err)
-// 			require.Equal(t, test.expectedResponse, response.StatusCode)
-// 		})
-// 	}
-// }
+func TestDeleteThreatModelHandler(t *testing.T) {
+	serviceAccountPermissionsJson := combo.ServiceAccountPermissionsJson(`{}`)
+	//
+	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
+	//
+	var tests = []struct {
+		name               string
+		ai                 *m.AuthenticationInfo
+		inputThreatModelID m.ThreatModelID
+		dsReturnError      error
+		expectedResponse   int
+	}{
+		{
+			"should delete threatModel",
+			&m.AuthenticationInfo{UserID: m.UserID("u-1"), Roles: []m.Role{m.RoleUser}},
+			m.ThreatModelID("d-12345678"),
+			nil,
+			http.StatusOK,
+		},
+		{
+			"should return 401 when no token passed",
+			nil,
+			m.ThreatModelID("d-12345678"),
+			nil,
+			http.StatusUnauthorized,
+		},
+	}
+	//
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			// given
+			mockThreatModelService := service.NewMockThreatModelService(ctrl)
+			//
+			comboFactory := combo.NewMockComboMiddlewareFactoryWithTokensAndPermissions(ctrl, test.ai,
+				serviceAccountPermissionsJson)
+			server, closeServer := createServer(comboFactory, mockThreatModelService)
+			defer closeServer()
+			//
+			if test.ai != nil {
+				mockThreatModelService.EXPECT().DeleteThreatModel(gomock.AssignableToTypeOf(&gin.Context{}), test.inputThreatModelID).Return(test.dsReturnError)
+			}
+			//
+			// when
+			request, _ := http.NewRequest(http.MethodDelete,
+				server.URL+"/api/v1/threatModel/"+string(test.inputThreatModelID), nil)
+			response, err := http.DefaultClient.Do(request)
+			//
+			// then
+			require.Nil(t, err)
+			require.Equal(t, test.expectedResponse, response.StatusCode)
+		})
+	}
+}

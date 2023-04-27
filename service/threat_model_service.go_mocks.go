@@ -50,6 +50,20 @@ func (mr *MockThreatModelServiceMockRecorder) CreateThreatModel(ctx, threatModel
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateThreatModel", reflect.TypeOf((*MockThreatModelService)(nil).CreateThreatModel), ctx, threatModel)
 }
 
+// DeleteThreatModel mocks base method.
+func (m *MockThreatModelService) DeleteThreatModel(ctx context.Context, id model.ThreatModelID) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeleteThreatModel", ctx, id)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// DeleteThreatModel indicates an expected call of DeleteThreatModel.
+func (mr *MockThreatModelServiceMockRecorder) DeleteThreatModel(ctx, id interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteThreatModel", reflect.TypeOf((*MockThreatModelService)(nil).DeleteThreatModel), ctx, id)
+}
+
 // GetThreatModel mocks base method.
 func (m *MockThreatModelService) GetThreatModel(ctx context.Context, id model.ThreatModelID) (*model.ThreatModel, error) {
 	m.ctrl.T.Helper()

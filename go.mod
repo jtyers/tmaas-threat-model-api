@@ -10,7 +10,7 @@ require (
 	github.com/jtyers/gin-jwt/v2 v2.6.5
 	github.com/jtyers/tmaas-api-util v0.0.0-20230427173337-82ac6547ae69
 	github.com/jtyers/tmaas-cors-config v0.0.0-20230417194512-a9d24d2b927f
-	github.com/jtyers/tmaas-model v0.0.0-20230427151215-0440f04f0e0a
+	github.com/jtyers/tmaas-model v0.0.0-20230427203129-5a95f025d6b8
 	github.com/jtyers/tmaas-service-dao v0.0.0-20230427170859-d2acd81172cf
 	github.com/jtyers/tmaas-service-util v0.0.0-20230427153302-ddcda66c124d
 	github.com/stretchr/testify v1.8.2
