@@ -10,7 +10,6 @@ import (
 	m "github.com/jtyers/tmaas-model"
 	"github.com/jtyers/tmaas-model/validator"
 	servicedao "github.com/jtyers/tmaas-service-dao"
-	"github.com/jtyers/tmaas-service-util/id"
 	"github.com/stretchr/testify/require"
 )
 
@@ -57,7 +56,7 @@ func TestGetThreatModel(t *testing.T) {
 			mockDao.EXPECT().Get(ctx, test.inputThreatModelID).Return(&test.daoReturnValue, test.daoReturnError)
 
 			// when
-			service := NewDefaultThreatModelService(mockDao, nil, nil)
+			service := NewDefaultThreatModelService(mockDao, nil)
 			g, err := service.GetThreatModel(ctx, test.inputThreatModelID)
 
 			// then
@@ -118,7 +117,6 @@ func TestUpdateThreatModel(t *testing.T) {
 
 			mockDao := dao.NewMockThreatModelDao(ctrl)
 			ctx := context.Background()
-			mockIDProvider := id.NewMockRandomIDProvider(ctrl)
 
 			mockValidator := validator.NewMockStructValidator(ctrl)
 			mockValidator.EXPECT().ValidateForUpdate(test.input).Return(test.validateUpdateReturnError)
@@ -129,7 +127,7 @@ func TestUpdateThreatModel(t *testing.T) {
 			}
 
 			// when
-			service := NewDefaultThreatModelService(mockDao, mockIDProvider, mockValidator)
+			service := NewDefaultThreatModelService(mockDao, mockValidator)
 			err := service.UpdateThreatModel(ctx, test.inputID, test.input)
 
 			// then
@@ -196,7 +194,6 @@ func TestCreateThreatModel(t *testing.T) {
 
 			mockDao := dao.NewMockThreatModelDao(ctrl)
 			ctx := context.Background()
-			mockIDProvider := id.NewMockRandomIDProvider(ctrl)
 
 			mockValidator := validator.NewMockStructValidator(ctrl)
 			mockValidator.EXPECT().ValidateForCreate(test.input).Return(test.validateCreateReturnError)
@@ -205,20 +202,13 @@ func TestCreateThreatModel(t *testing.T) {
 				mockValidator.EXPECT().ValidateForUpdate(test.input).Return(test.validateUpdateReturnError)
 
 				if test.validateUpdateReturnError == nil {
-					newID := "1234-1234"
-					mockIDProvider.EXPECT().GenerateID().Return(newID)
-
-					// NOTE: this is not a pointer, so a copy of the original struct
-					expectedInputForCreate := test.input
-					expectedInputForCreate.ThreatModelID = m.ThreatModelID(ThreatModelIDPrefix + newID)
-
-					mockDao.EXPECT().Create(ctx, &expectedInputForCreate).Return(test.expectedResult, test.daoReturnError)
+					mockDao.EXPECT().Create(ctx, &test.input).Return(test.expectedResult, test.daoReturnError)
 
 				}
 			}
 
 			// when
-			service := NewDefaultThreatModelService(mockDao, mockIDProvider, mockValidator)
+			service := NewDefaultThreatModelService(mockDao, mockValidator)
 			g, err := service.CreateThreatModel(ctx, test.input)
 
 			// then
@@ -276,7 +266,7 @@ func TestGetThreatModels(t *testing.T) {
 			mockDao.EXPECT().GetAll(ctx).Return(test.daoReturnValue, test.daoReturnError)
 
 			// when
-			service := NewDefaultThreatModelService(mockDao, nil, nil)
+			service := NewDefaultThreatModelService(mockDao, nil)
 			g, err := service.GetThreatModels(ctx)
 
 			// then
