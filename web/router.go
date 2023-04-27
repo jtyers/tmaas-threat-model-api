@@ -5,16 +5,18 @@ import (
 
 	"github.com/gin-gonic/gin"
 	jwt "github.com/jtyers/gin-jwt/v2"
-	"github.com/jtyers/tmaas-api-util/errors"
-	_ "github.com/jtyers/tmaas-api/docs"
-	"github.com/jtyers/tmaas-api/service"
-	corsconfig "github.com/jtyers/tmaas-cors-config"
-	m "github.com/jtyers/tmaas-model"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 
+	// Pull in docs so they are built and included in swagger endpoints
+	_ "github.com/jtyers/tmaas-threat-model-api/docs"
+
 	"github.com/jtyers/tmaas-api-util/combo"
+	"github.com/jtyers/tmaas-api-util/errors"
+	corsconfig "github.com/jtyers/tmaas-cors-config"
+	m "github.com/jtyers/tmaas-model"
 	"github.com/jtyers/tmaas-service-util/log"
+	"github.com/jtyers/tmaas-threat-model-api/service"
 )
 
 func NewRouter(handlers *ThreatModelHandlers, comboFactory combo.ComboMiddlewareFactory, errorsMiddlewareFactory errors.ErrorsMiddlewareFactory, corsMiddleware corsconfig.CorsMiddleware) http.Handler {

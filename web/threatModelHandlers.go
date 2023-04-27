@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/jtyers/tmaas-api/service"
+	"github.com/jtyers/tmaas-threat-model-api/service"
 	m "github.com/jtyers/tmaas-model"
 	"github.com/jtyers/tmaas-model/structs"
 )

@@ -7,9 +7,9 @@ import (
 	"net/http"
 
 	"github.com/google/wire"
-	"github.com/jtyers/tmaas-api/dao"
-	"github.com/jtyers/tmaas-api/service"
-	"github.com/jtyers/tmaas-api/web"
+	"github.com/jtyers/tmaas-threat-model-api/dao"
+	"github.com/jtyers/tmaas-threat-model-api/service"
+	"github.com/jtyers/tmaas-threat-model-api/web"
 )
 
 func InitialiseRouter() (http.Handler, error) {

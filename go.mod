@@ -1,4 +1,4 @@
-module github.com/jtyers/tmaas-api
+module github.com/jtyers/tmaas-threat-model-api
 
 go 1.20
 

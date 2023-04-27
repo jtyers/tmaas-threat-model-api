@@ -7,7 +7,7 @@ import (
 	"errors"
 	"fmt"
 
-	dao "github.com/jtyers/tmaas-api/dao"
+	dao "github.com/jtyers/tmaas-threat-model-api/dao"
 	m "github.com/jtyers/tmaas-model"
 	"github.com/jtyers/tmaas-model/validator"
 	servicedao "github.com/jtyers/tmaas-service-dao"

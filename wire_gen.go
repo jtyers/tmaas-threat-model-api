@@ -11,13 +11,13 @@ import (
 	"github.com/jtyers/tmaas-api-util/errors"
 	extractor2 "github.com/jtyers/tmaas-api-util/firebase/extractor"
 	"github.com/jtyers/tmaas-api-util/serviceaccount/extractor"
-	"github.com/jtyers/tmaas-api/dao"
-	"github.com/jtyers/tmaas-api/service"
-	"github.com/jtyers/tmaas-api/web"
 	"github.com/jtyers/tmaas-cors-config"
 	"github.com/jtyers/tmaas-model/validator"
 	"github.com/jtyers/tmaas-service-dao/datastore"
 	"github.com/jtyers/tmaas-service-util/id"
+	"github.com/jtyers/tmaas-threat-model-api/dao"
+	"github.com/jtyers/tmaas-threat-model-api/service"
+	"github.com/jtyers/tmaas-threat-model-api/web"
 	"net/http"
 )
 

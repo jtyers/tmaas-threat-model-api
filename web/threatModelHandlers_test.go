@@ -16,10 +16,10 @@ import (
 
 	"github.com/jtyers/tmaas-api-util/combo"
 	"github.com/jtyers/tmaas-api-util/errors"
-	"github.com/jtyers/tmaas-api/service"
 	cmocks "github.com/jtyers/tmaas-cors-config/mocks"
 	m "github.com/jtyers/tmaas-model"
 	"github.com/jtyers/tmaas-model/structs"
+	"github.com/jtyers/tmaas-threat-model-api/service"
 )
 
 type msi map[string]interface{}

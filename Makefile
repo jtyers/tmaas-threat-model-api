@@ -49,4 +49,20 @@ run-local:
 		LOG_LEVEL=debug \
 		CORS_CONFIG='{"AllowOrigins":["*"]}' \
 		GOOGLE_APPLICATION_CREDENTIALS=$$HOME/.config/gcloud/application_default_credentials.json \
+		./tmaas-${pkg_name}
+
+.PHONY: debug-local
+debug-local:
+	go build \
+	&& \
+		PORT=8080 \
+		GOOGLE_CLOUD_PROJECT=tmaas-dev-dev \
+		PROJECT_ID=tmaas-dev-dev \
+		PUBSUB_USER_CHANGES_TOPIC=user-changes \
+		SERVICE_ACCOUNT_NAME=${pkg_name} \
+		SERVICE_ACCOUNT_PERMISSIONS='{}' \
+		TEST_ACCOUNT_EMAIL_REGEXES='^$$' \
+		LOG_LEVEL=debug \
+		CORS_CONFIG='{"AllowOrigins":["*"]}' \
+		GOOGLE_APPLICATION_CREDENTIALS=$$HOME/.config/gcloud/application_default_credentials.json \
 		dlv debug
