@@ -29,7 +29,9 @@ func NewRouter(handlers *ThreatModelHandlers, comboFactory combo.ComboMiddleware
 
 	r.Use(errorsMiddlewareFactory.NewErrorMiddleware(map[error]int{
 		service.ErrNoSuchThreatModel: http.StatusNotFound,
-		errors.ErrUnauthorized:       http.StatusUnauthorized,
+		// TODO get a const or something that matches this
+		//validator.ValidationError:    http.StatusBadRequest,
+		errors.ErrUnauthorized: http.StatusUnauthorized,
 	}))
 
 	r.NoRoute(comboFactory.StrictPermission(m.PermissionReadOwnThreatModels), func(c *gin.Context) {
