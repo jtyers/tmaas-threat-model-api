@@ -808,8 +808,8 @@ github.com/jtyers/tmaas-api-util v0.0.0-20230427173337-82ac6547ae69/go.mod h1:VZ
 github.com/jtyers/tmaas-cors-config v0.0.0-20230417194512-a9d24d2b927f h1:pIwUbhxMLo3ZaSQwcvI2aw7c8Jqgsyn83FlnT6PfGng=
 github.com/jtyers/tmaas-cors-config v0.0.0-20230417194512-a9d24d2b927f/go.mod h1:fRxlwnHxht02/tuUMrCVEmKJcKXSDEMsYvsZB4Eura0=
 github.com/jtyers/tmaas-model v0.0.0-20230316213236-58ab80852bd7/go.mod h1:+wFTCkzjQCnR+y8QqkKGE6aXKGQ9rH5+h/hdEhBBNt8=
-github.com/jtyers/tmaas-model v0.0.0-20230427203129-5a95f025d6b8 h1:OnItv+J6gEg3F4O3w88yWVKdtUAP+/E4RC49zQ/RPsA=
-github.com/jtyers/tmaas-model v0.0.0-20230427203129-5a95f025d6b8/go.mod h1:+wFTCkzjQCnR+y8QqkKGE6aXKGQ9rH5+h/hdEhBBNt8=
+github.com/jtyers/tmaas-model v0.0.0-20230428224325-2ceaddeb0d98 h1:YuXbRURdCfSMibxDb6mkCy2BOO6lriC3cNX6irhFsNE=
+github.com/jtyers/tmaas-model v0.0.0-20230428224325-2ceaddeb0d98/go.mod h1:+wFTCkzjQCnR+y8QqkKGE6aXKGQ9rH5+h/hdEhBBNt8=
 github.com/jtyers/tmaas-service-dao v0.0.0-20230427170859-d2acd81172cf h1:UUUP0JN5oMsrGE+yOe2w3emFQwOxjek/bDGOIMxNzJ4=
 github.com/jtyers/tmaas-service-dao v0.0.0-20230427170859-d2acd81172cf/go.mod h1:6YdRxtSpsUvAilh/giBQ/P2UIdSYrGa2BcDLK2Pfopw=
 github.com/jtyers/tmaas-service-util v0.0.0-20230323095543-af29d2528eff/go.mod h1:OE1wTRdeP6u+K0+lHmQVLhB0Jqv78ygNA6WzOPjt/6o=
