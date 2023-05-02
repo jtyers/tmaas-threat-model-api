@@ -11,11 +11,6 @@ FROM golang:1.20-alpine as builder
     touch -m 600 /root/.ssh/known_hosts; \
     ssh-keyscan github.com > /root/.ssh/known_hosts
 
-# was required for cloud_build, but that is currently not in use
-##COPY id_rsa /root/.ssh/id_rsa
-##RUN chmod 400 /root/.ssh/id_rsa \
-##  && echo -e "Host *\n\tIdentityFile /root/.ssh/id_rsa" > /root/.ssh/config
-
   RUN git config --global \
     url."git@github.com:jtyers".insteadOf "https://github.com/jtyers" 
 

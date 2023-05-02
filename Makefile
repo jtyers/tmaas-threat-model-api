@@ -16,6 +16,8 @@ push:
 
 .PHONY: doc
 doc:
+	# tools.go pulls this in but you still need to go install for it to be on PATH
+	which swag &>/dev/null || go install github.com/swaggo/swag/cmd/swag
 	swag init --pd
 
 .PHONY: run

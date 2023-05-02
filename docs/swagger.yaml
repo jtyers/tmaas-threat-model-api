@@ -1,48 +1,16 @@
 basePath: /
 definitions:
-  model.DataFlowDiagram:
-    properties:
-      id:
-        description: A randomised string e.g. dfd_abcdef123456
-        type: string
-      root:
-        type: string
-    type: object
-  model.Threat:
-    properties:
-      componentID:
-        description: |-
-          Where in the model this threat occurs. A FlowID, a ComponentID or
-          a ComponentGroupID
-        type: string
-      controls:
-        items:
-          type: string
-        type: array
-      description:
-        minLength: 2
-        type: string
-      id:
-        description: A randomised string e.g. th_abcdef123456
-        type: string
-      inherentRisk:
-        type: string
-      stride:
-        minLength: 2
-        type: string
-    type: object
   model.ThreatModel:
     properties:
-      dfd:
-        $ref: '#/definitions/model.DataFlowDiagram'
+      dfdID:
+        description: The DFD of the threat model.
+        type: string
       id:
         description: A randomised string e.g. th_abcdef123456
         type: string
-      threats:
-        items:
-          $ref: '#/definitions/model.Threat'
-        type: array
       title:
+        description: The title of the threat model, must be at least two characters
+          long. Required.
         minLength: 2
         type: string
     type: object
@@ -135,4 +103,25 @@ paths:
           schema:
             type: string
       summary: Create a new Threat Model
+  /api/v1/threatModel/{id}:
+    delete:
+      operationId: delete-todo-by-id
+      parameters:
+      - description: todo ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.ThreatModel'
+        "404":
+          description: Not Found
+          schema:
+            type: string
+      summary: delete a todo item by ID
 swagger: "2.0"

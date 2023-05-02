@@ -108,6 +108,38 @@ const docTemplate = `{
                 }
             }
         },
+        "/api/v1/threatModel/{id}": {
+            "delete": {
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "delete a todo item by ID",
+                "operationId": "delete-todo-by-id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "todo ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.ThreatModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1/{threatModelID}": {
             "get": {
                 "produces": [
@@ -142,65 +174,19 @@ const docTemplate = `{
         }
     },
     "definitions": {
-        "model.DataFlowDiagram": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "description": "A randomised string e.g. dfd_abcdef123456",
-                    "type": "string"
-                },
-                "root": {
-                    "type": "string"
-                }
-            }
-        },
-        "model.Threat": {
-            "type": "object",
-            "properties": {
-                "componentID": {
-                    "description": "Where in the model this threat occurs. A FlowID, a ComponentID or\na ComponentGroupID",
-                    "type": "string"
-                },
-                "controls": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "description": {
-                    "type": "string",
-                    "minLength": 2
-                },
-                "id": {
-                    "description": "A randomised string e.g. th_abcdef123456",
-                    "type": "string"
-                },
-                "inherentRisk": {
-                    "type": "string"
-                },
-                "stride": {
-                    "type": "string",
-                    "minLength": 2
-                }
-            }
-        },
         "model.ThreatModel": {
             "type": "object",
             "properties": {
-                "dfd": {
-                    "$ref": "#/definitions/model.DataFlowDiagram"
+                "dfdID": {
+                    "description": "The DFD of the threat model.",
+                    "type": "string"
                 },
                 "id": {
                     "description": "A randomised string e.g. th_abcdef123456",
                     "type": "string"
                 },
-                "threats": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/model.Threat"
-                    }
-                },
                 "title": {
+                    "description": "The title of the threat model, must be at least two characters long. Required.",
                     "type": "string",
                     "minLength": 2
                 }
