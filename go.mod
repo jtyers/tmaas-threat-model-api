@@ -14,8 +14,6 @@ require (
 	github.com/jtyers/tmaas-service-dao v0.0.0-20230502080358-f2424d195f58
 	github.com/jtyers/tmaas-service-util v0.0.0-20230427153302-ddcda66c124d
 	github.com/stretchr/testify v1.8.2
-	github.com/swaggo/files v1.0.1
-	github.com/swaggo/gin-swagger v1.6.0
 	github.com/swaggo/swag v1.16.1
 )
 

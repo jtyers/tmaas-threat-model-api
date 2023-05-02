@@ -5,11 +5,6 @@ import (
 
 	"github.com/gin-gonic/gin"
 	jwt "github.com/jtyers/gin-jwt/v2"
-	swaggerFiles "github.com/swaggo/files"
-	ginSwagger "github.com/swaggo/gin-swagger"
-
-	// Pull in docs so they are built and included in swagger endpoints
-	_ "github.com/jtyers/tmaas-threat-model-api/docs"
 
 	"github.com/jtyers/tmaas-api-util/combo"
 	"github.com/jtyers/tmaas-api-util/errors"
@@ -60,12 +55,6 @@ func NewRouter(handlers *ThreatModelHandlers, comboFactory combo.ComboMiddleware
 	r.PATCH("/api/v1/threatModel/by-id/:threatModelID",
 		comboFactory.StrictPermission(m.PermissionReadOwnThreatModels),
 		handlers.PatchThreatModelHandler,
-	)
-
-	// docs route - we ensure users are authenticated somehow before emitting docs
-	r.GET("/docs/*any",
-		//comboFactory.StrictUserPermission(m.PermissionReadOwnUser),
-		ginSwagger.WrapHandler(swaggerFiles.Handler),
 	)
 
 	return r

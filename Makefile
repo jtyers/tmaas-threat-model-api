@@ -14,12 +14,6 @@ push:
 	docker tag ${pkg_name} europe-west1-docker.pkg.dev/tmaas-dev-dev/images/${pkg_name}:$${tag}
 	docker push europe-west1-docker.pkg.dev/tmaas-dev-dev/images/${pkg_name}:$${tag}
 
-.PHONY: doc
-doc:
-	# tools.go pulls this in but you still need to go install for it to be on PATH
-	which swag &>/dev/null || go install github.com/swaggo/swag/cmd/swag
-	swag init --pd
-
 .PHONY: run
 run:
 	docker run --rm -it \
