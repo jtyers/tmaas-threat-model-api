@@ -12,7 +12,7 @@ require (
 	github.com/jtyers/tmaas-cors-config v0.0.0-20230417194512-a9d24d2b927f
 	github.com/jtyers/tmaas-model v0.0.0-20230503202147-dfe6fb326676
 	github.com/jtyers/tmaas-service-dao v0.0.0-20230502080358-f2424d195f58
-	github.com/jtyers/tmaas-service-util v0.0.0-20230505200924-2aedae92bfb0
+	github.com/jtyers/tmaas-service-util v0.0.0-20230505204648-f25b83a85259
 	github.com/stretchr/testify v1.8.2
 )
 
