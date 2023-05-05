@@ -8,6 +8,8 @@ require (
 	github.com/golang/mock v1.7.0-rc.1.0.20220812172401-5b455625bd2c
 	github.com/google/wire v0.5.0
 	github.com/jtyers/gin-jwt/v2 v2.6.5
+	github.com/jtyers/shepd-device-api v0.0.0-20200910153600-14ec19c52605
+	github.com/jtyers/shepd-service-util v0.0.0-20201107070532-e4a536409348
 	github.com/jtyers/tmaas-api-util v0.0.0-20230501230017-c9cbb3558fb9
 	github.com/jtyers/tmaas-cors-config v0.0.0-20230417194512-a9d24d2b927f
 	github.com/jtyers/tmaas-model v0.0.0-20230503202147-dfe6fb326676
@@ -23,6 +25,7 @@ require (
 	cloud.google.com/go/firestore v1.9.0 // indirect
 	cloud.google.com/go/iam v0.12.0 // indirect
 	cloud.google.com/go/longrunning v0.4.1 // indirect
+	cloud.google.com/go/pubsub v1.29.0 // indirect
 	cloud.google.com/go/storage v1.28.1 // indirect
 	firebase.google.com/go v3.12.0+incompatible // indirect
 	github.com/blendle/zapdriver v1.3.1 // indirect
@@ -33,6 +36,7 @@ require (
 	github.com/dchest/uniuri v1.2.0 // indirect
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
+	github.com/fatih/camelcase v1.0.0 // indirect
 	github.com/fatih/structs v1.1.0 // indirect
 	github.com/gin-contrib/cors v1.3.1 // indirect
 	github.com/gin-contrib/sse v0.1.0 // indirect
@@ -49,6 +53,10 @@ require (
 	github.com/googleapis/enterprise-certificate-proxy v0.2.3 // indirect
 	github.com/googleapis/gax-go/v2 v2.7.1 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
+	github.com/jtyers/shepd-api-entities v0.0.0-20201107070736-c70a8924e134 // indirect
+	github.com/jtyers/shepd-api-util v0.0.0-20200812150344-826422f6fbad // indirect
+	github.com/jtyers/shepd-notifications-api-client v0.0.0-20200609111300-c93ea0a78892 // indirect
+	github.com/jtyers/shepd-service-dao v0.0.0-20200709084121-ea8a4a2567ea // indirect
 	github.com/klauspost/cpuid/v2 v2.0.9 // indirect
 	github.com/leodido/go-urn v1.2.2 // indirect
 	github.com/mattn/go-isatty v0.0.17 // indirect
@@ -57,6 +65,7 @@ require (
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/pelletier/go-toml/v2 v2.0.6 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
+	github.com/stretchr/objx v0.5.0 // indirect
 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
 	github.com/ugorji/go/codec v1.2.9 // indirect
 	go.opencensus.io v0.24.0 // indirect

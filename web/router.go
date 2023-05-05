@@ -43,7 +43,7 @@ func NewRouter(handlers *ThreatModelHandlers, comboFactory combo.ComboMiddleware
 		comboFactory.StrictUserPermission(m.PermissionReadOwnThreatModels),
 		handlers.GetThreatModelsHandler,
 	)
-	r.GET("/api/v1/threatModel/by-id/:threatModelID",
+	r.GET("/api/v1/threatModel/:threatModelID",
 		comboFactory.StrictPermission(m.PermissionReadOwnThreatModels), // Permit service accounts to access this
 		handlers.GetThreatModelHandler,
 	)
@@ -52,7 +52,7 @@ func NewRouter(handlers *ThreatModelHandlers, comboFactory combo.ComboMiddleware
 		comboFactory.StrictUserPermission(m.PermissionEditOwnThreatModels),
 		handlers.DeleteThreatModelHandler,
 	)
-	r.PATCH("/api/v1/threatModel/by-id/:threatModelID",
+	r.PATCH("/api/v1/threatModel/:threatModelID",
 		comboFactory.StrictPermission(m.PermissionReadOwnThreatModels),
 		handlers.PatchThreatModelHandler,
 	)
