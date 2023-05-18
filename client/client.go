@@ -4,6 +4,7 @@ import (
 	"context"
 
 	m "github.com/jtyers/tmaas-model"
+	"github.com/jtyers/tmaas-service-util/idchecker"
 	"github.com/jtyers/tmaas-service-util/requestor"
 	"github.com/jtyers/tmaas-threat-model-api/service"
 )
@@ -25,8 +26,19 @@ type ThreatModelServiceClient struct {
 
 var _ service.ThreatModelService = (*ThreatModelServiceClient)(nil)
 
-func NewThreatModelServiceClient(config ThreatModelServiceClientConfig, requestor requestor.RequestorWithContext) *ThreatModelServiceClient {
-	return &ThreatModelServiceClient{config, requestor}
+func NewThreatModelServiceClient(
+	config ThreatModelServiceClientConfig,
+	requestor requestor.RequestorWithContext,
+	idChecker idchecker.IDChecker,
+) (*ThreatModelServiceClient, error) {
+	cl := &ThreatModelServiceClient{config, requestor}
+	idCheckerForType := NewClientThreatModelIDChecker(cl)
+
+	err := idChecker.RegisterIDChecker(idCheckerForType)
+	if err != nil {
+		return nil, err
+	}
+	return cl, nil
 }
 
 // Retrieve a threatModel by threatModelID.

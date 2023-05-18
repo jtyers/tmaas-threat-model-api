@@ -6,10 +6,11 @@ import (
 	"testing"
 
 	"github.com/golang/mock/gomock"
-	"github.com/jtyers/tmaas-threat-model-api/dao"
 	m "github.com/jtyers/tmaas-model"
 	"github.com/jtyers/tmaas-model/validator"
 	servicedao "github.com/jtyers/tmaas-service-dao"
+	"github.com/jtyers/tmaas-service-util/idchecker"
+	"github.com/jtyers/tmaas-threat-model-api/dao"
 	"github.com/stretchr/testify/require"
 )
 
@@ -56,7 +57,7 @@ func TestGetThreatModel(t *testing.T) {
 			mockDao.EXPECT().Get(ctx, test.inputThreatModelID).Return(&test.daoReturnValue, test.daoReturnError)
 
 			// when
-			service := NewDefaultThreatModelService(mockDao, nil)
+			service := NewDefaultThreatModelService(mockDao, nil, nil)
 			g, err := service.GetThreatModel(ctx, test.inputThreatModelID)
 
 			// then
@@ -68,7 +69,8 @@ func TestGetThreatModel(t *testing.T) {
 
 func TestUpdateThreatModel(t *testing.T) {
 	threatModel := m.ThreatModel{
-		ThreatModelID: m.ThreatModelID("1234-1234-1234-1234"),
+		ThreatModelID:     m.ThreatModelID("1234-1234-1234-1234"),
+		DataFlowDiagramID: m.DataFlowDiagramID("1234-1234-1234-1234"),
 	}
 
 	var tests = []struct {
@@ -77,6 +79,8 @@ func TestUpdateThreatModel(t *testing.T) {
 		input                     m.ThreatModel
 		daoReturnError            error
 		validateUpdateReturnError error
+		checkIDResult             bool
+		checkIDError              error
 		expectedResult            *m.ThreatModel
 		expectedError             error
 	}{
@@ -85,6 +89,8 @@ func TestUpdateThreatModel(t *testing.T) {
 			threatModel.ThreatModelID,
 			threatModel,
 			nil,
+			nil,
+			true,
 			nil,
 			&threatModel,
 			nil,
@@ -95,6 +101,8 @@ func TestUpdateThreatModel(t *testing.T) {
 			threatModel,
 			nil,
 			fmt.Errorf("invalid"),
+			true,
+			nil,
 			nil,
 			fmt.Errorf("invalid"),
 		},
@@ -104,8 +112,32 @@ func TestUpdateThreatModel(t *testing.T) {
 			threatModel,
 			fmt.Errorf("dao failure"),
 			nil,
+			true,
+			nil,
 			nil,
 			fmt.Errorf("error updating threatModel: dao failure"),
+		},
+		{
+			"should fail if IDChecker fails",
+			threatModel.ThreatModelID,
+			threatModel,
+			nil,
+			nil,
+			false,
+			fmt.Errorf("failure"),
+			nil,
+			fmt.Errorf("CheckID failed: failure"),
+		},
+		{
+			"should fail if CheckID() returns false",
+			threatModel.ThreatModelID,
+			threatModel,
+			nil,
+			nil,
+			false,
+			nil,
+			nil,
+			fmt.Errorf("threatModel.DataFlowDiagramID %v does not exist", threatModel.DataFlowDiagramID),
 		},
 	}
 
@@ -117,17 +149,22 @@ func TestUpdateThreatModel(t *testing.T) {
 
 			mockDao := dao.NewMockThreatModelDao(ctrl)
 			ctx := context.Background()
-
+			mockIDChecker := idchecker.NewMockIDChecker(ctrl)
 			mockValidator := validator.NewMockStructValidator(ctrl)
+
 			mockValidator.EXPECT().ValidateForUpdate(test.input).Return(test.validateUpdateReturnError)
 
 			if test.validateUpdateReturnError == nil {
-				mockDao.EXPECT().Update(ctx, test.inputID, &test.input).Return(test.expectedResult, test.daoReturnError)
+				mockIDChecker.EXPECT().CheckID(ctx, test.input.DataFlowDiagramID).Return(test.checkIDResult, test.checkIDError)
 
+				if test.checkIDResult && test.checkIDError == nil {
+					mockDao.EXPECT().Update(ctx, test.inputID, &test.input).Return(test.expectedResult, test.daoReturnError)
+
+				}
 			}
 
 			// when
-			service := NewDefaultThreatModelService(mockDao, mockValidator)
+			service := NewDefaultThreatModelService(mockDao, mockValidator, mockIDChecker)
 			err := service.UpdateThreatModel(ctx, test.inputID, test.input)
 
 			// then
@@ -143,6 +180,8 @@ func TestCreateThreatModel(t *testing.T) {
 		name                      string
 		input                     m.ThreatModel
 		daoReturnError            error
+		checkIDResult             bool
+		checkIDError              error
 		validateCreateReturnError error
 		validateUpdateReturnError error
 		expectedResult            *m.ThreatModel
@@ -151,6 +190,8 @@ func TestCreateThreatModel(t *testing.T) {
 		{
 			"should create threatModel",
 			threatModel,
+			nil,
+			true,
 			nil,
 			nil,
 			nil,
@@ -161,6 +202,8 @@ func TestCreateThreatModel(t *testing.T) {
 			"should pass through ValidateCreate errors with no wrapping or changes",
 			threatModel,
 			nil,
+			true,
+			nil,
 			fmt.Errorf("invalid"),
 			nil,
 			nil,
@@ -169,6 +212,8 @@ func TestCreateThreatModel(t *testing.T) {
 		{
 			"should pass through ValidateForUpdate errors with no wrapping or changes",
 			threatModel,
+			nil,
+			true,
 			nil,
 			nil,
 			fmt.Errorf("invalid"),
@@ -179,10 +224,34 @@ func TestCreateThreatModel(t *testing.T) {
 			"should fail if DAO create fails",
 			threatModel,
 			fmt.Errorf("dao failure"),
+			true,
+			nil,
 			nil,
 			nil,
 			nil,
 			fmt.Errorf("error creating threatModel: dao failure"),
+		},
+		{
+			"should fail if IDChecker fails",
+			threatModel,
+			nil,
+			false,
+			fmt.Errorf("failure"),
+			nil,
+			nil,
+			nil,
+			fmt.Errorf("CheckID failed: failure"),
+		},
+		{
+			"should fail if CheckID() returns false",
+			threatModel,
+			nil,
+			false,
+			nil,
+			nil,
+			nil,
+			nil,
+			fmt.Errorf("threatModel.DataFlowDiagramID %v does not exist", threatModel.DataFlowDiagramID),
 		},
 	}
 
@@ -194,21 +263,27 @@ func TestCreateThreatModel(t *testing.T) {
 
 			mockDao := dao.NewMockThreatModelDao(ctrl)
 			ctx := context.Background()
-
 			mockValidator := validator.NewMockStructValidator(ctrl)
+			mockIDChecker := idchecker.NewMockIDChecker(ctrl)
+
 			mockValidator.EXPECT().ValidateForCreate(test.input).Return(test.validateCreateReturnError)
 
 			if test.validateCreateReturnError == nil {
 				mockValidator.EXPECT().ValidateForUpdate(test.input).Return(test.validateUpdateReturnError)
 
 				if test.validateUpdateReturnError == nil {
-					mockDao.EXPECT().Create(ctx, &test.input).Return(test.expectedResult, test.daoReturnError)
+					mockIDChecker.EXPECT().CheckID(ctx, test.input.DataFlowDiagramID).Return(test.checkIDResult, test.checkIDError)
 
+					if test.checkIDResult && test.checkIDError == nil {
+
+						mockDao.EXPECT().Create(ctx, &test.input).Return(test.expectedResult, test.daoReturnError)
+
+					}
 				}
 			}
 
 			// when
-			service := NewDefaultThreatModelService(mockDao, mockValidator)
+			service := NewDefaultThreatModelService(mockDao, mockValidator, mockIDChecker)
 			g, err := service.CreateThreatModel(ctx, test.input)
 
 			// then
@@ -266,7 +341,7 @@ func TestGetThreatModels(t *testing.T) {
 			mockDao.EXPECT().GetAll(ctx).Return(test.daoReturnValue, test.daoReturnError)
 
 			// when
-			service := NewDefaultThreatModelService(mockDao, nil)
+			service := NewDefaultThreatModelService(mockDao, nil, nil)
 			g, err := service.GetThreatModels(ctx)
 
 			// then

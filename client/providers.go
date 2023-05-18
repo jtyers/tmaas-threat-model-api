@@ -21,4 +21,6 @@ var ThreatModelServiceClientProviderSet = wire.NewSet(
 
 	wire.Bind(new(service.ThreatModelService), new(*ThreatModelServiceClient)),
 	NewThreatModelServiceClient,
+
+	NewClientThreatModelIDChecker,
 )

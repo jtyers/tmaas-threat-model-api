@@ -15,6 +15,7 @@ import (
 	"github.com/jtyers/tmaas-model/validator"
 	"github.com/jtyers/tmaas-service-dao/datastore"
 	"github.com/jtyers/tmaas-service-util/id"
+	"github.com/jtyers/tmaas-service-util/idchecker"
 	"github.com/jtyers/tmaas-threat-model-api/dao"
 	"github.com/jtyers/tmaas-threat-model-api/service"
 	"github.com/jtyers/tmaas-threat-model-api/web"
@@ -41,7 +42,8 @@ func InitialiseRouter() (http.Handler, error) {
 	if err != nil {
 		return nil, err
 	}
-	defaultThreatModelService := service.NewDefaultThreatModelService(threatModelDao, defaultStructValidator)
+	defaultIDChecker := idchecker.NewDefaultIDChecker()
+	defaultThreatModelService := service.NewDefaultThreatModelService(threatModelDao, defaultStructValidator, defaultIDChecker)
 	threatModelHandlers := web.NewThreatModelHandlers(defaultThreatModelService)
 	iamClient, err := extractor.NewIamClient(context)
 	if err != nil {

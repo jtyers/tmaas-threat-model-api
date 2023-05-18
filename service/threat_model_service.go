@@ -7,10 +7,11 @@ import (
 	"errors"
 	"fmt"
 
-	dao "github.com/jtyers/tmaas-threat-model-api/dao"
 	m "github.com/jtyers/tmaas-model"
 	"github.com/jtyers/tmaas-model/validator"
 	servicedao "github.com/jtyers/tmaas-service-dao"
+	"github.com/jtyers/tmaas-service-util/idchecker"
+	dao "github.com/jtyers/tmaas-threat-model-api/dao"
 )
 
 var (
@@ -38,10 +39,15 @@ type ThreatModelService interface {
 type DefaultThreatModelService struct {
 	dao       dao.ThreatModelDao
 	validator validator.StructValidator
+	idChecker idchecker.IDChecker
 }
 
-func NewDefaultThreatModelService(dao dao.ThreatModelDao, validator validator.StructValidator) *DefaultThreatModelService {
-	return &DefaultThreatModelService{dao, validator}
+func NewDefaultThreatModelService(
+	dao dao.ThreatModelDao,
+	validator validator.StructValidator,
+	idChecker idchecker.IDChecker,
+) *DefaultThreatModelService {
+	return &DefaultThreatModelService{dao, validator, idChecker}
 }
 
 func (g *DefaultThreatModelService) GetThreatModel(ctx context.Context, threatModelID m.ThreatModelID) (*m.ThreatModel, error) {
@@ -59,11 +65,16 @@ func (g *DefaultThreatModelService) GetThreatModel(ctx context.Context, threatMo
 
 // CreateThreatModel Creates a new ThreatModel in Firestore.
 //
-// The threatModel supplied should not have its ID or ThreatModelID fields set to anything
-// other than "". An error is emitted if this is not the case.
+// The threatModel supplied should not have its ID or ThreatModelID
+// fields set to anything other than "". An error is emitted if this
+// is not the case.
 //
-// The created threatModel is returned to the caller, with ID and ThreatModelID set.
-func (g *DefaultThreatModelService) CreateThreatModel(ctx context.Context, threatModel m.ThreatModel) (*m.ThreatModel, error) {
+// The created threatModel is returned to the caller, with ID and
+// ThreatModelID set.
+func (g *DefaultThreatModelService) CreateThreatModel(
+	ctx context.Context,
+	threatModel m.ThreatModel,
+) (*m.ThreatModel, error) {
 	if threatModel.ThreatModelID != "" {
 		return nil, fmt.Errorf("cannot create a threatModel that already has ThreatModelID set")
 	}
@@ -75,6 +86,15 @@ func (g *DefaultThreatModelService) CreateThreatModel(ctx context.Context, threa
 	err = g.validator.ValidateForUpdate(threatModel)
 	if err != nil {
 		return nil, err
+	}
+
+	exists, err := g.idChecker.CheckID(ctx, threatModel.DataFlowDiagramID)
+	if err != nil {
+		return nil, fmt.Errorf("CheckID failed: %v", err)
+	}
+	if !exists {
+		return nil, fmt.Errorf("threatModel.DataFlowDiagramID %v does not exist",
+			threatModel.DataFlowDiagramID)
 	}
 
 	// leave ID blank - the DAO will generate one for us
@@ -94,6 +114,17 @@ func (g *DefaultThreatModelService) UpdateThreatModel(ctx context.Context, threa
 
 	if threatModel.ThreatModelID != threatModelID {
 		return fmt.Errorf("given threatModel IDs do not match")
+	}
+
+	if threatModel.DataFlowDiagramID != "" {
+		exists, err := g.idChecker.CheckID(ctx, threatModel.DataFlowDiagramID)
+		if err != nil {
+			return fmt.Errorf("CheckID failed: %v", err)
+		}
+		if !exists {
+			return fmt.Errorf("threatModel.DataFlowDiagramID %v does not exist",
+				threatModel.DataFlowDiagramID)
+		}
 	}
 
 	_, err = g.dao.Update(ctx, threatModelID, &threatModel)

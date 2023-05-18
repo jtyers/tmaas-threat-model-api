@@ -10,10 +10,10 @@ import (
 )
 
 type ClientThreatModelIDChecker struct {
-	client ThreatModelServiceClient
+	client *ThreatModelServiceClient
 }
 
-func NewClientThreatModelIDChecker(client ThreatModelServiceClient) *ClientThreatModelIDChecker {
+func NewClientThreatModelIDChecker(client *ThreatModelServiceClient) *ClientThreatModelIDChecker {
 	return &ClientThreatModelIDChecker{client}
 }
 
@@ -41,4 +41,25 @@ func (c *ClientThreatModelIDChecker) CheckID(ctx context.Context, id any) (bool,
 	} else {
 		return false, err
 	}
+}
+
+// ClientThreatModelIDCheckerIniter is a crap name for an 'initer', which
+// registers the checker. It exists because we cannot call initialisation
+// code as part of wire directly, so we use wire to pull this in as call it
+// as part of main().
+type ClientThreatModelIDCheckerIniter struct {
+	idChecker idchecker.IDChecker
+	checker   *ClientThreatModelIDChecker
+}
+
+func NewClientThreatModelIDCheckerIniter(
+	idChecker idchecker.IDChecker,
+	checker *ClientThreatModelIDChecker,
+) *ClientThreatModelIDCheckerIniter {
+	return &ClientThreatModelIDCheckerIniter{idChecker, checker}
+}
+
+// Register registers the ClientThreatModelIDChecker with the IDChecker
+func (i *ClientThreatModelIDCheckerIniter) Register() error {
+	return i.idChecker.RegisterIDChecker(i.checker)
 }
