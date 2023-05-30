@@ -6,6 +6,7 @@ package dao
 
 import (
 	"github.com/google/wire"
+	m "github.com/jtyers/tmaas-model"
 	"github.com/jtyers/tmaas-service-dao/datastore"
 	util "github.com/jtyers/tmaas-service-util"
 	"github.com/jtyers/tmaas-service-util/id"
@@ -19,7 +20,7 @@ func NewDatastoreConfig() datastore.DatastoreConfiguration {
 }
 
 func NewThreatModelRandomIDProviderPrefix() id.RandomIDProviderPrefix {
-	return id.RandomIDProviderPrefix(ThreatModelIDPrefix)
+	return id.RandomIDProviderPrefix(m.ThreatModelIDPrefix)
 }
 
 var ThreatModelDaoProviderSet = wire.NewSet(
