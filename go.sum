@@ -791,13 +791,15 @@ github.com/jtyers/tmaas-api-util v0.0.0-20230501230017-c9cbb3558fb9/go.mod h1:ji
 github.com/jtyers/tmaas-cors-config v0.0.0-20230417194512-a9d24d2b927f h1:pIwUbhxMLo3ZaSQwcvI2aw7c8Jqgsyn83FlnT6PfGng=
 github.com/jtyers/tmaas-cors-config v0.0.0-20230417194512-a9d24d2b927f/go.mod h1:fRxlwnHxht02/tuUMrCVEmKJcKXSDEMsYvsZB4Eura0=
 github.com/jtyers/tmaas-model v0.0.0-20230316213236-58ab80852bd7/go.mod h1:+wFTCkzjQCnR+y8QqkKGE6aXKGQ9rH5+h/hdEhBBNt8=
-github.com/jtyers/tmaas-model v0.0.0-20230503202147-dfe6fb326676 h1:0+ohuZIClp4D+dgSk9DcMxwICVcKczp58HgchYFVSrQ=
-github.com/jtyers/tmaas-model v0.0.0-20230503202147-dfe6fb326676/go.mod h1:+wFTCkzjQCnR+y8QqkKGE6aXKGQ9rH5+h/hdEhBBNt8=
+github.com/jtyers/tmaas-model v0.0.0-20230530082441-ca3aff4e82b1 h1:03NvJVqGEYEM2qog45qzrnFYQvb6IKQ4i3elEtYcHW0=
+github.com/jtyers/tmaas-model v0.0.0-20230530082441-ca3aff4e82b1/go.mod h1:+wFTCkzjQCnR+y8QqkKGE6aXKGQ9rH5+h/hdEhBBNt8=
 github.com/jtyers/tmaas-service-dao v0.0.0-20230502080358-f2424d195f58 h1:OPNXWfHp+gccX51nUMlCFcAdMhwUgP85xoZ+q2YFghE=
 github.com/jtyers/tmaas-service-dao v0.0.0-20230502080358-f2424d195f58/go.mod h1:6YdRxtSpsUvAilh/giBQ/P2UIdSYrGa2BcDLK2Pfopw=
 github.com/jtyers/tmaas-service-util v0.0.0-20230323095543-af29d2528eff/go.mod h1:OE1wTRdeP6u+K0+lHmQVLhB0Jqv78ygNA6WzOPjt/6o=
 github.com/jtyers/tmaas-service-util v0.0.0-20230517155719-6e78ffeb0268 h1:G9BHqAUPlbx5Bj3tpHGhhf+hXmfZxBHu1s+bCHazhJQ=
 github.com/jtyers/tmaas-service-util v0.0.0-20230517155719-6e78ffeb0268/go.mod h1:sAkpVG2woJBBb4+2EKdnWSgP8p8YKQKxiUCcR0gBl7A=
+github.com/jtyers/tmaas-threat-api v0.0.5 h1:QOxCyuDaBfYbyBtrJh+/sAwlyEN+JL12kze6LagN7fM=
+github.com/jtyers/tmaas-threat-api v0.0.5/go.mod h1:nbb9zVZpbKtLn0OF0Vw09eocT2QABpftLPEFPYLzCMM=
 github.com/jung-kurt/gofpdf v1.0.0/go.mod h1:7Id9E/uU8ce6rXgefFLlgrJj/GYY22cpxn+r32jIOes=
 github.com/jung-kurt/gofpdf v1.0.3-0.20190309125859-24315acbbda5/go.mod h1:7Id9E/uU8ce6rXgefFLlgrJj/GYY22cpxn+r32jIOes=
 github.com/kballard/go-shellquote v0.0.0-20180428030007-95032a82bc51/go.mod h1:CzGEWj7cYgsdH8dAjBGEr58BoE7ScuLd+fwFZ44+/x8=

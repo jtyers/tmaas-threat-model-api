@@ -94,6 +94,21 @@ func (mr *MockThreatModelServiceMockRecorder) GetThreatModels(ctx interface{}) *
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetThreatModels", reflect.TypeOf((*MockThreatModelService)(nil).GetThreatModels), ctx)
 }
 
+// GetThreats mocks base method.
+func (m *MockThreatModelService) GetThreats(ctx context.Context, threatModelID model.ThreatModelID) ([]*model.Threat, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetThreats", ctx, threatModelID)
+	ret0, _ := ret[0].([]*model.Threat)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetThreats indicates an expected call of GetThreats.
+func (mr *MockThreatModelServiceMockRecorder) GetThreats(ctx, threatModelID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetThreats", reflect.TypeOf((*MockThreatModelService)(nil).GetThreats), ctx, threatModelID)
+}
+
 // UpdateThreatModel mocks base method.
 func (m *MockThreatModelService) UpdateThreatModel(ctx context.Context, threatModelID model.ThreatModelID, threatModel model.ThreatModel) error {
 	m.ctrl.T.Helper()

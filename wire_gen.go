@@ -16,6 +16,8 @@ import (
 	"github.com/jtyers/tmaas-service-dao/datastore"
 	"github.com/jtyers/tmaas-service-util/id"
 	"github.com/jtyers/tmaas-service-util/idchecker"
+	"github.com/jtyers/tmaas-service-util/requestor"
+	"github.com/jtyers/tmaas-threat-api/client"
 	"github.com/jtyers/tmaas-threat-model-api/dao"
 	"github.com/jtyers/tmaas-threat-model-api/service"
 	"github.com/jtyers/tmaas-threat-model-api/web"
@@ -27,14 +29,14 @@ import (
 func InitialiseRouter() (http.Handler, error) {
 	context := datastore.NewContext()
 	datastoreConfiguration := dao.NewDatastoreConfig()
-	client, err := datastore.NewDatastoreClient(context, datastoreConfiguration)
+	datastoreClient, err := datastore.NewDatastoreClient(context, datastoreConfiguration)
 	if err != nil {
 		return nil, err
 	}
 	randomIDProviderPrefix := dao.NewThreatModelRandomIDProviderPrefix()
 	defaultRandomIDProvider := id.NewDefaultRandomIDProvider(randomIDProviderPrefix)
 	threatModelIDCreator := dao.NewThreatModelIDCreator()
-	threatModelDao, err := dao.NewThreatModelDao(client, defaultRandomIDProvider, datastoreConfiguration, threatModelIDCreator)
+	threatModelDao, err := dao.NewThreatModelDao(datastoreClient, defaultRandomIDProvider, datastoreConfiguration, threatModelIDCreator)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +45,10 @@ func InitialiseRouter() (http.Handler, error) {
 		return nil, err
 	}
 	defaultIDChecker := idchecker.NewDefaultIDChecker()
-	defaultThreatModelService := service.NewDefaultThreatModelService(threatModelDao, defaultStructValidator, defaultIDChecker)
+	threatServiceClientConfig := client.NewThreatServiceClientConfig()
+	defaultRequestorWithContext := requestor.NewDefaultRequestorWithContext()
+	threatServiceClient := client.NewThreatServiceClient(threatServiceClientConfig, defaultRequestorWithContext)
+	defaultThreatModelService := service.NewDefaultThreatModelService(threatModelDao, defaultStructValidator, defaultIDChecker, threatServiceClient)
 	threatModelHandlers := web.NewThreatModelHandlers(defaultThreatModelService)
 	iamClient, err := extractor.NewIamClient(context)
 	if err != nil {

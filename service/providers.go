@@ -8,6 +8,7 @@ import (
 	"github.com/google/wire"
 	"github.com/jtyers/tmaas-model/validator"
 	"github.com/jtyers/tmaas-service-util/idchecker"
+	"github.com/jtyers/tmaas-threat-api/client"
 )
 
 var ServiceDepsProviderSet = wire.NewSet(
@@ -24,4 +25,6 @@ var ThreatModelServiceProviderSet = wire.NewSet(
 
 	wire.Bind(new(idchecker.IDChecker), new(*idchecker.DefaultIDChecker)),
 	idchecker.NewDefaultIDChecker,
+
+	client.ThreatServiceClientProviderSet,
 )

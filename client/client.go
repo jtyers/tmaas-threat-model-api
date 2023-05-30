@@ -2,6 +2,7 @@ package client
 
 import (
 	"context"
+	"fmt"
 
 	m "github.com/jtyers/tmaas-model"
 	"github.com/jtyers/tmaas-service-util/idchecker"
@@ -61,6 +62,19 @@ func (s *ThreatModelServiceClient) GetThreatModels(ctx context.Context) ([]*m.Th
 	}
 
 	return result, nil
+}
+
+func (s *ThreatModelServiceClient) GetThreats(ctx context.Context, id m.ThreatModelID) ([]*m.Threat, error) {
+	// not yet implemented by the ThreatModelService's web router
+	return nil, fmt.Errorf("not yet implemented")
+
+	//result := []*m.Threat{}
+	//err := s.requestor.GetInto(ctx, s.config.BaseURL+URLPrefix+"/", &result)
+	//if err != nil {
+	//	return nil, err
+	//}
+
+	// return result, nil
 }
 
 // Creates a threatModel. `threatModel` should not have ID or threatModelID set.

@@ -57,7 +57,7 @@ func TestGetThreatModel(t *testing.T) {
 			mockDao.EXPECT().Get(ctx, test.inputThreatModelID).Return(&test.daoReturnValue, test.daoReturnError)
 
 			// when
-			service := NewDefaultThreatModelService(mockDao, nil, nil)
+			service := NewDefaultThreatModelService(mockDao, nil, nil, nil)
 			g, err := service.GetThreatModel(ctx, test.inputThreatModelID)
 
 			// then
@@ -164,7 +164,7 @@ func TestUpdateThreatModel(t *testing.T) {
 			}
 
 			// when
-			service := NewDefaultThreatModelService(mockDao, mockValidator, mockIDChecker)
+			service := NewDefaultThreatModelService(mockDao, mockValidator, mockIDChecker, nil)
 			err := service.UpdateThreatModel(ctx, test.inputID, test.input)
 
 			// then
@@ -283,7 +283,7 @@ func TestCreateThreatModel(t *testing.T) {
 			}
 
 			// when
-			service := NewDefaultThreatModelService(mockDao, mockValidator, mockIDChecker)
+			service := NewDefaultThreatModelService(mockDao, mockValidator, mockIDChecker, nil)
 			g, err := service.CreateThreatModel(ctx, test.input)
 
 			// then
@@ -341,7 +341,7 @@ func TestGetThreatModels(t *testing.T) {
 			mockDao.EXPECT().GetAll(ctx).Return(test.daoReturnValue, test.daoReturnError)
 
 			// when
-			service := NewDefaultThreatModelService(mockDao, nil, nil)
+			service := NewDefaultThreatModelService(mockDao, nil, nil, nil)
 			g, err := service.GetThreatModels(ctx)
 
 			// then
