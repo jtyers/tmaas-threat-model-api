@@ -6,14 +6,22 @@ package service
 
 import (
 	"github.com/google/wire"
+	dfdclient "github.com/jtyers/tmaas-dfd-api/client"
 	"github.com/jtyers/tmaas-model/validator"
 	"github.com/jtyers/tmaas-service-util/idchecker"
-	"github.com/jtyers/tmaas-threat-api/client"
+	"github.com/jtyers/tmaas-service-util/requestor"
+	thclient "github.com/jtyers/tmaas-threat-api/client"
 )
 
 var ServiceDepsProviderSet = wire.NewSet(
 	validator.StructValidatorProviderSet,
 )
+
+func NewIDCheckerForTypes(dfd *dfdclient.ClientDataFlowDiagramIDChecker) idchecker.IDCheckerForTypes {
+	return idchecker.IDCheckerForTypes([]idchecker.IDCheckerForType{
+		dfd,
+	})
+}
 
 var ThreatModelServiceProviderSet = wire.NewSet(
 	ServiceDepsProviderSet,
@@ -26,5 +34,10 @@ var ThreatModelServiceProviderSet = wire.NewSet(
 	wire.Bind(new(idchecker.IDChecker), new(*idchecker.DefaultIDChecker)),
 	idchecker.NewDefaultIDChecker,
 
-	client.ThreatServiceClientProviderSet,
+	requestor.RequestorWithContextProviderSet,
+	dfdclient.DataFlowDiagramServiceClientProviderSet,
+	thclient.ThreatServiceClientProviderSet,
+
+	NewIDCheckerForTypes,
+	dfdclient.NewClientDataFlowDiagramIDChecker,
 )

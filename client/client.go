@@ -31,15 +31,8 @@ func NewThreatModelServiceClient(
 	config ThreatModelServiceClientConfig,
 	requestor requestor.RequestorWithContext,
 	idChecker idchecker.IDChecker,
-) (*ThreatModelServiceClient, error) {
-	cl := &ThreatModelServiceClient{config, requestor}
-	idCheckerForType := NewClientThreatModelIDChecker(cl)
-
-	err := idChecker.RegisterIDChecker(idCheckerForType)
-	if err != nil {
-		return nil, err
-	}
-	return cl, nil
+) *ThreatModelServiceClient {
+	return &ThreatModelServiceClient{config, requestor}
 }
 
 // Retrieve a threatModel by threatModelID.

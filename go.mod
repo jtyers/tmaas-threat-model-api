@@ -10,9 +10,10 @@ require (
 	github.com/jtyers/gin-jwt/v2 v2.6.5
 	github.com/jtyers/tmaas-api-util v0.0.0-20230501230017-c9cbb3558fb9
 	github.com/jtyers/tmaas-cors-config v0.0.0-20230417194512-a9d24d2b927f
+	github.com/jtyers/tmaas-dfd-api v0.0.6
 	github.com/jtyers/tmaas-model v0.0.0-20230530082441-ca3aff4e82b1
 	github.com/jtyers/tmaas-service-dao v0.0.0-20230502080358-f2424d195f58
-	github.com/jtyers/tmaas-service-util v0.0.0-20230517155719-6e78ffeb0268
+	github.com/jtyers/tmaas-service-util v0.0.0-20230531184541-dda2a6e4872c
 	github.com/jtyers/tmaas-threat-api v0.0.5
 	github.com/stretchr/testify v1.8.2
 )
@@ -50,7 +51,6 @@ require (
 	github.com/googleapis/enterprise-certificate-proxy v0.2.3 // indirect
 	github.com/googleapis/gax-go/v2 v2.7.1 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
-	github.com/jtyers/shepd-api-entities v0.0.0-20201107070736-c70a8924e134 // indirect
 	github.com/klauspost/cpuid/v2 v2.0.9 // indirect
 	github.com/leodido/go-urn v1.2.2 // indirect
 	github.com/mattn/go-isatty v0.0.17 // indirect
