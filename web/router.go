@@ -14,6 +14,10 @@ import (
 	"github.com/jtyers/tmaas-threat-model-api/service"
 )
 
+var (
+	UrlPrefix = "/api/v1/threatmodel"
+)
+
 func NewRouter(handlers *ThreatModelHandlers, comboFactory combo.ComboMiddlewareFactory, errorsMiddlewareFactory errors.ErrorsMiddlewareFactory, corsMiddleware corsconfig.CorsMiddleware) http.Handler {
 	r := gin.New()
 	r.Use(gin.Logger())
@@ -34,25 +38,25 @@ func NewRouter(handlers *ThreatModelHandlers, comboFactory combo.ComboMiddleware
 		c.JSON(404, gin.H{"code": "PAGE_NOT_FOUND", "message": "Page not found"})
 	})
 
-	r.PUT("/api/v1/threatModel",
+	r.PUT(UrlPrefix,
 		comboFactory.StrictUserPermission(m.PermissionReadOwnThreatModels),
 		handlers.PutThreatModelHandler,
 	)
 
-	r.GET("/api/v1/threatModel",
+	r.GET(UrlPrefix,
 		comboFactory.StrictUserPermission(m.PermissionReadOwnThreatModels),
 		handlers.GetThreatModelsHandler,
 	)
-	r.GET("/api/v1/threatModel/:threatModelID",
+	r.GET(UrlPrefix+"/:threatModelID",
 		comboFactory.StrictPermission(m.PermissionReadOwnThreatModels), // Permit service accounts to access this
 		handlers.GetThreatModelHandler,
 	)
 
-	r.DELETE("/api/v1/threatModel/:threatModelID",
+	r.DELETE(UrlPrefix+"/:threatModelID",
 		comboFactory.StrictUserPermission(m.PermissionEditOwnThreatModels),
 		handlers.DeleteThreatModelHandler,
 	)
-	r.PATCH("/api/v1/threatModel/:threatModelID",
+	r.PATCH(UrlPrefix+"/:threatModelID",
 		comboFactory.StrictPermission(m.PermissionReadOwnThreatModels),
 		handlers.PatchThreatModelHandler,
 	)

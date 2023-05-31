@@ -145,7 +145,7 @@ func TestGetThreatModelHandler(t *testing.T) {
 
 			// when
 			request, _ := http.NewRequest(http.MethodGet,
-				server.URL+"/api/v1/threatModel/"+string(threatModel.ThreatModelID), nil)
+				server.URL+UrlPrefix+"/"+string(threatModel.ThreatModelID), nil)
 			response, err := http.DefaultClient.Do(request)
 
 			// then
@@ -242,7 +242,7 @@ func TestGetThreatModelsHandler(t *testing.T) {
 			defer closeServer()
 
 			// when
-			request, _ := http.NewRequest(http.MethodGet, server.URL+"/api/v1/threatModel", nil)
+			request, _ := http.NewRequest(http.MethodGet, server.URL+UrlPrefix, nil)
 			response, err := http.DefaultClient.Do(request)
 
 			// then
@@ -329,7 +329,7 @@ func TestCreateThreatModelHandler(t *testing.T) {
 
 			// when
 			request, _ := http.NewRequest(http.MethodPut,
-				server.URL+"/api/v1/threatModel", strings.NewReader(toJsonString(test.input)))
+				server.URL+UrlPrefix, strings.NewReader(toJsonString(test.input)))
 			response, err := http.DefaultClient.Do(request)
 
 			// then
@@ -401,7 +401,7 @@ func TestPatchThreatModelHandler(t *testing.T) {
 
 			// when
 			request, _ := http.NewRequest(http.MethodPatch,
-				server.URL+"/api/v1/threatModel/"+string(test.inputThreatModelID), bodyReader)
+				server.URL+UrlPrefix+"/"+string(test.inputThreatModelID), bodyReader)
 			response, err := http.DefaultClient.Do(request)
 
 			// then
@@ -456,7 +456,7 @@ func TestDeleteThreatModelHandler(t *testing.T) {
 			//
 			// when
 			request, _ := http.NewRequest(http.MethodDelete,
-				server.URL+"/api/v1/threatModel/"+string(test.inputThreatModelID), nil)
+				server.URL+UrlPrefix+"/"+string(test.inputThreatModelID), nil)
 			response, err := http.DefaultClient.Do(request)
 			//
 			// then

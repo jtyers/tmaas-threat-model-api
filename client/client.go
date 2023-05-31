@@ -11,7 +11,7 @@ import (
 )
 
 var (
-	URLPrefix = "api/v1/threatModel"
+	URLPrefix = "api/v1/threatmodel"
 )
 
 type ThreatModelServiceClientConfig struct {
