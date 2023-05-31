@@ -12,12 +12,13 @@ import (
 	extractor2 "github.com/jtyers/tmaas-api-util/firebase/extractor"
 	"github.com/jtyers/tmaas-api-util/serviceaccount/extractor"
 	"github.com/jtyers/tmaas-cors-config"
+	"github.com/jtyers/tmaas-dfd-api/client"
 	"github.com/jtyers/tmaas-model/validator"
 	"github.com/jtyers/tmaas-service-dao/datastore"
 	"github.com/jtyers/tmaas-service-util/id"
 	"github.com/jtyers/tmaas-service-util/idchecker"
 	"github.com/jtyers/tmaas-service-util/requestor"
-	"github.com/jtyers/tmaas-threat-api/client"
+	client2 "github.com/jtyers/tmaas-threat-api/client"
 	"github.com/jtyers/tmaas-threat-model-api/dao"
 	"github.com/jtyers/tmaas-threat-model-api/service"
 	"github.com/jtyers/tmaas-threat-model-api/web"
@@ -44,10 +45,14 @@ func InitialiseRouter() (http.Handler, error) {
 	if err != nil {
 		return nil, err
 	}
-	defaultIDChecker := idchecker.NewDefaultIDChecker()
-	threatServiceClientConfig := client.NewThreatServiceClientConfig()
+	dataFlowDiagramServiceClientConfig := client.NewDataFlowDiagramServiceClientConfig()
 	defaultRequestorWithContext := requestor.NewDefaultRequestorWithContext()
-	threatServiceClient := client.NewThreatServiceClient(threatServiceClientConfig, defaultRequestorWithContext)
+	dataFlowDiagramServiceClient := client.NewDataFlowDiagramServiceClient(dataFlowDiagramServiceClientConfig, defaultRequestorWithContext)
+	clientDataFlowDiagramIDChecker := client.NewClientDataFlowDiagramIDChecker(dataFlowDiagramServiceClient)
+	idCheckerForTypes := service.NewIDCheckerForTypes(clientDataFlowDiagramIDChecker)
+	defaultIDChecker := idchecker.NewDefaultIDChecker(idCheckerForTypes)
+	threatServiceClientConfig := client2.NewThreatServiceClientConfig()
+	threatServiceClient := client2.NewThreatServiceClient(threatServiceClientConfig, defaultRequestorWithContext)
 	defaultThreatModelService := service.NewDefaultThreatModelService(threatModelDao, defaultStructValidator, defaultIDChecker, threatServiceClient)
 	threatModelHandlers := web.NewThreatModelHandlers(defaultThreatModelService)
 	iamClient, err := extractor.NewIamClient(context)
