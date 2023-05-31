@@ -797,8 +797,6 @@ github.com/jtyers/tmaas-service-dao v0.0.0-20230502080358-f2424d195f58/go.mod h1
 github.com/jtyers/tmaas-service-util v0.0.0-20230323095543-af29d2528eff/go.mod h1:OE1wTRdeP6u+K0+lHmQVLhB0Jqv78ygNA6WzOPjt/6o=
 github.com/jtyers/tmaas-service-util v0.0.0-20230531203144-6ef50c3a54e7 h1:rNeW1SH3J6NagjZwOT9AH4jq2X/XPh8CVkAYWqR0m90=
 github.com/jtyers/tmaas-service-util v0.0.0-20230531203144-6ef50c3a54e7/go.mod h1:W6jyIIC0BcF/+oLb6VVjhQulOy1TpiuRt779aHzh2B8=
-github.com/jtyers/tmaas-threat-api v0.1.0 h1:zmKUW9zsMrljfWS+H+JH6Ygr8ve28gqu7eL8In33/Hc=
-github.com/jtyers/tmaas-threat-api v0.1.0/go.mod h1:nbb9zVZpbKtLn0OF0Vw09eocT2QABpftLPEFPYLzCMM=
 github.com/jung-kurt/gofpdf v1.0.0/go.mod h1:7Id9E/uU8ce6rXgefFLlgrJj/GYY22cpxn+r32jIOes=
 github.com/jung-kurt/gofpdf v1.0.3-0.20190309125859-24315acbbda5/go.mod h1:7Id9E/uU8ce6rXgefFLlgrJj/GYY22cpxn+r32jIOes=
 github.com/kballard/go-shellquote v0.0.0-20180428030007-95032a82bc51/go.mod h1:CzGEWj7cYgsdH8dAjBGEr58BoE7ScuLd+fwFZ44+/x8=
