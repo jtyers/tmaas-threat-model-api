@@ -5,7 +5,6 @@ import (
 	"fmt"
 
 	m "github.com/jtyers/tmaas-model"
-	"github.com/jtyers/tmaas-service-util/idchecker"
 	"github.com/jtyers/tmaas-service-util/requestor"
 	"github.com/jtyers/tmaas-threat-model-api/service"
 )
@@ -30,7 +29,6 @@ var _ service.ThreatModelService = (*ThreatModelServiceClient)(nil)
 func NewThreatModelServiceClient(
 	config ThreatModelServiceClientConfig,
 	requestor requestor.RequestorWithContext,
-	idChecker idchecker.IDChecker,
 ) *ThreatModelServiceClient {
 	return &ThreatModelServiceClient{config, requestor}
 }

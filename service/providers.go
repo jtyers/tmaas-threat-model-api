@@ -9,7 +9,6 @@ import (
 	dfdclient "github.com/jtyers/tmaas-dfd-api/client"
 	"github.com/jtyers/tmaas-model/validator"
 	"github.com/jtyers/tmaas-service-util/idchecker"
-	thclient "github.com/jtyers/tmaas-threat-api/client"
 )
 
 var ServiceDepsProviderSet = wire.NewSet(
@@ -34,7 +33,6 @@ var ThreatModelServiceProviderSet = wire.NewSet(
 	idchecker.NewDefaultIDChecker,
 
 	dfdclient.DataFlowDiagramServiceClientProviderSet,
-	thclient.ThreatServiceClientMinimalProviderSet,
 
 	NewIDCheckerForTypes,
 )
