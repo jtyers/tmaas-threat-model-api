@@ -11,7 +11,6 @@ import (
 	"github.com/jtyers/tmaas-model/validator"
 	servicedao "github.com/jtyers/tmaas-service-dao"
 	"github.com/jtyers/tmaas-service-util/idchecker"
-	"github.com/jtyers/tmaas-threat-api/client"
 	dao "github.com/jtyers/tmaas-threat-model-api/dao"
 )
 
@@ -35,16 +34,12 @@ type ThreatModelService interface {
 
 	// Delete a threatModel by threatModelID.
 	DeleteThreatModel(ctx context.Context, id m.ThreatModelID) error
-
-	// Get all threats in a threat model
-	GetThreats(ctx context.Context, threatModelID m.ThreatModelID) ([]*m.Threat, error)
 }
 
 type DefaultThreatModelService struct {
-	dao                 dao.ThreatModelDao
-	validator           validator.StructValidator
-	idChecker           idchecker.IDChecker
-	threatServiceClient *client.ThreatServiceClient
+	dao       dao.ThreatModelDao
+	validator validator.StructValidator
+	idChecker idchecker.IDChecker
 }
 
 var _ ThreatModelService = (*DefaultThreatModelService)(nil)
@@ -53,9 +48,8 @@ func NewDefaultThreatModelService(
 	dao dao.ThreatModelDao,
 	validator validator.StructValidator,
 	idChecker idchecker.IDChecker,
-	threatServiceClient *client.ThreatServiceClient,
 ) *DefaultThreatModelService {
-	return &DefaultThreatModelService{dao, validator, idChecker, threatServiceClient}
+	return &DefaultThreatModelService{dao, validator, idChecker}
 }
 
 func (g *DefaultThreatModelService) GetThreatModel(ctx context.Context, threatModelID m.ThreatModelID) (*m.ThreatModel, error) {
@@ -160,8 +154,4 @@ func (g *DefaultThreatModelService) DeleteThreatModel(ctx context.Context, id m.
 	}
 
 	return nil
-}
-
-func (g *DefaultThreatModelService) GetThreats(ctx context.Context, threatModelID m.ThreatModelID) ([]*m.Threat, error) {
-	return g.threatServiceClient.GetThreats(ctx, threatModelID)
 }
