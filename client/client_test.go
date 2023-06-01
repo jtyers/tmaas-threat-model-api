@@ -53,7 +53,7 @@ func TestGetThreatModelHandler(t *testing.T) {
 	serviceAccountPermissionsJson := combo.ServiceAccountPermissionsJson(`{"` + authorisedServiceAccount + `": ["readOwnThreatModels"]}`)
 
 	threatModel := m.ThreatModel{
-		ThreatModelID: m.ThreatModelID("1234-1234-1234-1234"),
+		ThreatModelID: m.NewThreatModelIDP("1234-1234-1234-1234"),
 		Title:         "my-first-threatModel",
 	}
 
@@ -141,17 +141,17 @@ func TestGetThreatModelsHandler(t *testing.T) {
 	serviceAccountPermissionsJson := combo.ServiceAccountPermissionsJson(`{}`)
 
 	threatModel1 := m.ThreatModel{
-		ThreatModelID: m.ThreatModelID("1234-1234-1234-1234"),
+		ThreatModelID: m.NewThreatModelIDP("1234-1234-1234-1234"),
 		Title:         "my-first-threatModel",
 	}
 
 	threatModel2 := m.ThreatModel{
-		ThreatModelID: m.ThreatModelID("2345-2345-2345-2345"),
+		ThreatModelID: m.NewThreatModelIDP("2345-2345-2345-2345"),
 		Title:         "my-second-threatModel",
 	}
 
 	threatModel3 := m.ThreatModel{
-		ThreatModelID: m.ThreatModelID("3456-3456-3456-3456"),
+		ThreatModelID: m.NewThreatModelIDP("3456-3456-3456-3456"),
 		Title:         "my-third-threatModel",
 	}
 
@@ -316,16 +316,16 @@ func TestPatchThreatModelHandler(t *testing.T) {
 		{
 			"should update threatModel details",
 			&m.AuthenticationInfo{UserID: "u-1234", Roles: []m.Role{&m.RoleUser}},
-			m.ThreatModelID("d-1234"),
-			m.ThreatModel{ThreatModelID: m.ThreatModelID("d-1234"), Title: "foo"},
+			m.NewThreatModelIDP("d-1234"),
+			m.ThreatModel{ThreatModelID: m.NewThreatModelIDP("d-1234"), Title: "foo"},
 			nil,
 			nil,
 		},
 		{
 			"should return 401 if no JWT supplied",
 			nil,
-			m.ThreatModelID("d-1234"),
-			m.ThreatModel{ThreatModelID: m.ThreatModelID("d-1234"), Title: "foo"},
+			m.NewThreatModelIDP("d-1234"),
+			m.ThreatModel{ThreatModelID: m.NewThreatModelIDP("d-1234"), Title: "foo"},
 			nil,
 			requestor.ErrRequestFailed{http.StatusUnauthorized, ``},
 		},
@@ -374,14 +374,14 @@ func TestDeleteThreatModelHandler(t *testing.T) {
 		{
 			"should delete threatModel",
 			&m.AuthenticationInfo{UserID: m.UserID("u-1"), Roles: []m.Role{&m.RoleUser}},
-			m.ThreatModelID("d-12345678"),
+			m.NewThreatModelIDP("d-12345678"),
 			nil,
 			nil,
 		},
 		{
 			"should return 401 when no token passed",
 			nil,
-			m.ThreatModelID("d-12345678"),
+			m.NewThreatModelIDP("d-12345678"),
 			nil,
 			requestor.ErrRequestFailed{http.StatusUnauthorized, ""},
 		},

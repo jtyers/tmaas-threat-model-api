@@ -26,7 +26,7 @@ func NewThreatModelHandlers(ts service.ThreatModelService) *ThreatModelHandlers 
 // @Router /api/v1/threatmodel/{threatModelID} [get]
 func (th *ThreatModelHandlers) GetThreatModelHandler(c *gin.Context) {
 	threatModelIDStr := c.Param("threatModelID")
-	threatModelID := m.ThreatModelID(threatModelIDStr)
+	threatModelID := m.NewThreatModelIDP(threatModelIDStr)
 
 	result, err := th.threatModelService.GetThreatModel(c, threatModelID)
 	if err != nil {
@@ -84,7 +84,7 @@ func (th *ThreatModelHandlers) PutThreatModelHandler(c *gin.Context) {
 // @Router /api/v1/threatmodel/{threatModelID} [patch]
 func (th *ThreatModelHandlers) PatchThreatModelHandler(c *gin.Context) {
 	threatModelIDStr := c.Param("threatModelID")
-	threatModelID := m.ThreatModelID(threatModelIDStr)
+	threatModelID := m.NewThreatModelIDP(threatModelIDStr)
 
 	var t m.ThreatModel
 
@@ -112,7 +112,7 @@ func (th *ThreatModelHandlers) PatchThreatModelHandler(c *gin.Context) {
 // @Router /api/v1/threatmodel/{threatModelID} [delete]
 func (th *ThreatModelHandlers) DeleteThreatModelHandler(c *gin.Context) {
 	threatModelIDStr := c.Param("threatModelID")
-	threatModelID := m.ThreatModelID(threatModelIDStr)
+	threatModelID := m.NewThreatModelIDP(threatModelIDStr)
 	//
 	err := th.threatModelService.DeleteThreatModel(c, threatModelID)
 	if err != nil {

@@ -77,7 +77,7 @@ func (g *DefaultThreatModelService) CreateThreatModel(
 	ctx context.Context,
 	threatModel m.ThreatModel,
 ) (*m.ThreatModel, error) {
-	if threatModel.ThreatModelID != "" {
+	if threatModel.ThreatModelID != m.ThreatModelIDZero {
 		return nil, fmt.Errorf("cannot create a threatModel that already has ThreatModelID set")
 	}
 
@@ -118,7 +118,7 @@ func (g *DefaultThreatModelService) UpdateThreatModel(ctx context.Context, threa
 		return fmt.Errorf("given threatModel IDs do not match")
 	}
 
-	if threatModel.DataFlowDiagramID != "" {
+	if threatModel.DataFlowDiagramID != m.DataFlowDiagramIDZero {
 		exists, err := g.idChecker.CheckID(ctx, threatModel.DataFlowDiagramID)
 		if err != nil {
 			return fmt.Errorf("CheckID failed: %v", err)

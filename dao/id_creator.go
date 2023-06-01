@@ -8,5 +8,5 @@ func NewThreatModelIDCreator() ThreatModelIDCreator {
 	return ThreatModelIDCreator{}
 }
 func (ThreatModelIDCreator) Create(id string) m.ThreatModelID {
-	return m.ThreatModelID(id)
+	return m.NewThreatModelID(id)
 }

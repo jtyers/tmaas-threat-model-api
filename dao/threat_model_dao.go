@@ -25,7 +25,7 @@ type ThreatModelDao interface {
 }
 
 func (ThreatModelIDCreator) Zero() m.ThreatModelID {
-	return m.ThreatModelID("")
+	return m.NewThreatModelID("")
 }
 
 func NewThreatModelDao(client *gdatastore.Client, randomIDProvider id.RandomIDProvider, config datastore.DatastoreConfiguration, idCreator ThreatModelIDCreator) (ThreatModelDao, error) {

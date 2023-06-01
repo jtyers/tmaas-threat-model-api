@@ -16,7 +16,7 @@ import (
 
 func TestGetThreatModel(t *testing.T) {
 	threatModel := m.ThreatModel{
-		ThreatModelID: m.ThreatModelID("1234-1234-1234-1234"),
+		ThreatModelID: m.NewThreatModelIDP("1234-1234-1234-1234"),
 	}
 
 	var tests = []struct {
@@ -69,8 +69,8 @@ func TestGetThreatModel(t *testing.T) {
 
 func TestUpdateThreatModel(t *testing.T) {
 	threatModel := m.ThreatModel{
-		ThreatModelID:     m.ThreatModelID("1234-1234-1234-1234"),
-		DataFlowDiagramID: m.DataFlowDiagramID("1234-1234-1234-1234"),
+		ThreatModelID:     m.NewThreatModelIDP("1234-1234-1234-1234"),
+		DataFlowDiagramID: m.NewDataFlowDiagramIDP("1234-1234-1234-1234"),
 	}
 
 	var tests = []struct {
@@ -296,13 +296,13 @@ func TestCreateThreatModel(t *testing.T) {
 func TestGetThreatModels(t *testing.T) {
 	threatModels := []*m.ThreatModel{
 		{
-			ThreatModelID: m.ThreatModelID("1234-1234-1234-1234"),
+			ThreatModelID: m.NewThreatModelIDP("1234-1234-1234-1234"),
 		},
 		{
-			ThreatModelID: m.ThreatModelID("2345-2345-2345-3245"),
+			ThreatModelID: m.NewThreatModelIDP("2345-2345-2345-3245"),
 		},
 		{
-			ThreatModelID: m.ThreatModelID("3456-3456-3456-3456"),
+			ThreatModelID: m.NewThreatModelIDP("3456-3456-3456-3456"),
 		},
 	}
 
