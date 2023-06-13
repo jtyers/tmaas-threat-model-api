@@ -5,7 +5,6 @@ import (
 
 	"github.com/gin-gonic/gin"
 	m "github.com/jtyers/tmaas-model"
-	"github.com/jtyers/tmaas-model/structs"
 	"github.com/jtyers/tmaas-threat-model-api/service"
 )
 
@@ -32,7 +31,7 @@ func (th *ThreatModelHandlers) GetThreatModelHandler(c *gin.Context) {
 	if err != nil {
 		c.Error(err)
 	} else {
-		c.PureJSON(http.StatusOK, structs.StructToMap(result))
+		c.PureJSON(http.StatusOK, result)
 	}
 }
 
@@ -58,7 +57,7 @@ func (th *ThreatModelHandlers) GetThreatModelsHandler(c *gin.Context) {
 // @Failure 400 {string} string "Nope"
 // @Router /api/v1/threatmodel [put]
 func (th *ThreatModelHandlers) PutThreatModelHandler(c *gin.Context) {
-	var t m.ThreatModel
+	var t m.ThreatModelParams
 
 	err := c.BindJSON(&t)
 	if err != nil {
@@ -72,7 +71,7 @@ func (th *ThreatModelHandlers) PutThreatModelHandler(c *gin.Context) {
 		return
 	}
 
-	c.PureJSON(http.StatusOK, structs.StructToMap(result))
+	c.PureJSON(http.StatusOK, result)
 }
 
 // @Summary Update a new Threat Model
@@ -86,7 +85,7 @@ func (th *ThreatModelHandlers) PatchThreatModelHandler(c *gin.Context) {
 	threatModelIDStr := c.Param("threatModelID")
 	threatModelID := m.NewThreatModelIDP(threatModelIDStr)
 
-	var t m.ThreatModel
+	var t m.ThreatModelParams
 
 	err := c.BindJSON(&t)
 	if err != nil {
@@ -100,7 +99,7 @@ func (th *ThreatModelHandlers) PatchThreatModelHandler(c *gin.Context) {
 		return
 	}
 
-	c.PureJSON(http.StatusOK, structs.StructToMap(t))
+	c.PureJSON(http.StatusOK, t)
 }
 
 // @Summary Delete a threat model

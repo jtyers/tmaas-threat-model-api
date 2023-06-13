@@ -21,7 +21,7 @@ type ThreatModelDao interface {
 	//  1. clone https://github.com/bradleygore/gomock
 	//  2. checkout task_HOSPENG-4373-gomock-generics
 	//  3. run `go install ./...`
-	servicedao.IDTypedDao[m.ThreatModelID, m.ThreatModel]
+	servicedao.IDTypedDao[m.ThreatModelID, m.ThreatModel, m.ThreatModelParams, *m.ThreatModelQuery]
 }
 
 func (ThreatModelIDCreator) Zero() m.ThreatModelID {
@@ -31,5 +31,5 @@ func (ThreatModelIDCreator) Zero() m.ThreatModelID {
 func NewThreatModelDao(client *gdatastore.Client, randomIDProvider id.RandomIDProvider, config datastore.DatastoreConfiguration, idCreator ThreatModelIDCreator) (ThreatModelDao, error) {
 	var errorMappings map[error]error
 
-	return datastore.NewDatastoreDao[m.ThreatModelID, m.ThreatModel, *m.ThreatModel](client, randomIDProvider, config, idCreator, errorMappings)
+	return datastore.NewDatastoreDao[m.ThreatModelID, m.ThreatModel, m.ThreatModelParams, *m.ThreatModelQuery](client, randomIDProvider, config, idCreator, errorMappings)
 }

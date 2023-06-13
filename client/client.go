@@ -69,8 +69,8 @@ func (s *ThreatModelServiceClient) GetThreats(ctx context.Context, id m.ThreatMo
 }
 
 // Creates a threatModel. `threatModel` should not have ID or threatModelID set.
-func (s *ThreatModelServiceClient) CreateThreatModel(ctx context.Context, threatModel m.ThreatModel) (*m.ThreatModel, error) {
-	body, err := requestor.StructReader(threatModel)
+func (s *ThreatModelServiceClient) CreateThreatModel(ctx context.Context, params m.ThreatModelParams) (*m.ThreatModel, error) {
+	body, err := requestor.StructReader(params)
 	if err != nil {
 		return nil, err
 	}
@@ -85,8 +85,8 @@ func (s *ThreatModelServiceClient) CreateThreatModel(ctx context.Context, threat
 }
 
 // Updates a threatModel
-func (s *ThreatModelServiceClient) UpdateThreatModel(ctx context.Context, threatModelID m.ThreatModelID, threatModel m.ThreatModel) error {
-	body, err := requestor.StructReader(threatModel)
+func (s *ThreatModelServiceClient) UpdateThreatModel(ctx context.Context, threatModelID m.ThreatModelID, params m.ThreatModelParams) error {
+	body, err := requestor.StructReader(params)
 	if err != nil {
 		return err
 	}

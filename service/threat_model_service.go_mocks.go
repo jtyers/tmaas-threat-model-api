@@ -36,18 +36,18 @@ func (m *MockThreatModelService) EXPECT() *MockThreatModelServiceMockRecorder {
 }
 
 // CreateThreatModel mocks base method.
-func (m *MockThreatModelService) CreateThreatModel(ctx context.Context, threatModel model.ThreatModel) (*model.ThreatModel, error) {
+func (m *MockThreatModelService) CreateThreatModel(ctx context.Context, params model.ThreatModelParams) (*model.ThreatModel, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "CreateThreatModel", ctx, threatModel)
+	ret := m.ctrl.Call(m, "CreateThreatModel", ctx, params)
 	ret0, _ := ret[0].(*model.ThreatModel)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // CreateThreatModel indicates an expected call of CreateThreatModel.
-func (mr *MockThreatModelServiceMockRecorder) CreateThreatModel(ctx, threatModel interface{}) *gomock.Call {
+func (mr *MockThreatModelServiceMockRecorder) CreateThreatModel(ctx, params interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateThreatModel", reflect.TypeOf((*MockThreatModelService)(nil).CreateThreatModel), ctx, threatModel)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateThreatModel", reflect.TypeOf((*MockThreatModelService)(nil).CreateThreatModel), ctx, params)
 }
 
 // DeleteThreatModel mocks base method.
@@ -95,15 +95,15 @@ func (mr *MockThreatModelServiceMockRecorder) GetThreatModels(ctx interface{}) *
 }
 
 // UpdateThreatModel mocks base method.
-func (m *MockThreatModelService) UpdateThreatModel(ctx context.Context, threatModelID model.ThreatModelID, threatModel model.ThreatModel) error {
+func (m *MockThreatModelService) UpdateThreatModel(ctx context.Context, threatModelID model.ThreatModelID, params model.ThreatModelParams) error {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "UpdateThreatModel", ctx, threatModelID, threatModel)
+	ret := m.ctrl.Call(m, "UpdateThreatModel", ctx, threatModelID, params)
 	ret0, _ := ret[0].(error)
 	return ret0
 }
 
 // UpdateThreatModel indicates an expected call of UpdateThreatModel.
-func (mr *MockThreatModelServiceMockRecorder) UpdateThreatModel(ctx, threatModelID, threatModel interface{}) *gomock.Call {
+func (mr *MockThreatModelServiceMockRecorder) UpdateThreatModel(ctx, threatModelID, params interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateThreatModel", reflect.TypeOf((*MockThreatModelService)(nil).UpdateThreatModel), ctx, threatModelID, threatModel)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateThreatModel", reflect.TypeOf((*MockThreatModelService)(nil).UpdateThreatModel), ctx, threatModelID, params)
 }

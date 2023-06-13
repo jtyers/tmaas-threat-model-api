@@ -27,10 +27,10 @@ type ThreatModelService interface {
 	GetThreatModels(ctx context.Context) ([]*m.ThreatModel, error)
 
 	// Creates a threatModel. `threatModel` should not have ID or threatModelID set.
-	CreateThreatModel(ctx context.Context, threatModel m.ThreatModel) (*m.ThreatModel, error)
+	CreateThreatModel(ctx context.Context, params m.ThreatModelParams) (*m.ThreatModel, error)
 
 	// Updates a threatModel
-	UpdateThreatModel(ctx context.Context, threatModelID m.ThreatModelID, threatModel m.ThreatModel) error
+	UpdateThreatModel(ctx context.Context, threatModelID m.ThreatModelID, params m.ThreatModelParams) error
 
 	// Delete a threatModel by threatModelID.
 	DeleteThreatModel(ctx context.Context, id m.ThreatModelID) error
@@ -73,34 +73,29 @@ func (g *DefaultThreatModelService) GetThreatModel(ctx context.Context, threatMo
 //
 // The created threatModel is returned to the caller, with ID and
 // ThreatModelID set.
-func (g *DefaultThreatModelService) CreateThreatModel(
-	ctx context.Context,
-	threatModel m.ThreatModel,
-) (*m.ThreatModel, error) {
-	if threatModel.ThreatModelID != m.ThreatModelIDZero {
-		return nil, fmt.Errorf("cannot create a threatModel that already has ThreatModelID set")
-	}
-
-	err := g.validator.ValidateForCreate(threatModel)
+func (g *DefaultThreatModelService) CreateThreatModel(ctx context.Context, params m.ThreatModelParams) (*m.ThreatModel, error) {
+	err := g.validator.ValidateForCreate(params)
 	if err != nil {
 		return nil, err
 	}
-	err = g.validator.ValidateForUpdate(threatModel)
+	err = g.validator.ValidateForUpdate(params)
 	if err != nil {
 		return nil, err
 	}
 
-	exists, err := g.idChecker.CheckID(ctx, threatModel.DataFlowDiagramID)
-	if err != nil {
-		return nil, fmt.Errorf("CheckID failed: %v", err)
-	}
-	if !exists {
-		return nil, fmt.Errorf("threatModel.DataFlowDiagramID %v does not exist",
-			threatModel.DataFlowDiagramID)
+	if params.DataFlowDiagramID != nil {
+		exists, err := g.idChecker.CheckID(ctx, params.DataFlowDiagramID)
+		if err != nil {
+			return nil, fmt.Errorf("CheckID failed: %v", err)
+		}
+		if !exists {
+			return nil, fmt.Errorf("threatModel.DataFlowDiagramID %v does not exist",
+				params.DataFlowDiagramID)
+		}
 	}
 
 	// leave ID blank - the DAO will generate one for us
-	result, err := g.dao.Create(ctx, &threatModel)
+	result, err := g.dao.Create(ctx, params)
 	if err != nil {
 		return nil, fmt.Errorf("error creating threatModel: %v", err)
 	}
@@ -108,28 +103,24 @@ func (g *DefaultThreatModelService) CreateThreatModel(
 	return result, nil
 }
 
-func (g *DefaultThreatModelService) UpdateThreatModel(ctx context.Context, threatModelID m.ThreatModelID, threatModel m.ThreatModel) error {
-	err := g.validator.ValidateForUpdate(threatModel)
+func (g *DefaultThreatModelService) UpdateThreatModel(ctx context.Context, threatModelID m.ThreatModelID, params m.ThreatModelParams) error {
+	err := g.validator.ValidateForUpdate(params)
 	if err != nil {
 		return err
 	}
 
-	if threatModel.ThreatModelID != threatModelID {
-		return fmt.Errorf("given threatModel IDs do not match")
-	}
-
-	if threatModel.DataFlowDiagramID != m.DataFlowDiagramIDZero {
-		exists, err := g.idChecker.CheckID(ctx, threatModel.DataFlowDiagramID)
+	if params.DataFlowDiagramID != nil {
+		exists, err := g.idChecker.CheckID(ctx, params.DataFlowDiagramID)
 		if err != nil {
 			return fmt.Errorf("CheckID failed: %v", err)
 		}
 		if !exists {
 			return fmt.Errorf("threatModel.DataFlowDiagramID %v does not exist",
-				threatModel.DataFlowDiagramID)
+				params.DataFlowDiagramID)
 		}
 	}
 
-	_, err = g.dao.Update(ctx, threatModelID, &threatModel)
+	_, err = g.dao.Update(ctx, threatModelID, params)
 	if err != nil {
 		return fmt.Errorf("error updating threatModel: %v", err)
 	}

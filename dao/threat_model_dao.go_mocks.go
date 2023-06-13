@@ -36,18 +36,18 @@ func (m *MockThreatModelDao) EXPECT() *MockThreatModelDaoMockRecorder {
 }
 
 // Create mocks base method.
-func (m *MockThreatModelDao) Create(ctx context.Context, data *model.ThreatModel) (*model.ThreatModel, error) {
+func (m *MockThreatModelDao) Create(ctx context.Context, params model.ThreatModelParams) (*model.ThreatModel, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Create", ctx, data)
+	ret := m.ctrl.Call(m, "Create", ctx, params)
 	ret0, _ := ret[0].(*model.ThreatModel)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // Create indicates an expected call of Create.
-func (mr *MockThreatModelDaoMockRecorder) Create(ctx, data interface{}) *gomock.Call {
+func (mr *MockThreatModelDaoMockRecorder) Create(ctx, params interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Create", reflect.TypeOf((*MockThreatModelDao)(nil).Create), ctx, data)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Create", reflect.TypeOf((*MockThreatModelDao)(nil).Create), ctx, params)
 }
 
 // Delete mocks base method.
@@ -65,7 +65,7 @@ func (mr *MockThreatModelDaoMockRecorder) Delete(ctx, id interface{}) *gomock.Ca
 }
 
 // DeleteWhere mocks base method.
-func (m *MockThreatModelDao) DeleteWhere(ctx context.Context, query *model.ThreatModel) error {
+func (m *MockThreatModelDao) DeleteWhere(ctx context.Context, query *model.ThreatModelQuery) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "DeleteWhere", ctx, query)
 	ret0, _ := ret[0].(error)
@@ -109,7 +109,7 @@ func (mr *MockThreatModelDaoMockRecorder) GetAll(ctx interface{}) *gomock.Call {
 }
 
 // QueryExact mocks base method.
-func (m *MockThreatModelDao) QueryExact(ctx context.Context, query *model.ThreatModel) ([]*model.ThreatModel, error) {
+func (m *MockThreatModelDao) QueryExact(ctx context.Context, query *model.ThreatModelQuery) ([]*model.ThreatModel, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "QueryExact", ctx, query)
 	ret0, _ := ret[0].([]*model.ThreatModel)
@@ -124,7 +124,7 @@ func (mr *MockThreatModelDaoMockRecorder) QueryExact(ctx, query interface{}) *go
 }
 
 // QueryExactSingle mocks base method.
-func (m *MockThreatModelDao) QueryExactSingle(ctx context.Context, query *model.ThreatModel) (*model.ThreatModel, error) {
+func (m *MockThreatModelDao) QueryExactSingle(ctx context.Context, query *model.ThreatModelQuery) (*model.ThreatModel, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "QueryExactSingle", ctx, query)
 	ret0, _ := ret[0].(*model.ThreatModel)
@@ -139,46 +139,46 @@ func (mr *MockThreatModelDaoMockRecorder) QueryExactSingle(ctx, query interface{
 }
 
 // Update mocks base method.
-func (m *MockThreatModelDao) Update(ctx context.Context, id model.ThreatModelID, data *model.ThreatModel) (*model.ThreatModel, error) {
+func (m *MockThreatModelDao) Update(ctx context.Context, id model.ThreatModelID, params model.ThreatModelParams) (*model.ThreatModel, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Update", ctx, id, data)
+	ret := m.ctrl.Call(m, "Update", ctx, id, params)
 	ret0, _ := ret[0].(*model.ThreatModel)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // Update indicates an expected call of Update.
-func (mr *MockThreatModelDaoMockRecorder) Update(ctx, id, data interface{}) *gomock.Call {
+func (mr *MockThreatModelDaoMockRecorder) Update(ctx, id, params interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Update", reflect.TypeOf((*MockThreatModelDao)(nil).Update), ctx, id, data)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Update", reflect.TypeOf((*MockThreatModelDao)(nil).Update), ctx, id, params)
 }
 
 // UpdateWhereExact mocks base method.
-func (m *MockThreatModelDao) UpdateWhereExact(ctx context.Context, queryExact, data *model.ThreatModel) ([]*model.ThreatModel, error) {
+func (m *MockThreatModelDao) UpdateWhereExact(ctx context.Context, queryExact *model.ThreatModelQuery, params model.ThreatModelParams) ([]*model.ThreatModel, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "UpdateWhereExact", ctx, queryExact, data)
+	ret := m.ctrl.Call(m, "UpdateWhereExact", ctx, queryExact, params)
 	ret0, _ := ret[0].([]*model.ThreatModel)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // UpdateWhereExact indicates an expected call of UpdateWhereExact.
-func (mr *MockThreatModelDaoMockRecorder) UpdateWhereExact(ctx, queryExact, data interface{}) *gomock.Call {
+func (mr *MockThreatModelDaoMockRecorder) UpdateWhereExact(ctx, queryExact, params interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateWhereExact", reflect.TypeOf((*MockThreatModelDao)(nil).UpdateWhereExact), ctx, queryExact, data)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateWhereExact", reflect.TypeOf((*MockThreatModelDao)(nil).UpdateWhereExact), ctx, queryExact, params)
 }
 
 // UpdateWhereExactSingle mocks base method.
-func (m *MockThreatModelDao) UpdateWhereExactSingle(ctx context.Context, queryExact, data *model.ThreatModel) (*model.ThreatModel, error) {
+func (m *MockThreatModelDao) UpdateWhereExactSingle(ctx context.Context, queryExact *model.ThreatModelQuery, params model.ThreatModelParams) (*model.ThreatModel, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "UpdateWhereExactSingle", ctx, queryExact, data)
+	ret := m.ctrl.Call(m, "UpdateWhereExactSingle", ctx, queryExact, params)
 	ret0, _ := ret[0].(*model.ThreatModel)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // UpdateWhereExactSingle indicates an expected call of UpdateWhereExactSingle.
-func (mr *MockThreatModelDaoMockRecorder) UpdateWhereExactSingle(ctx, queryExact, data interface{}) *gomock.Call {
+func (mr *MockThreatModelDaoMockRecorder) UpdateWhereExactSingle(ctx, queryExact, params interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateWhereExactSingle", reflect.TypeOf((*MockThreatModelDao)(nil).UpdateWhereExactSingle), ctx, queryExact, data)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateWhereExactSingle", reflect.TypeOf((*MockThreatModelDao)(nil).UpdateWhereExactSingle), ctx, queryExact, params)
 }

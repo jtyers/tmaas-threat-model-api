@@ -228,7 +228,7 @@ func TestCreateThreatModelHandler(t *testing.T) {
 
 	var tests = []struct {
 		name                           string
-		input                          m.ThreatModel
+		input                          m.ThreatModelParams
 		ai                             *m.AuthenticationInfo
 		expectedCreatedThreatModel     *m.ThreatModel
 		threatModelToReturnFromService *m.ThreatModel
@@ -241,7 +241,7 @@ func TestCreateThreatModelHandler(t *testing.T) {
 		//
 		{
 			"with authentication: should create threatModel and pass AuthenticationInfo",
-			m.ThreatModel{Title: "my new threatModel"},
+			m.ThreatModelParams{Title: m.String("my new threatModel")},
 			&m.AuthenticationInfo{UserID: m.UserID("u-1234-1234"), Roles: []m.Role{&m.RoleUser}},
 			&m.ThreatModel{Title: "my new threatModel"},
 			&m.ThreatModel{Title: "my new threatModel"},
@@ -251,7 +251,7 @@ func TestCreateThreatModelHandler(t *testing.T) {
 		},
 		{
 			"with authentication: should return an error without msg if ThreatModelService returns a non-public error",
-			m.ThreatModel{Title: "my new threatModel"},
+			m.ThreatModelParams{Title: m.String("my new threatModel")},
 			&m.AuthenticationInfo{UserID: m.UserID("u-1234-1234"), Roles: []m.Role{&m.RoleUser}},
 			&m.ThreatModel{Title: "my new threatModel"},
 			nil,
@@ -261,7 +261,7 @@ func TestCreateThreatModelHandler(t *testing.T) {
 		},
 		{
 			"no authentication: should fail",
-			m.ThreatModel{Title: "my new threatModel"},
+			m.ThreatModelParams{Title: m.String("my new threatModel")},
 			nil,
 			nil,
 			nil,
@@ -277,7 +277,7 @@ func TestCreateThreatModelHandler(t *testing.T) {
 			mockThreatModelService := service.NewMockThreatModelService(ctrl)
 
 			if test.expectedCreatedThreatModel != nil {
-				mockThreatModelService.EXPECT().CreateThreatModel(gomock.Any(), *test.expectedCreatedThreatModel).Return(
+				mockThreatModelService.EXPECT().CreateThreatModel(gomock.Any(), test.input).Return(
 					test.threatModelToReturnFromService, test.errorToReturnFromService)
 			}
 
@@ -309,7 +309,7 @@ func TestPatchThreatModelHandler(t *testing.T) {
 		name               string
 		ai                 *m.AuthenticationInfo
 		inputThreatModelID m.ThreatModelID
-		inputThreatModel   m.ThreatModel
+		input              m.ThreatModelParams
 		dsReturnError      error
 		expectedError      error
 	}{
@@ -317,7 +317,7 @@ func TestPatchThreatModelHandler(t *testing.T) {
 			"should update threatModel details",
 			&m.AuthenticationInfo{UserID: "u-1234", Roles: []m.Role{&m.RoleUser}},
 			m.NewThreatModelIDP("d-1234"),
-			m.ThreatModel{ThreatModelID: m.NewThreatModelIDP("d-1234"), Title: "foo"},
+			m.ThreatModelParams{Title: m.String("foo")},
 			nil,
 			nil,
 		},
@@ -325,7 +325,7 @@ func TestPatchThreatModelHandler(t *testing.T) {
 			"should return 401 if no JWT supplied",
 			nil,
 			m.NewThreatModelIDP("d-1234"),
-			m.ThreatModel{ThreatModelID: m.NewThreatModelIDP("d-1234"), Title: "foo"},
+			m.ThreatModelParams{Title: m.String("foo")},
 			nil,
 			requestor.ErrRequestFailed{http.StatusUnauthorized, ``},
 		},
@@ -343,14 +343,14 @@ func TestPatchThreatModelHandler(t *testing.T) {
 
 			if test.ai != nil {
 				mockThreatModelService.EXPECT().UpdateThreatModel(gomock.Any(), test.inputThreatModelID,
-					test.inputThreatModel).Return(test.dsReturnError)
+					test.input).Return(test.dsReturnError)
 			}
 
 			client := createClient(server)
 
 			// when
 			ctx := context.Background()
-			err := client.UpdateThreatModel(ctx, test.inputThreatModelID, test.inputThreatModel)
+			err := client.UpdateThreatModel(ctx, test.inputThreatModelID, test.input)
 
 			// then
 			require.Equal(t, test.expectedError, err)
