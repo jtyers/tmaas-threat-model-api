@@ -94,6 +94,9 @@ func (s *ThreatModelServiceClient) Create(ctx context.Context, params m.ThreatMo
 func (s *ThreatModelServiceClient) Update(ctx context.Context, id m.ThreatModelID, params m.ThreatModelParams) error {
 	body, err := requestor.StructReader(params)
 	if err != nil {
+		if reqErr, ok := err.(requestor.ErrRequestFailed); ok && reqErr.StatusCode == 404 {
+			return service.ErrNoSuchThreatModel
+		}
 		return err
 	}
 
@@ -109,6 +112,9 @@ func (s *ThreatModelServiceClient) Update(ctx context.Context, id m.ThreatModelI
 func (s *ThreatModelServiceClient) Delete(ctx context.Context, id m.ThreatModelID) error {
 	_, err := s.requestor.Delete(ctx, fmt.Sprintf(URLPrefixWithID, s.config.BaseURL, id.String()))
 	if err != nil {
+		if reqErr, ok := err.(requestor.ErrRequestFailed); ok && reqErr.StatusCode == 404 {
+			return service.ErrNoSuchThreatModel
+		}
 		return err
 	}
 
