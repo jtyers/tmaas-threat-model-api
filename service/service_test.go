@@ -14,7 +14,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestGetThreatModel(t *testing.T) {
+func TestGet(t *testing.T) {
 	threatModel := m.ThreatModel{
 		ThreatModelID: m.NewThreatModelIDP("1234-1234-1234-1234"),
 	}
@@ -58,7 +58,7 @@ func TestGetThreatModel(t *testing.T) {
 
 			// when
 			service := NewDefaultThreatModelService(mockDao, nil, nil)
-			g, err := service.GetThreatModel(ctx, test.inputThreatModelID)
+			g, err := service.Get(ctx, test.inputThreatModelID)
 
 			// then
 			require.Equal(t, test.expectedResult, g)
@@ -167,7 +167,7 @@ func TestUpdateThreatModel(t *testing.T) {
 
 			// when
 			service := NewDefaultThreatModelService(mockDao, mockValidator, mockIDChecker)
-			err := service.UpdateThreatModel(ctx, test.inputID, test.input)
+			err := service.Update(ctx, test.inputID, test.input)
 
 			// then
 			require.Equal(t, test.expectedError, err)
@@ -175,7 +175,7 @@ func TestUpdateThreatModel(t *testing.T) {
 	}
 }
 
-func TestCreateThreatModel(t *testing.T) {
+func TestCreate(t *testing.T) {
 	threatModel := m.ThreatModel{}
 
 	var tests = []struct {
@@ -286,7 +286,7 @@ func TestCreateThreatModel(t *testing.T) {
 
 			// when
 			service := NewDefaultThreatModelService(mockDao, mockValidator, mockIDChecker)
-			g, err := service.CreateThreatModel(ctx, test.input)
+			g, err := service.Create(ctx, test.input)
 
 			// then
 			require.Equal(t, test.expectedResult, g)
@@ -295,7 +295,7 @@ func TestCreateThreatModel(t *testing.T) {
 	}
 }
 
-func TestGetThreatModels(t *testing.T) {
+func TestGetAll(t *testing.T) {
 	threatModels := []*m.ThreatModel{
 		{
 			ThreatModelID: m.NewThreatModelIDP("1234-1234-1234-1234"),
@@ -344,7 +344,7 @@ func TestGetThreatModels(t *testing.T) {
 
 			// when
 			service := NewDefaultThreatModelService(mockDao, nil, nil)
-			g, err := service.GetThreatModels(ctx)
+			g, err := service.GetAll(ctx)
 
 			// then
 			require.Equal(t, test.expectedResult, g)

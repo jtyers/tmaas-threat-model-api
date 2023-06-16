@@ -27,7 +27,7 @@ func (th *ThreatModelHandlers) GetThreatModelHandler(c *gin.Context) {
 	threatModelIDStr := c.Param("threatModelID")
 	threatModelID := m.NewThreatModelIDP(threatModelIDStr)
 
-	result, err := th.threatModelService.GetThreatModel(c, threatModelID)
+	result, err := th.threatModelService.Get(c, threatModelID)
 	if err != nil {
 		c.Error(err)
 	} else {
@@ -41,7 +41,7 @@ func (th *ThreatModelHandlers) GetThreatModelHandler(c *gin.Context) {
 // @Success 200 {object} []m.ThreatModel
 // @Router /api/v1/threatmodel [get]
 func (th *ThreatModelHandlers) GetThreatModelsHandler(c *gin.Context) {
-	result, err := th.threatModelService.GetThreatModels(c)
+	result, err := th.threatModelService.GetAll(c)
 	if err != nil {
 		c.Error(err)
 	} else {
@@ -65,7 +65,7 @@ func (th *ThreatModelHandlers) PutThreatModelHandler(c *gin.Context) {
 		return
 	}
 
-	result, err := th.threatModelService.CreateThreatModel(c, t)
+	result, err := th.threatModelService.Create(c, t)
 	if err != nil {
 		c.Error(err)
 		return
@@ -93,7 +93,7 @@ func (th *ThreatModelHandlers) PatchThreatModelHandler(c *gin.Context) {
 		return
 	}
 
-	err = th.threatModelService.UpdateThreatModel(c, threatModelID, t)
+	err = th.threatModelService.Update(c, threatModelID, t)
 	if err != nil {
 		c.Error(err)
 		return
@@ -113,7 +113,7 @@ func (th *ThreatModelHandlers) DeleteThreatModelHandler(c *gin.Context) {
 	threatModelIDStr := c.Param("threatModelID")
 	threatModelID := m.NewThreatModelIDP(threatModelIDStr)
 	//
-	err := th.threatModelService.DeleteThreatModel(c, threatModelID)
+	err := th.threatModelService.Delete(c, threatModelID)
 	if err != nil {
 		c.Error(err)
 		return

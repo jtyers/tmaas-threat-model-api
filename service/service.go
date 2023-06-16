@@ -21,19 +21,23 @@ var (
 // ThreatModelService provides the interface to manage threat models.
 type ThreatModelService interface {
 	// Retrieve a threatModel by threatModelID.
-	GetThreatModel(ctx context.Context, id m.ThreatModelID) (*m.ThreatModel, error)
+	Get(ctx context.Context, id m.ThreatModelID) (*m.ThreatModel, error)
 
 	// Retrieve all threatModel.
-	GetThreatModels(ctx context.Context) ([]*m.ThreatModel, error)
+	GetAll(ctx context.Context) ([]*m.ThreatModel, error)
+
+	Query(ctx context.Context, q *m.ThreatModelQuery) ([]*m.ThreatModel, error)
+
+	QuerySingle(ctx context.Context, q *m.ThreatModelQuery) (*m.ThreatModel, error)
 
 	// Creates a threatModel. `threatModel` should not have ID or threatModelID set.
-	CreateThreatModel(ctx context.Context, params m.ThreatModelParams) (*m.ThreatModel, error)
+	Create(ctx context.Context, params m.ThreatModelParams) (*m.ThreatModel, error)
 
 	// Updates a threatModel
-	UpdateThreatModel(ctx context.Context, threatModelID m.ThreatModelID, params m.ThreatModelParams) error
+	Update(ctx context.Context, id m.ThreatModelID, params m.ThreatModelParams) error
 
 	// Delete a threatModel by threatModelID.
-	DeleteThreatModel(ctx context.Context, id m.ThreatModelID) error
+	Delete(ctx context.Context, id m.ThreatModelID) error
 }
 
 type DefaultThreatModelService struct {
@@ -52,7 +56,7 @@ func NewDefaultThreatModelService(
 	return &DefaultThreatModelService{dao, validator, idChecker}
 }
 
-func (g *DefaultThreatModelService) GetThreatModel(ctx context.Context, threatModelID m.ThreatModelID) (*m.ThreatModel, error) {
+func (g *DefaultThreatModelService) Get(ctx context.Context, threatModelID m.ThreatModelID) (*m.ThreatModel, error) {
 	threatModel, err := g.dao.Get(ctx, threatModelID)
 
 	if err != nil {
@@ -73,7 +77,7 @@ func (g *DefaultThreatModelService) GetThreatModel(ctx context.Context, threatMo
 //
 // The created threatModel is returned to the caller, with ID and
 // ThreatModelID set.
-func (g *DefaultThreatModelService) CreateThreatModel(ctx context.Context, params m.ThreatModelParams) (*m.ThreatModel, error) {
+func (g *DefaultThreatModelService) Create(ctx context.Context, params m.ThreatModelParams) (*m.ThreatModel, error) {
 	err := g.validator.ValidateForCreate(params)
 	if err != nil {
 		return nil, err
@@ -103,7 +107,7 @@ func (g *DefaultThreatModelService) CreateThreatModel(ctx context.Context, param
 	return result, nil
 }
 
-func (g *DefaultThreatModelService) UpdateThreatModel(ctx context.Context, threatModelID m.ThreatModelID, params m.ThreatModelParams) error {
+func (g *DefaultThreatModelService) Update(ctx context.Context, threatModelID m.ThreatModelID, params m.ThreatModelParams) error {
 	err := g.validator.ValidateForUpdate(params)
 	if err != nil {
 		return err
@@ -128,7 +132,7 @@ func (g *DefaultThreatModelService) UpdateThreatModel(ctx context.Context, threa
 	return nil
 }
 
-func (g *DefaultThreatModelService) GetThreatModels(ctx context.Context) ([]*m.ThreatModel, error) {
+func (g *DefaultThreatModelService) GetAll(ctx context.Context) ([]*m.ThreatModel, error) {
 	threatModels, err := g.dao.GetAll(ctx)
 
 	if err != nil {
@@ -138,11 +142,31 @@ func (g *DefaultThreatModelService) GetThreatModels(ctx context.Context) ([]*m.T
 	return threatModels, nil
 }
 
-func (g *DefaultThreatModelService) DeleteThreatModel(ctx context.Context, id m.ThreatModelID) error {
+func (g *DefaultThreatModelService) Delete(ctx context.Context, id m.ThreatModelID) error {
 	err := g.dao.Delete(ctx, id)
 	if err != nil {
 		return fmt.Errorf("error deleting threatModel %s: %v", id, err)
 	}
 
 	return nil
+}
+
+func (g *DefaultThreatModelService) Query(ctx context.Context, q *m.ThreatModelQuery) ([]*m.ThreatModel, error) {
+	result, err := g.dao.QueryExact(ctx, q)
+
+	if err != nil {
+		return nil, fmt.Errorf("error in QueryExact: %v", err)
+	}
+
+	return result, nil
+}
+
+func (g *DefaultThreatModelService) QuerySingle(ctx context.Context, q *m.ThreatModelQuery) (*m.ThreatModel, error) {
+	result, err := g.dao.QueryExactSingle(ctx, q)
+
+	if err != nil {
+		return nil, fmt.Errorf("error in QueryExact: %v", err)
+	}
+
+	return result, nil
 }

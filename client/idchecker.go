@@ -35,7 +35,7 @@ func (c *ClientThreatModelIDChecker) CheckID(ctx context.Context, id any) (bool,
 		idStruct = *(id.(*m.ThreatModelID))
 	}
 
-	_, err := c.client.GetThreatModel(ctx, idStruct)
+	_, err := c.client.Get(ctx, idStruct)
 	if err == nil {
 		return true, nil
 

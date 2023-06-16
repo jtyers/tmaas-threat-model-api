@@ -11,7 +11,7 @@ import (
 
 func NewThreatModelServiceClientConfig() ThreatModelServiceClientConfig {
 	return ThreatModelServiceClientConfig{
-		BaseURL: serviceutil.GetEnvWithDefault("THREATPLANE_THREAT_MODEL_API_URL", "https://threatmodel.api.threatplane.io/"),
+		BaseURL: serviceutil.EnsureSuffix(serviceutil.GetEnvWithDefault("THREATPLANE_THREAT_MODEL_API_URL", "https://threatmodel.api.threatplane.io/"), "/"),
 	}
 }
 

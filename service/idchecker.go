@@ -34,7 +34,7 @@ func (c *ServiceThreatModelIDChecker) CheckID(ctx context.Context, id any) (bool
 		idStruct = *(id.(*m.ThreatModelID))
 	}
 
-	_, err := c.service.GetThreatModel(ctx, idStruct)
+	_, err := c.service.Get(ctx, idStruct)
 	if err == nil {
 		return true, nil
 	} else if err == ErrNoSuchThreatModel {

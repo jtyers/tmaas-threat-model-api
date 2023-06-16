@@ -74,12 +74,12 @@ func TestGetThreatModelHandler(t *testing.T) {
 			nil,
 		},
 		{
-			"should return 404 NO_SUCH_DEVICE for non-existent threatModel",
+			"should return ErrNoSuchThreatModel for non-existent threatModel",
 			&m.AuthenticationInfo{UserID: "u-12345678", Roles: []m.Role{m.RoleUser}},
 			nil,
 			service.ErrNoSuchThreatModel,
 			nil,
-			requestor.ErrRequestFailed{http.StatusNotFound, `{"errors":["Failed"]}`},
+			service.ErrNoSuchThreatModel,
 		},
 		{
 			"service token: should get existing threatModel",
@@ -90,12 +90,12 @@ func TestGetThreatModelHandler(t *testing.T) {
 			nil,
 		},
 		{
-			"service token: should return 404 NO_SUCH_DEVICE for non-existent threatModel",
+			"service token: should return ErrNoSuchThreatModel for non-existent threatModel",
 			&m.ServiceAccountToken{Name: authorisedServiceAccount},
 			nil,
 			service.ErrNoSuchThreatModel,
 			nil,
-			requestor.ErrRequestFailed{http.StatusNotFound, `{"errors":["Failed"]}`},
+			service.ErrNoSuchThreatModel,
 		},
 		{
 			"should return 401 for unauthenticated users",
@@ -116,7 +116,7 @@ func TestGetThreatModelHandler(t *testing.T) {
 			mockThreatModelService := service.NewMockThreatModelService(ctrl)
 
 			if test.dsReturnValue != nil || test.dsReturnError != nil {
-				mockThreatModelService.EXPECT().GetThreatModel(gomock.AssignableToTypeOf(&gin.Context{}), threatModel.ThreatModelID).Return(
+				mockThreatModelService.EXPECT().Get(gomock.AssignableToTypeOf(&gin.Context{}), threatModel.ThreatModelID).Return(
 					test.dsReturnValue, test.dsReturnError)
 			}
 
@@ -128,7 +128,7 @@ func TestGetThreatModelHandler(t *testing.T) {
 
 			// when
 			ctx := context.Background()
-			response, err := client.GetThreatModel(ctx, threatModel.ThreatModelID)
+			response, err := client.Get(ctx, threatModel.ThreatModelID)
 
 			// then
 			require.Equal(t, test.expectedError, err)
@@ -198,7 +198,7 @@ func TestGetThreatModelsHandler(t *testing.T) {
 			// given
 			mockThreatModelService := service.NewMockThreatModelService(ctrl)
 			if test.ai != nil {
-				mockThreatModelService.EXPECT().GetThreatModels(gomock.AssignableToTypeOf(&gin.Context{})).Return(test.dsReturnValue, test.dsReturnError)
+				mockThreatModelService.EXPECT().GetAll(gomock.AssignableToTypeOf(&gin.Context{})).Return(test.dsReturnValue, test.dsReturnError)
 			}
 
 			comboFactory := combo.NewMockComboMiddlewareFactoryWithTokensAndPermissions(ctrl, test.ai,
@@ -210,7 +210,7 @@ func TestGetThreatModelsHandler(t *testing.T) {
 
 			// when
 			ctx := context.Background()
-			response, err := client.GetThreatModels(ctx)
+			response, err := client.GetAll(ctx)
 
 			// then
 			require.Equal(t, test.expectedError, err)
@@ -277,7 +277,7 @@ func TestCreateThreatModelHandler(t *testing.T) {
 			mockThreatModelService := service.NewMockThreatModelService(ctrl)
 
 			if test.expectedCreatedThreatModel != nil {
-				mockThreatModelService.EXPECT().CreateThreatModel(gomock.Any(), test.input).Return(
+				mockThreatModelService.EXPECT().Create(gomock.Any(), test.input).Return(
 					test.threatModelToReturnFromService, test.errorToReturnFromService)
 			}
 
@@ -290,7 +290,7 @@ func TestCreateThreatModelHandler(t *testing.T) {
 
 			// when
 			ctx := context.Background()
-			response, err := client.CreateThreatModel(ctx, test.input)
+			response, err := client.Create(ctx, test.input)
 
 			// then
 			require.Equal(t, test.expectedError, err)
@@ -342,7 +342,7 @@ func TestPatchThreatModelHandler(t *testing.T) {
 			defer closeServer()
 
 			if test.ai != nil {
-				mockThreatModelService.EXPECT().UpdateThreatModel(gomock.Any(), test.inputThreatModelID,
+				mockThreatModelService.EXPECT().Update(gomock.Any(), test.inputThreatModelID,
 					test.input).Return(test.dsReturnError)
 			}
 
@@ -350,7 +350,7 @@ func TestPatchThreatModelHandler(t *testing.T) {
 
 			// when
 			ctx := context.Background()
-			err := client.UpdateThreatModel(ctx, test.inputThreatModelID, test.input)
+			err := client.Update(ctx, test.inputThreatModelID, test.input)
 
 			// then
 			require.Equal(t, test.expectedError, err)
@@ -398,14 +398,14 @@ func TestDeleteThreatModelHandler(t *testing.T) {
 			defer closeServer()
 
 			if test.ai != nil {
-				mockThreatModelService.EXPECT().DeleteThreatModel(gomock.AssignableToTypeOf(&gin.Context{}), test.inputThreatModelID).Return(test.dsReturnError)
+				mockThreatModelService.EXPECT().Delete(gomock.AssignableToTypeOf(&gin.Context{}), test.inputThreatModelID).Return(test.dsReturnError)
 			}
 
 			client := createClient(server)
 
 			// when
 			ctx := context.Background()
-			err := client.DeleteThreatModel(ctx, test.inputThreatModelID)
+			err := client.Delete(ctx, test.inputThreatModelID)
 
 			// then
 			require.Equal(t, test.expectedError, err)

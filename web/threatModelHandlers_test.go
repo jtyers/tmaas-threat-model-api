@@ -121,7 +121,7 @@ func TestGetThreatModelHandler(t *testing.T) {
 			svc := service.NewMockThreatModelService(ctrl)
 
 			if test.dsReturnValue != nil || test.dsReturnError != nil {
-				svc.EXPECT().GetThreatModel(gomock.AssignableToTypeOf(&gin.Context{}), threatModel.ThreatModelID).Return(
+				svc.EXPECT().Get(gomock.AssignableToTypeOf(&gin.Context{}), threatModel.ThreatModelID).Return(
 					test.dsReturnValue, test.dsReturnError)
 			}
 
@@ -211,7 +211,7 @@ func TestGetThreatModelsHandler(t *testing.T) {
 			// given
 			mockThreatModelService := service.NewMockThreatModelService(ctrl)
 			if test.ai != nil {
-				mockThreatModelService.EXPECT().GetThreatModels(gomock.AssignableToTypeOf(&gin.Context{})).Return(test.dsReturnValue, test.dsReturnError)
+				mockThreatModelService.EXPECT().GetAll(gomock.AssignableToTypeOf(&gin.Context{})).Return(test.dsReturnValue, test.dsReturnError)
 			}
 
 			comboFactory := combo.NewMockComboMiddlewareFactoryWithTokensAndPermissions(ctrl, test.ai,
@@ -296,7 +296,7 @@ func TestCreateThreatModelHandler(t *testing.T) {
 			mockThreatModelService := service.NewMockThreatModelService(ctrl)
 
 			if test.expectedCreatedThreatModel != nil {
-				mockThreatModelService.EXPECT().CreateThreatModel(gomock.Any(), test.input).Return(
+				mockThreatModelService.EXPECT().Create(gomock.Any(), test.input).Return(
 					test.threatModelToReturnFromService, test.errorToReturnFromService)
 			}
 
@@ -369,7 +369,7 @@ func TestPatchThreatModelHandler(t *testing.T) {
 
 			var bodyReader io.Reader = nil
 			if test.ai != nil {
-				mockThreatModelService.EXPECT().UpdateThreatModel(gomock.Any(), test.inputThreatModelID,
+				mockThreatModelService.EXPECT().Update(gomock.Any(), test.inputThreatModelID,
 					test.input).Return(test.dsReturnError)
 
 				s, err := structs.StructToJSON(test.input)
@@ -429,7 +429,7 @@ func TestDeleteThreatModelHandler(t *testing.T) {
 			defer closeServer()
 			//
 			if test.ai != nil {
-				mockThreatModelService.EXPECT().DeleteThreatModel(gomock.AssignableToTypeOf(&gin.Context{}), test.inputThreatModelID).Return(test.dsReturnError)
+				mockThreatModelService.EXPECT().Delete(gomock.AssignableToTypeOf(&gin.Context{}), test.inputThreatModelID).Return(test.dsReturnError)
 			}
 			//
 			// when
