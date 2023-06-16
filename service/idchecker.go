@@ -2,7 +2,6 @@ package service
 
 import (
 	"context"
-	"fmt"
 
 	m "github.com/jtyers/tmaas-model"
 	"github.com/jtyers/tmaas-service-util/idchecker"
@@ -19,17 +18,23 @@ func NewServiceThreatModelIDChecker(service ThreatModelService) *ServiceThreatMo
 var _ idchecker.IDCheckerForType = (*ServiceThreatModelIDChecker)(nil)
 
 func (c *ServiceThreatModelIDChecker) CanHandle(id any) bool {
-	_, ok := id.(m.ThreatModelID)
-	return ok
+	switch id.(type) {
+	case m.ThreatModelID, *m.ThreatModelID:
+		return true
+	}
+	return false
 }
 
 func (c *ServiceThreatModelIDChecker) CheckID(ctx context.Context, id any) (bool, error) {
-	threatModelID, ok := id.(m.ThreatModelID)
-	if !ok {
-		return false, fmt.Errorf("not a ThreatModelID")
+	var idStruct m.ThreatModelID
+	switch id.(type) {
+	case m.ThreatModelID:
+		idStruct = id.(m.ThreatModelID)
+	case *m.ThreatModelID:
+		idStruct = *(id.(*m.ThreatModelID))
 	}
 
-	_, err := c.service.GetThreatModel(ctx, threatModelID)
+	_, err := c.service.GetThreatModel(ctx, idStruct)
 	if err == nil {
 		return true, nil
 	} else if err == ErrNoSuchThreatModel {
