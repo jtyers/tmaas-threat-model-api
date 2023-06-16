@@ -10,7 +10,7 @@ require (
 	github.com/jtyers/gin-jwt/v2 v2.6.5
 	github.com/jtyers/tmaas-api-util v0.0.0-20230501230017-c9cbb3558fb9
 	github.com/jtyers/tmaas-cors-config v0.0.0-20230417194512-a9d24d2b927f
-	github.com/jtyers/tmaas-dfd-api v0.3.3
+	github.com/jtyers/tmaas-dfd-api v0.3.4
 	github.com/jtyers/tmaas-model v0.0.0-20230614102655-2c850895e715
 	github.com/jtyers/tmaas-service-dao v0.0.0-20230615144957-63ea552f1c1f
 	github.com/jtyers/tmaas-service-util v0.0.0-20230601155509-b72a58a3d5d9
