@@ -20,23 +20,23 @@ var (
 
 // ThreatModelService provides the interface to manage threat models.
 type ThreatModelService interface {
-	// Retrieve a threatModel by threatModelID.
+	// Retrieve a ThreatModel by ID.
 	Get(ctx context.Context, id m.ThreatModelID) (*m.ThreatModel, error)
 
-	// Retrieve all threatModel.
+	// Retrieve all ThreatModels.
 	GetAll(ctx context.Context) ([]*m.ThreatModel, error)
 
 	Query(ctx context.Context, q *m.ThreatModelQuery) ([]*m.ThreatModel, error)
 
 	QuerySingle(ctx context.Context, q *m.ThreatModelQuery) (*m.ThreatModel, error)
 
-	// Creates a threatModel. `threatModel` should not have ID or threatModelID set.
+	// Creates a ThreatModel.
 	Create(ctx context.Context, params m.ThreatModelParams) (*m.ThreatModel, error)
 
-	// Updates a threatModel
+	// Updates a ThreatModel
 	Update(ctx context.Context, id m.ThreatModelID, params m.ThreatModelParams) error
 
-	// Delete a threatModel by threatModelID.
+	// Delete a ThreatModel by ID.
 	Delete(ctx context.Context, id m.ThreatModelID) error
 }
 
@@ -56,8 +56,8 @@ func NewDefaultThreatModelService(
 	return &DefaultThreatModelService{dao, validator, idChecker}
 }
 
-func (g *DefaultThreatModelService) Get(ctx context.Context, threatModelID m.ThreatModelID) (*m.ThreatModel, error) {
-	threatModel, err := g.dao.Get(ctx, threatModelID)
+func (g *DefaultThreatModelService) Get(ctx context.Context, id m.ThreatModelID) (*m.ThreatModel, error) {
+	threatModel, err := g.dao.Get(ctx, id)
 
 	if err != nil {
 		if err == servicedao.ErrNoSuchDocument {
@@ -70,13 +70,6 @@ func (g *DefaultThreatModelService) Get(ctx context.Context, threatModelID m.Thr
 }
 
 // CreateThreatModel Creates a new ThreatModel in Firestore.
-//
-// The threatModel supplied should not have its ID or ThreatModelID
-// fields set to anything other than "". An error is emitted if this
-// is not the case.
-//
-// The created threatModel is returned to the caller, with ID and
-// ThreatModelID set.
 func (g *DefaultThreatModelService) Create(ctx context.Context, params m.ThreatModelParams) (*m.ThreatModel, error) {
 	err := g.validator.ValidateForCreate(params)
 	if err != nil {
@@ -93,7 +86,7 @@ func (g *DefaultThreatModelService) Create(ctx context.Context, params m.ThreatM
 			return nil, fmt.Errorf("CheckID failed: %v", err)
 		}
 		if !exists {
-			return nil, fmt.Errorf("threatModel.DataFlowDiagramID %v does not exist",
+			return nil, fmt.Errorf("params.DataFlowDiagramID %v does not exist",
 				params.DataFlowDiagramID)
 		}
 	}
@@ -107,7 +100,7 @@ func (g *DefaultThreatModelService) Create(ctx context.Context, params m.ThreatM
 	return result, nil
 }
 
-func (g *DefaultThreatModelService) Update(ctx context.Context, threatModelID m.ThreatModelID, params m.ThreatModelParams) error {
+func (g *DefaultThreatModelService) Update(ctx context.Context, id m.ThreatModelID, params m.ThreatModelParams) error {
 	err := g.validator.ValidateForUpdate(params)
 	if err != nil {
 		return err
@@ -124,7 +117,7 @@ func (g *DefaultThreatModelService) Update(ctx context.Context, threatModelID m.
 		}
 	}
 
-	_, err = g.dao.Update(ctx, threatModelID, params)
+	_, err = g.dao.Update(ctx, id, params)
 	if err != nil {
 		return fmt.Errorf("error updating threatModel: %v", err)
 	}
@@ -133,19 +126,19 @@ func (g *DefaultThreatModelService) Update(ctx context.Context, threatModelID m.
 }
 
 func (g *DefaultThreatModelService) GetAll(ctx context.Context) ([]*m.ThreatModel, error) {
-	threatModels, err := g.dao.GetAll(ctx)
+	result, err := g.dao.GetAll(ctx)
 
 	if err != nil {
-		return nil, fmt.Errorf("error retrieving threatModels: %v", err)
+		return nil, fmt.Errorf("error in GetAll: %v", err)
 	}
 
-	return threatModels, nil
+	return result, nil
 }
 
 func (g *DefaultThreatModelService) Delete(ctx context.Context, id m.ThreatModelID) error {
 	err := g.dao.Delete(ctx, id)
 	if err != nil {
-		return fmt.Errorf("error deleting threatModel %s: %v", id, err)
+		return fmt.Errorf("error in Delete %s: %v", id, err)
 	}
 
 	return nil

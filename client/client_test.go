@@ -24,7 +24,7 @@ import (
 	"github.com/jtyers/tmaas-threat-model-api/web"
 )
 
-func createServer(comboFactory combo.ComboMiddlewareFactory, threatModelService *service.MockThreatModelService) (*httptest.Server, func()) {
+func createServer(comboFactory combo.ComboMiddlewareFactory, svc *service.MockThreatModelService) (*httptest.Server, func()) {
 	log.InitialiseLogging()
 
 	errors := errors.NewDefaultErrorsMiddlewareFactory() // use real middleware to check error handling
@@ -33,7 +33,7 @@ func createServer(comboFactory combo.ComboMiddlewareFactory, threatModelService 
 	corsMiddlware := comocks.NewMockCorsMiddleware()
 
 	// generate a test server so we can capture and inspect the request
-	handlers := web.NewThreatModelHandlers(threatModelService)
+	handlers := web.NewThreatModelHandlers(svc)
 	testServer := httptest.NewServer(web.NewRouter(handlers, comboFactory, errors, corsMiddlware))
 
 	gin.SetMode(gin.TestMode)

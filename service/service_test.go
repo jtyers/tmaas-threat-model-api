@@ -253,7 +253,7 @@ func TestCreate(t *testing.T) {
 			nil,
 			nil,
 			nil,
-			fmt.Errorf("threatModel.DataFlowDiagramID %v does not exist", m.NewDataFlowDiagramIDPPtr("1")),
+			fmt.Errorf("params.DataFlowDiagramID %v does not exist", m.NewDataFlowDiagramIDPPtr("1")),
 		},
 	}
 
@@ -327,7 +327,7 @@ func TestGetAll(t *testing.T) {
 			threatModels,
 			fmt.Errorf("foo bar"),
 			nil,
-			fmt.Errorf("error retrieving threatModels: foo bar"),
+			fmt.Errorf("error in GetAll: foo bar"),
 		},
 	}
 

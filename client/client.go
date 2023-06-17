@@ -19,7 +19,7 @@ type ThreatModelServiceClientConfig struct {
 	BaseURL string
 }
 
-// A client for DeviceService that makes calls over HTTPS.
+// A client for ThreatModelService that makes calls over HTTPS.
 type ThreatModelServiceClient struct {
 	config    ThreatModelServiceClientConfig
 	requestor requestor.RequestorWithContext
@@ -34,7 +34,7 @@ func NewThreatModelServiceClient(
 	return &ThreatModelServiceClient{config, requestor}
 }
 
-// Retrieve a threatModel by threatModelID.
+// Retrieve a ThreatModel by ID.
 func (s *ThreatModelServiceClient) Get(ctx context.Context, id m.ThreatModelID) (*m.ThreatModel, error) {
 	result := m.ThreatModel{}
 	err := s.requestor.GetInto(ctx, fmt.Sprintf(URLPrefixWithID, s.config.BaseURL, id.String()), &result)
@@ -48,7 +48,7 @@ func (s *ThreatModelServiceClient) Get(ctx context.Context, id m.ThreatModelID) 
 	return &result, nil
 }
 
-// Retrieve all threatModel.
+// Retrieve all ThreatModels.
 func (s *ThreatModelServiceClient) GetAll(ctx context.Context) ([]*m.ThreatModel, error) {
 	result := []*m.ThreatModel{}
 	err := s.requestor.GetInto(ctx, fmt.Sprintf(URLPrefix, s.config.BaseURL), &result)
@@ -74,7 +74,7 @@ func (s *ThreatModelServiceClient) GetThreats(ctx context.Context, id m.ThreatMo
 	return nil, fmt.Errorf("not yet implemented")
 }
 
-// Creates a threatModel. `threatModel` should not have ID or threatModelID set.
+// Creates a ThreatModel.
 func (s *ThreatModelServiceClient) Create(ctx context.Context, params m.ThreatModelParams) (*m.ThreatModel, error) {
 	body, err := requestor.StructReader(params)
 	if err != nil {
@@ -90,7 +90,7 @@ func (s *ThreatModelServiceClient) Create(ctx context.Context, params m.ThreatMo
 	return &result, nil
 }
 
-// Updates a threatModel
+// Updates a ThreatModel.
 func (s *ThreatModelServiceClient) Update(ctx context.Context, id m.ThreatModelID, params m.ThreatModelParams) error {
 	body, err := requestor.StructReader(params)
 	if err != nil {
@@ -108,7 +108,7 @@ func (s *ThreatModelServiceClient) Update(ctx context.Context, id m.ThreatModelI
 	return nil
 }
 
-// Delete a threatModel by threatModelID.
+// Delete a ThreatModel by ID..
 func (s *ThreatModelServiceClient) Delete(ctx context.Context, id m.ThreatModelID) error {
 	_, err := s.requestor.Delete(ctx, fmt.Sprintf(URLPrefixWithID, s.config.BaseURL, id.String()))
 	if err != nil {
