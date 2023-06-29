@@ -91,21 +91,22 @@ func (s *ThreatModelServiceClient) Create(ctx context.Context, params m.ThreatMo
 }
 
 // Updates a ThreatModel.
-func (s *ThreatModelServiceClient) Update(ctx context.Context, id m.ThreatModelID, params m.ThreatModelParams) error {
+func (s *ThreatModelServiceClient) Update(ctx context.Context, id m.ThreatModelID, params m.ThreatModelParams) (*m.ThreatModel, error) {
 	body, err := requestor.StructReader(params)
 	if err != nil {
 		if reqErr, ok := err.(requestor.ErrRequestFailed); ok && reqErr.StatusCode == 404 {
-			return service.ErrNoSuchThreatModel
+			return nil, service.ErrNoSuchThreatModel
 		}
-		return err
+		return nil, err
 	}
 
-	_, err = s.requestor.Patch(ctx, fmt.Sprintf(URLPrefixWithID, s.config.BaseURL, id.String()), body)
+	result := m.ThreatModel{}
+	err = s.requestor.PatchInto(ctx, fmt.Sprintf(URLPrefixWithID, s.config.BaseURL, id.String()), body, &result)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
-	return nil
+	return &result, nil
 }
 
 // Delete a ThreatModel by ID..

@@ -125,11 +125,12 @@ func (mr *MockThreatModelServiceMockRecorder) QuerySingle(ctx, q interface{}) *g
 }
 
 // Update mocks base method.
-func (m *MockThreatModelService) Update(ctx context.Context, id model.ThreatModelID, params model.ThreatModelParams) error {
+func (m *MockThreatModelService) Update(ctx context.Context, id model.ThreatModelID, params model.ThreatModelParams) (*model.ThreatModel, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Update", ctx, id, params)
-	ret0, _ := ret[0].(error)
-	return ret0
+	ret0, _ := ret[0].(*model.ThreatModel)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
 }
 
 // Update indicates an expected call of Update.

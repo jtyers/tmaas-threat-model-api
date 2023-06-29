@@ -167,10 +167,11 @@ func TestUpdateThreatModel(t *testing.T) {
 
 			// when
 			service := NewDefaultThreatModelService(mockDao, mockValidator, mockIDChecker)
-			err := service.Update(ctx, test.inputID, test.input)
+			result, err := service.Update(ctx, test.inputID, test.input)
 
 			// then
 			require.Equal(t, test.expectedError, err)
+			require.Equal(t, test.expectedResult, result)
 		})
 	}
 }

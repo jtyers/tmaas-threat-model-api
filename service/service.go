@@ -34,7 +34,7 @@ type ThreatModelService interface {
 	Create(ctx context.Context, params m.ThreatModelParams) (*m.ThreatModel, error)
 
 	// Updates a ThreatModel
-	Update(ctx context.Context, id m.ThreatModelID, params m.ThreatModelParams) error
+	Update(ctx context.Context, id m.ThreatModelID, params m.ThreatModelParams) (*m.ThreatModel, error)
 
 	// Delete a ThreatModel by ID.
 	Delete(ctx context.Context, id m.ThreatModelID) error
@@ -100,29 +100,29 @@ func (g *DefaultThreatModelService) Create(ctx context.Context, params m.ThreatM
 	return result, nil
 }
 
-func (g *DefaultThreatModelService) Update(ctx context.Context, id m.ThreatModelID, params m.ThreatModelParams) error {
+func (g *DefaultThreatModelService) Update(ctx context.Context, id m.ThreatModelID, params m.ThreatModelParams) (*m.ThreatModel, error) {
 	err := g.validator.ValidateForUpdate(params)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	if params.DataFlowDiagramID != nil {
 		exists, err := g.idChecker.CheckID(ctx, params.DataFlowDiagramID)
 		if err != nil {
-			return fmt.Errorf("CheckID failed: %v", err)
+			return nil, fmt.Errorf("CheckID failed: %v", err)
 		}
 		if !exists {
-			return fmt.Errorf("threatModel.DataFlowDiagramID %v does not exist",
+			return nil, fmt.Errorf("threatModel.DataFlowDiagramID %v does not exist",
 				params.DataFlowDiagramID)
 		}
 	}
 
-	_, err = g.dao.Update(ctx, id, params)
+	updated, err := g.dao.Update(ctx, id, params)
 	if err != nil {
-		return fmt.Errorf("error updating threatModel: %v", err)
+		return nil, fmt.Errorf("error updating threatModel: %v", err)
 	}
 
-	return nil
+	return updated, nil
 }
 
 func (g *DefaultThreatModelService) GetAll(ctx context.Context) ([]*m.ThreatModel, error) {

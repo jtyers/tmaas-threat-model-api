@@ -310,7 +310,9 @@ func TestPatchThreatModelHandler(t *testing.T) {
 		ai                 *m.AuthenticationInfo
 		inputThreatModelID m.ThreatModelID
 		input              m.ThreatModelParams
+		dsReturnResult     *m.ThreatModel
 		dsReturnError      error
+		expectedResult     *m.ThreatModel
 		expectedError      error
 	}{
 		{
@@ -318,7 +320,9 @@ func TestPatchThreatModelHandler(t *testing.T) {
 			&m.AuthenticationInfo{UserID: "u-1234", Roles: []m.Role{&m.RoleUser}},
 			m.NewThreatModelIDP("d-1234"),
 			m.ThreatModelParams{Title: m.String("foo")},
+			&m.ThreatModel{ThreatModelID: m.NewThreatModelIDP("d-1234"), Title: "foo"},
 			nil,
+			&m.ThreatModel{ThreatModelID: m.NewThreatModelIDP("d-1234"), Title: "foo"},
 			nil,
 		},
 		{
@@ -326,6 +330,8 @@ func TestPatchThreatModelHandler(t *testing.T) {
 			nil,
 			m.NewThreatModelIDP("d-1234"),
 			m.ThreatModelParams{Title: m.String("foo")},
+			nil,
+			nil,
 			nil,
 			requestor.ErrRequestFailed{http.StatusUnauthorized, ``},
 		},
@@ -343,17 +349,18 @@ func TestPatchThreatModelHandler(t *testing.T) {
 
 			if test.ai != nil {
 				mockThreatModelService.EXPECT().Update(gomock.Any(), test.inputThreatModelID,
-					test.input).Return(test.dsReturnError)
+					test.input).Return(test.dsReturnResult, test.dsReturnError)
 			}
 
 			client := createClient(server)
 
 			// when
 			ctx := context.Background()
-			err := client.Update(ctx, test.inputThreatModelID, test.input)
+			result, err := client.Update(ctx, test.inputThreatModelID, test.input)
 
 			// then
 			require.Equal(t, test.expectedError, err)
+			require.Equal(t, test.expectedResult, result)
 		})
 	}
 }

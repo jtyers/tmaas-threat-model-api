@@ -100,13 +100,13 @@ func (th *ThreatModelHandlers) PatchThreatModelHandler(c *gin.Context) {
 		return
 	}
 
-	err = th.threatModelService.Update(c, threatModelID, t)
+	updated, err := th.threatModelService.Update(c, threatModelID, t)
 	if err != nil {
 		c.Error(err)
 		return
 	}
 
-	c.PureJSON(http.StatusOK, t)
+	c.PureJSON(http.StatusOK, updated)
 }
 
 // @Summary Delete a ThreatModel by ID

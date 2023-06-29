@@ -336,24 +336,30 @@ func TestPatchThreatModelHandler(t *testing.T) {
 		ai                 *m.AuthenticationInfo
 		inputThreatModelID m.ThreatModelID
 		input              m.ThreatModelParams
+		dsReturn           *m.ThreatModel
 		dsReturnError      error
 		expectedResponse   int
+		expectedBody       *m.ThreatModel // not checked if nil
 	}{
 		{
 			"should update threatModel details",
 			&m.AuthenticationInfo{UserID: "u-1234", Roles: []m.Role{m.RoleUser}},
 			m.NewThreatModelIDP("d-1234"),
 			m.ThreatModelParams{Title: m.String("foo")},
+			&m.ThreatModel{ThreatModelID: m.NewThreatModelIDP("d-1234"), Title: "foo"},
 			nil,
 			http.StatusOK,
+			&m.ThreatModel{ThreatModelID: m.NewThreatModelIDP("d-1234"), Title: "foo"},
 		},
 		{
 			"should return 401 if no JWT supplied",
 			nil,
 			m.NewThreatModelIDP("d-1234"),
 			m.ThreatModelParams{Title: m.String("foo")},
+			&m.ThreatModel{ThreatModelID: m.NewThreatModelIDP("d-1234"), Title: "foo"},
 			nil,
 			http.StatusUnauthorized,
+			nil,
 		},
 	}
 
@@ -370,7 +376,7 @@ func TestPatchThreatModelHandler(t *testing.T) {
 			var bodyReader io.Reader = nil
 			if test.ai != nil {
 				mockThreatModelService.EXPECT().Update(gomock.Any(), test.inputThreatModelID,
-					test.input).Return(test.dsReturnError)
+					test.input).Return(test.dsReturn, test.dsReturnError)
 
 				s, err := structs.StructToJSON(test.input)
 				require.Nil(t, err)
@@ -385,6 +391,15 @@ func TestPatchThreatModelHandler(t *testing.T) {
 			// then
 			require.Nil(t, err)
 			require.Equal(t, test.expectedResponse, response.StatusCode)
+
+			if test.expectedBody != nil {
+				got := m.ThreatModel{}
+				body := readToBytes(response.Body)
+				err = structs.JSONToStruct(body, &got)
+				require.Nil(t, err)
+
+				require.Equal(t, &got, test.expectedBody)
+			}
 		})
 	}
 }
